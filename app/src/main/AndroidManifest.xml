@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.LBService"
+            android:exported="true" >
+            <intent-filter>
+                <action
+                    android:name="org.tianjyan.luban.service"
+                    android:exported="true" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
