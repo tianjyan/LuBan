@@ -1,4 +1,4 @@
-package org.tianjyan.luban.client;
+package org.tianjyan.luban.client.internal;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
