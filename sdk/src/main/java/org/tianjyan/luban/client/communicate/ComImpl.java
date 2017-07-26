@@ -22,9 +22,9 @@ public class ComImpl implements ICom {
     }
 
     @Override
-    public int checkIsCanConnect(String cur_pkgName, int versionId) {
+    public int checkIsCanConnect(String pkgName, int versionId) {
         try {
-            return service.checkIsCanConnect(cur_pkgName, versionId);
+            return service.checkIsCanConnect(pkgName, versionId);
         } catch (RemoteException e) {
             e.printStackTrace();
             return -1;
@@ -32,9 +32,9 @@ public class ComImpl implements ICom {
     }
 
     @Override
-    public boolean disconnect(String cur_pkgName) {
+    public boolean disconnect(String pkgName) {
         try {
-            return service.disconnect(cur_pkgName);
+            return service.disconnect(pkgName);
         } catch (RemoteException e) {
             e.printStackTrace();
             return false;

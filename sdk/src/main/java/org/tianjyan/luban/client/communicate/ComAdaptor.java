@@ -7,12 +7,12 @@ public class ComAdaptor implements ICom {
     }
 
     @Override
-    public int checkIsCanConnect(String cur_pkgName, int versionId) {
+    public int checkIsCanConnect(String pkgName, int versionId) {
         return -1;
     }
 
     @Override
-    public boolean disconnect(String cur_pkgName) {
+    public boolean disconnect(String pkgName) {
         return false;
     }
 }

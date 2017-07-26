@@ -6,10 +6,6 @@ import org.tianjyan.luban.client.InParaManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by young on 2017/7/26.
- */
-
 public class InParaManagerInternal {
 
     private List<InPara> temp;
