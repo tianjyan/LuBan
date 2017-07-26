@@ -1,6 +1,7 @@
 package org.tianjyan.luban.client.internal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -34,10 +35,16 @@ public class SplashHandler extends Handler {
 
         switch (msg.what) {
             case MSG_START_CONNECT_LB:
-                // TODO: 连接LuBan
+                Intent bindIntent = (Intent) msg.obj;
+                context.bindService(bindIntent,
+                        LBInternal.getInstance().getLbServiceConnection(),
+                        Context.BIND_AUTO_CREATE);
                 break;
             case MSG_START_DISCONNECT_LB:
-                // TODO: 断开LuBan
+                context.unbindService(LBInternal.getInstance().getLbServiceConnection());
+                LBInternal.getInstance().setConnState(LBInternal.getInstance().CONNECT_STATE_NOT_CONNECTED);
+                LBInternal.getInstance().setLbService(null);
+                LBInternal.getInstance().setLbServiceConnection(null);
                 break;
             case MSG_LB_SERVICE_CONNECTED:
                 break;
