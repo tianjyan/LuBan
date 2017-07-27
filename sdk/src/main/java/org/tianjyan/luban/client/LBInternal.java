@@ -141,7 +141,7 @@ class LBInternal {
         return lbServiceConnection;
     }
 
-    void setConnState(IConnState state) {
+    synchronized void setConnState(IConnState state) {
         if (this.currentConnState != null) {
             this.currentConnState.finish();
         }
@@ -155,7 +155,7 @@ class LBInternal {
     }
     //endregion
 
-    //region OutPara and InPara
+    //region OutParaCache and InPara
     InParaManagerInternal getInParaManager() {
         return inParaManager;
     }

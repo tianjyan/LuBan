@@ -5,25 +5,25 @@ import org.tianjyan.luban.aidl.OutPara;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutParaManagerInternal {
+class OutParaManagerInternal {
     //region Field
     private List<OutPara> temp;
     private OutParaManager userInterface;
     //endregion
 
     //region Constructor
-    public OutParaManagerInternal() {
+    OutParaManagerInternal() {
         temp = new ArrayList<>();
         userInterface = new OutParaManager();
     }
     //endregion
 
     //region Internal Method
-    public OutParaManager getUserInterface() {
+    OutParaManager getUserInterface() {
         return userInterface;
     }
 
-    public void register(String paraName, String alias) {
+    void register(String paraName, String alias) {
         if (paraName == null || alias == null) {
             return;
         }
@@ -39,7 +39,7 @@ public class OutParaManagerInternal {
         temp.add(outPara);
     }
 
-    public void setOutParasInFloatingArea(String... paraNames) {
+    void setOutParasInFloatingArea(String... paraNames) {
         if (paraNames != null) {
             int len = paraNames.length;
             for (int i = 0; i < temp.size(); i++) {
@@ -52,13 +52,13 @@ public class OutParaManagerInternal {
         }
     }
 
-    public void setOutParasInDisableArea() {
+    void setOutParasInDisableArea() {
         for (int i = 0; i < temp.size(); i++) {
             temp.get(i).setDisplayProperty(OutPara.DISPLAY_DISABLE);
         }
     }
 
-    public void setOutParasInDisableArea(String... paraNames) {
+    void setOutParasInDisableArea(String... paraNames) {
         if (paraNames != null) {
             int len = paraNames.length;
 
@@ -72,7 +72,7 @@ public class OutParaManagerInternal {
         }
     }
 
-    public OutPara[] getAndClearTempParas() {
+    OutPara[] getAndClearTempParas() {
         OutPara[] result = temp.toArray(new OutPara[]{});
         temp.clear();
         return result;
