@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class DataCacheController {
+public class DataCacheController {
     private ParaTaskCache paraTaskCache;
     private LogTaskCache logTaskCache;
     private OutParaCache outParaCache;

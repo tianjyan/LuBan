@@ -9,6 +9,11 @@ import android.util.Log;
 
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
+import org.tianjyan.luban.client.Connect.ConnectedState;
+import org.tianjyan.luban.client.Connect.ConnectingState;
+import org.tianjyan.luban.client.Connect.DataCacheController;
+import org.tianjyan.luban.client.Connect.DisConnectedState;
+import org.tianjyan.luban.client.Connect.DisconnectingState;
 import org.tianjyan.luban.client.Connect.IConnState;
 
 class LBInternal {
@@ -22,6 +27,7 @@ class LBInternal {
     private LBServiceConnection lbServiceConnection;
     private InParaManagerInternal inParaManager;
     private OutParaManagerInternal outParaManager;
+    private DataCacheController dataCacheController;
     IConnState CONNECT_STATE_CONNECTING;
     IConnState CONNECT_STATE_CONNECTED;
     IConnState CONNECT_STATE_DISCONNECTING;
@@ -33,6 +39,15 @@ class LBInternal {
     private static LBInternal INSTANCE = new LBInternal();
     static LBInternal getInstance() {
         return INSTANCE;
+    }
+
+    private LBInternal() {
+        dataCacheController = new DataCacheController();
+        CONNECT_STATE_CONNECTING = new ConnectingState(dataCacheController);
+        CONNECT_STATE_CONNECTED = new ConnectedState(dataCacheController);
+        CONNECT_STATE_DISCONNECTING = new DisconnectingState(dataCacheController);
+        CONNECT_STATE_DISCONNECTED = new DisConnectedState(dataCacheController);
+        currentConnState = CONNECT_STATE_DISCONNECTED;
     }
     //endregion
 

@@ -15,4 +15,7 @@ public interface IConnState {
 
     void registerInParas(InPara[] inParas);
     void registerOutParas(OutPara[] outParas);
+    void setOutPara(String paraName, String value);
+    void setInPara(String paraName, String value);
+    String getInPara(String paraName);
 }
