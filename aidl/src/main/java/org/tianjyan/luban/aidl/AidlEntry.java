@@ -3,14 +3,14 @@ package org.tianjyan.luban.aidl;
 import android.os.Parcel;
 
 public abstract class AidlEntry implements AidlTask {
-
+    //region Field
     public static final int DISPLAY_NORMAL = 0;
-    public static final int DISPLAY_AC = 1;
+    public static final int DISPLAY_FLOATING = 1;
     public static final int DISPLAY_DISABLE = 2;
-    public static final int DISPLAY_TITLE = 3;
-
     int functionId;
+    //endregion
 
+    //region Setter and Getter
     public int getFunctionId() {
         return functionId;
     }
@@ -18,7 +18,9 @@ public abstract class AidlEntry implements AidlTask {
     public void setFunctionId(int functionId) {
         this.functionId = functionId;
     }
+    //endregion
 
+    //region Override
     @Override
     public int describeContents() {
         return 0;
@@ -32,4 +34,5 @@ public abstract class AidlEntry implements AidlTask {
     public void readFromParcel(Parcel parcel) {
         functionId = parcel.readInt();
     }
+    //endregion
 }

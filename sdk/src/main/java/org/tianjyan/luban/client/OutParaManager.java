@@ -1,21 +1,19 @@
 package org.tianjyan.luban.client;
 
-import org.tianjyan.luban.client.internal.LBInternal;
-
 public class OutParaManager {
-    public void register(String ParaName, String alias, Object...extras){
-        LBInternal.getInstance().getOutParaManager().register(ParaName, alias, extras);
+    public void register(String paraName, String alias) {
+        LBInternal.getInstance().getOutParaManager().register(paraName, alias);
     }
 
-    public void defaultOutParasInAC(String... ParaNames){
-        LBInternal.getInstance().getOutParaManager().defaultOutParasInAC(ParaNames);
+    public void setOutParasInFloatingArea(String... paraNames) {
+        LBInternal.getInstance().getOutParaManager().setOutParasInFloatingArea(paraNames);
     }
 
-    public void defaultOutParasInDisableArea(){
-        LBInternal.getInstance().getOutParaManager().setOutParasDisable();
+    public void setOutParasInDisableArea() {
+        LBInternal.getInstance().getOutParaManager().setOutParasInDisableArea();
     }
 
-    public void defaultOutParasInDisableArea(String... ParaNames){
-        LBInternal.getInstance().getOutParaManager().setOutParasDisable(ParaNames);
+    public void setOutParasInDisableArea(String... paraNames) {
+        LBInternal.getInstance().getOutParaManager().setOutParasInDisableArea(paraNames);
     }
 }

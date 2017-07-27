@@ -1,4 +1,4 @@
-package org.tianjyan.luban.client.internal.connect;
+package org.tianjyan.luban.client.Connect;
 
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;

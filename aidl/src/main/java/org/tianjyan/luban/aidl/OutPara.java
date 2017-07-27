@@ -7,52 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutPara extends AidlEntry {
+    //region Field
     private String key;
     private String alias;
     private String value;
-    private String freezValue;
+    private String freezeValue;
     private int displayProperty;
-
-    private List<String> cacheHistory;
-
+    private List<String> cacheHistory = new ArrayList<>();
     private long time = -1;
-
     private boolean isRegistering;
-    private boolean isGlobal;
-
     private boolean monitor;
-    public boolean hasMonitorOnce;
-    public boolean alert = false;
-
+    public boolean alert;
     private String client;
+    //endregion
 
-    public String getClient() {
-        return client;
-    }
-
-    public void setClient(String client) {
-        this.client = client;
-    }
-
-    public boolean isAlert() {
-        return alert;
-    }
-
-    public void setAlert(boolean alert) {
-        this.alert = alert;
-    }
-
-    public boolean isMonitor() {
-        return monitor;
-    }
-
-    public void setMonitor(boolean monitor) {
-        this.monitor = monitor;
-    }
-
+    //region Constructor
     public OutPara() {
         setFunctionId(Functions.REGISTER_OUT_PARA);
-        cacheHistory = new ArrayList<String>();
     }
 
     public OutPara(Parcel parcel) {
@@ -60,19 +31,32 @@ public class OutPara extends AidlEntry {
         key = parcel.readString();
         alias = parcel.readString();
         value = parcel.readString();
-        freezValue = "";
+        freezeValue = "";
         displayProperty = parcel.readInt();
-        cacheHistory = new ArrayList<String>();
         parcel.readStringList(cacheHistory);
         this.time = parcel.readLong();
+    }
+    //endregion
+
+    //region Setter and Getter
+    public String getKey() {
+        return key;
     }
 
     public void setKey(String key) {
         this.key = key;
     }
 
+    public String getAlias() {
+        return alias;
+    }
+
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     public void setValue(String value) {
@@ -83,68 +67,64 @@ public class OutPara extends AidlEntry {
         }
     }
 
-    public void setValue(long time, String value) {
-        if (null == value) {
-            this.value = "";
-        } else {
-            this.value = value;
-        }
-        this.time = time;
+    public String getFreezeValue() {
+        return freezeValue;
     }
 
-    public void setFreezValue(String freezValue) {
-        this.freezValue = freezValue;
-    }
-
-    public void setDisplayProperty(int displayProperty) {
-        this.displayProperty = displayProperty;
-    }
-
-    public void setRegistering(boolean isRegistering) {
-        this.isRegistering = isRegistering;
-    }
-
-    public void setGlobal(boolean isGlobal) {
-        this.isGlobal = isGlobal;
-    }
-
-    public void addHistory(String h) {
-        cacheHistory.add(h);
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getFreezValue() {
-        return freezValue;
+    public void setFreezeValue(String freezeValue) {
+        this.freezeValue = freezeValue;
     }
 
     public int getDisplayProperty() {
         return displayProperty;
     }
 
+    public void setDisplayProperty(int displayProperty) {
+        this.displayProperty = displayProperty;
+    }
+
+    public void addHistory(String h) {
+        cacheHistory.add(h);
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
     public boolean isRegistering() {
         return isRegistering;
     }
 
-    public boolean isGlobal() {
-        return isGlobal;
+    public void setRegistering(boolean isRegistering) {
+        this.isRegistering = isRegistering;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean isMonitor() {
+        return monitor;
     }
 
+    public void setMonitor(boolean monitor) {
+        this.monitor = monitor;
+    }
+
+    public boolean isAlert() {
+        return alert;
+    }
+
+    public void setAlert(boolean alert) {
+        this.alert = alert;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+    //endregion
+
+    //region Override
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         super.writeToParcel(parcel, flags);
@@ -165,4 +145,5 @@ public class OutPara extends AidlEntry {
             return new OutPara[size];
         }
     };
+    //endregion
 }
