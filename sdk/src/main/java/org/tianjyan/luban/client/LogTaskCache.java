@@ -1,4 +1,4 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import java.util.concurrent.LinkedBlockingQueue;
 

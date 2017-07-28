@@ -1,18 +1,19 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
-public abstract class AbsConnState implements IConnState {
-    @Override
-    public void init(IConnState lastState) {
+class DisconnectedState implements IConnState {
+    private DataCacheController dataCacheController;
 
+    public DisconnectedState(DataCacheController dataCacheController) {
+        this.dataCacheController = dataCacheController;
     }
 
     @Override
-    public void init(IConnState lastState, IService gtService) {
-
+    public void init(IService service) {
+        dataCacheController.dispose();
     }
 
     @Override
@@ -41,12 +42,12 @@ public abstract class AbsConnState implements IConnState {
     }
 
     @Override
-    public void registerOutParas(OutPara[] outParas) {
+    public void registerInParas(InPara[] inParas) {
 
     }
 
     @Override
-    public void registerInParas(InPara[] inParas) {
+    public void registerOutParas(OutPara[] outParas) {
 
     }
 
@@ -62,6 +63,6 @@ public abstract class AbsConnState implements IConnState {
 
     @Override
     public String getInPara(String paraName) {
-        return "";
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import org.tianjyan.luban.aidl.AidlTask;
 import org.tianjyan.luban.aidl.InPara;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class DataCacheController {
+class DataCacheController {
     private ParaTaskCache paraTaskCache;
     private LogTaskCache logTaskCache;
     private OutParaCache outParaCache;

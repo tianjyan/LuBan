@@ -44,4 +44,16 @@ public class LB {
         }
         LBInternal.getInstance().disconnect(hostContext);
     }
+
+    public static void setOutPara(String paraName, String value) {
+        LBInternal.getInstance().setOutPara(paraName, value);
+    }
+
+    public static void setInPara(String paraName, String value) {
+        LBInternal.getInstance().setInPara(paraName, value);
+    }
+
+    public static void getInPara(String paraName) {
+        LBInternal.getInstance().getInPara(paraName);
+    }
 }

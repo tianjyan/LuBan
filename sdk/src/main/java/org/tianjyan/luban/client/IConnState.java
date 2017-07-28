@@ -1,12 +1,11 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
-public interface IConnState {
-    void init(IConnState lastState);
-    void init(IConnState lastState, IService lbService);
+interface IConnState {
+    void init(IService service);
     void finish();
     void logI(String tag, String msg);
     void logD(String tag, String msg);

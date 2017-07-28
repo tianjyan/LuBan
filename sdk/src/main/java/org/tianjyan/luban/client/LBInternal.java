@@ -9,25 +9,19 @@ import android.util.Log;
 
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
-import org.tianjyan.luban.client.Connect.ConnectedState;
-import org.tianjyan.luban.client.Connect.ConnectingState;
-import org.tianjyan.luban.client.Connect.DataCacheController;
-import org.tianjyan.luban.client.Connect.DisConnectedState;
-import org.tianjyan.luban.client.Connect.DisconnectingState;
-import org.tianjyan.luban.client.Connect.IConnState;
 
 class LBInternal {
     //region Field
     static final String LB_PACKAGE_NAME = "org.tianjyan.luban";
     static final String ACTION = "org.tianjyan.luban.service";
 
-    private IService lbService;
+    private IService service;
     private Context context;
-    private SplashHandler splashHandler;
-    private LBServiceConnection lbServiceConnection;
+    private SplashHandler handler;
+    private LBServiceConnection connection;
     private InParaManagerInternal inParaManager;
     private OutParaManagerInternal outParaManager;
-    private DataCacheController dataCacheController;
+    private DataCacheController cacheController;
     IConnState CONNECT_STATE_CONNECTING;
     IConnState CONNECT_STATE_CONNECTED;
     IConnState CONNECT_STATE_DISCONNECTING;
@@ -42,11 +36,11 @@ class LBInternal {
     }
 
     private LBInternal() {
-        dataCacheController = new DataCacheController();
-        CONNECT_STATE_CONNECTING = new ConnectingState(dataCacheController);
-        CONNECT_STATE_CONNECTED = new ConnectedState(dataCacheController);
-        CONNECT_STATE_DISCONNECTING = new DisconnectingState(dataCacheController);
-        CONNECT_STATE_DISCONNECTED = new DisConnectedState(dataCacheController);
+        cacheController = new DataCacheController();
+        CONNECT_STATE_CONNECTING = new ConnectingState(cacheController);
+        CONNECT_STATE_CONNECTED = new ConnectedState(cacheController);
+        CONNECT_STATE_DISCONNECTING = new DisconnectingState(cacheController);
+        CONNECT_STATE_DISCONNECTED = new DisconnectedState(cacheController);
         currentConnState = CONNECT_STATE_DISCONNECTED;
     }
     //endregion
@@ -66,8 +60,8 @@ class LBInternal {
                 return false;
             }
 
-            splashHandler = new SplashHandler(context);
-            lbServiceConnection = new LBServiceConnection(splashHandler);
+            handler = new SplashHandler(context);
+            connection = new LBServiceConnection(handler);
 
             outParaManager = new OutParaManagerInternal();
             inParaManager = new InParaManagerInternal();
@@ -82,7 +76,7 @@ class LBInternal {
             Message msg = Message.obtain();
             msg.what = SplashHandler.MSG_START_CONNECT_SERVICE;
             msg.obj = gtIntent;
-            splashHandler.sendMessage(msg);
+            handler.sendMessage(msg);
         }
         return true;
     }
@@ -91,8 +85,8 @@ class LBInternal {
         if (canDisConnect()) {
             setConnState(CONNECT_STATE_DISCONNECTING);
             boolean isSuccess = disconnectLB() == Config.RES_CODE_OK;
-            if (isSuccess && splashHandler != null) {
-                splashHandler.sendEmptyMessage(SplashHandler.MSG_START_DISCONNECT_SERVICE);
+            if (isSuccess && handler != null) {
+                handler.sendEmptyMessage(SplashHandler.MSG_START_DISCONNECT_SERVICE);
             }
         }
     }
@@ -101,7 +95,7 @@ class LBInternal {
         int result = canConnectLB();
         if (result == Config.RES_CODE_OK) {
             try {
-                lbService.connectLB(context.getPackageName(), android.os.Process.myPid());
+                service.connectLB(context.getPackageName(), android.os.Process.myPid());
                 setConnState(CONNECT_STATE_CONNECTED);
             } catch (RemoteException e) {
                 Log.e("connectLB Exception", e.getMessage());
@@ -114,7 +108,7 @@ class LBInternal {
     private int disconnectLB() {
         int result = Config.RES_CODE_NONE;
         try {
-            if (lbService.disconnectLB(context.getPackageName())) {
+            if (service.disconnectLB(context.getPackageName())) {
                 result = Config.RES_CODE_OK;
             } else {
                 result = Config.RES_CODE_REFUSE;
@@ -137,23 +131,23 @@ class LBInternal {
     private int canConnectLB() {
         int result = Config.RES_CODE_NONE;
         try {
-            result = lbService.canConnectLB(context.getPackageName(), Config.INTERVAL_VID);
+            result = service.canConnectLB(context.getPackageName(), Config.INTERVAL_VID);
         } catch (RemoteException e) {
             Log.e("canConnectLB Exception", e.getMessage());
         }
         return result;
     }
 
-    void setLbService(IService lbService) {
-        this.lbService = lbService;
+    void setService(IService service) {
+        this.service = service;
     }
 
-    void setLbServiceConnection(LBServiceConnection lbServiceConnection) {
-        this.lbServiceConnection = lbServiceConnection;
+    void setConnection(LBServiceConnection connection) {
+        this.connection = connection;
     }
 
-    LBServiceConnection getLbServiceConnection() {
-        return lbServiceConnection;
+    LBServiceConnection getConnection() {
+        return connection;
     }
 
     synchronized void setConnState(IConnState state) {
@@ -162,21 +156,35 @@ class LBInternal {
         }
         Log.w("setConnState", "Pre State:" + this.currentConnState.getClass().getName());
 
-        state.init(this.currentConnState);
-        state.init(this.currentConnState, lbService);
+        state.init(service);
         this.currentConnState = state;
 
         Log.w("setConnState", "Now State:" + this.currentConnState.getClass().getName());
     }
+
     //endregion
 
-    //region OutParaCache and InPara
+    //region InParaManager and OutParaManager
     InParaManagerInternal getInParaManager() {
         return inParaManager;
     }
 
     OutParaManagerInternal getOutParaManager() {
         return outParaManager;
+    }
+    //endregion
+
+    //region InPara and OutPara
+    void setOutPara(String paraName, String value) {
+        currentConnState.setOutPara(paraName, value);
+    }
+
+    void setInPara(String paraName, String value) {
+        currentConnState.setInPara(paraName, value);
+    }
+
+    String getInPara(String paraName) {
+        return currentConnState.getInPara(paraName);
     }
     //endregion
 

@@ -1,14 +1,14 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import android.os.Process;
 
 import org.tianjyan.luban.aidl.Config;
 
-public abstract class AbsDataCachedConnState implements IConnState {
-    protected DataCacheController dataCacheController;
+abstract class AbsDataCachedConnState implements IConnState {
+    DataCacheController cacheController;
 
-    public AbsDataCachedConnState(DataCacheController dataCacheController) {
-        this.dataCacheController = dataCacheController;
+    AbsDataCachedConnState(DataCacheController dataCacheController) {
+        this.cacheController = dataCacheController;
     }
 
     private void log(int level, String tag, String msg) {
@@ -19,7 +19,7 @@ public abstract class AbsDataCachedConnState implements IConnState {
         content[2] = tag;
         content[3] = msg;
 
-        dataCacheController.putLog(content);
+        cacheController.putLog(content);
     }
 
     @Override

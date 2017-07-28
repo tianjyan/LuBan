@@ -6,7 +6,7 @@ import android.os.IBinder;
 
 import org.tianjyan.luban.aidl.IService;
 
-public class LBServiceConnection implements ServiceConnection {
+class LBServiceConnection implements ServiceConnection {
     private SplashHandler splashHandler;
 
     public LBServiceConnection(SplashHandler handler) {
@@ -16,7 +16,7 @@ public class LBServiceConnection implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         IService iService = IService.Stub.asInterface(service);
-        LBInternal.getInstance().setLbService(iService);
+        LBInternal.getInstance().setService(iService);
         splashHandler.sendEmptyMessage(SplashHandler.MSG_SERVICE_CONNECTED);
     }
 

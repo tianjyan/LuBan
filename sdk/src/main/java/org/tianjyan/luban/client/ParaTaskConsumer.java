@@ -1,6 +1,5 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
-import android.icu.util.IslamicCalendar;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.util.Log;
@@ -21,14 +20,14 @@ class ParaTaskConsumer {
                     AidlTask task = dataCacheController.takeParaTask();
                     if (task == null) continue;
                     if (task instanceof InPara) {
-                        InPara inPara = (InPara)task;
+                        InPara inPara = (InPara) task;
                         if (inPara.isRegistering()) {
                             service.registerInPara(inPara);
                         } else if (inPara.getValues() != null && inPara.getValues().size() > 0) {
                             service.setInPara(inPara.getKey(), inPara.getValues().get(0));
                         }
                     } else if (task instanceof OutPara) {
-                        OutPara outPara = (OutPara)task;
+                        OutPara outPara = (OutPara) task;
                         if (outPara.isRegistering()) {
                             service.registerOutPara(outPara);
                         } else if (outPara.getValue() != null) {

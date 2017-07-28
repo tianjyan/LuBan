@@ -39,14 +39,14 @@ class SplashHandler extends Handler {
             case MSG_START_CONNECT_SERVICE:
                 Intent bindIntent = (Intent) msg.obj;
                 context.bindService(bindIntent,
-                        LBInternal.getInstance().getLbServiceConnection(),
+                        LBInternal.getInstance().getConnection(),
                         Context.BIND_AUTO_CREATE);
                 break;
             case MSG_START_DISCONNECT_SERVICE:
-                context.unbindService(LBInternal.getInstance().getLbServiceConnection());
+                context.unbindService(LBInternal.getInstance().getConnection());
                 LBInternal.getInstance().setConnState(LBInternal.getInstance().CONNECT_STATE_DISCONNECTED);
-                LBInternal.getInstance().setLbService(null);
-                LBInternal.getInstance().setLbServiceConnection(null);
+                LBInternal.getInstance().setService(null);
+                LBInternal.getInstance().setConnection(null);
                 break;
             case MSG_SERVICE_CONNECTED:
                 int result = LBInternal.getInstance().connectLB();
@@ -54,9 +54,9 @@ class SplashHandler extends Handler {
                 break;
             case MSG_SERVICE_DISCONNECTED:
                 LBInternal.getInstance().setConnState(LBInternal.getInstance().CONNECT_STATE_DISCONNECTED);
-                context.unbindService(LBInternal.getInstance().getLbServiceConnection());
-                LBInternal.getInstance().setLbService(null);
-                LBInternal.getInstance().setLbServiceConnection(null);
+                context.unbindService(LBInternal.getInstance().getConnection());
+                LBInternal.getInstance().setService(null);
+                LBInternal.getInstance().setConnection(null);
                 break;
             default:
                 break;

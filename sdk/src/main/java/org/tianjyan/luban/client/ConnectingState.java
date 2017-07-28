@@ -1,23 +1,18 @@
-package org.tianjyan.luban.client.Connect;
+package org.tianjyan.luban.client;
 
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
-public class ConnectingState extends AbsDataCachedConnState {
+class ConnectingState extends AbsDataCachedConnState {
 
-    public ConnectingState(DataCacheController dataCacheController) {
+    ConnectingState(DataCacheController dataCacheController) {
         super(dataCacheController);
     }
 
     @Override
-    public void init(IConnState lastState) {
-        dataCacheController.init();
-    }
-
-    @Override
-    public void init(IConnState lastState, IService lbService) {
-
+    public void init(IService service) {
+        cacheController.init();
     }
 
     @Override
@@ -28,29 +23,29 @@ public class ConnectingState extends AbsDataCachedConnState {
     @Override
     public void registerInParas(InPara[] inParas) {
         for (InPara para: inParas) {
-            dataCacheController.registerInParaToCache(para);
+            cacheController.registerInParaToCache(para);
         }
     }
 
     @Override
     public void registerOutParas(OutPara[] outParas) {
         for (OutPara para: outParas) {
-            dataCacheController.registerOutPareToCache(para);
+            cacheController.registerOutPareToCache(para);
         }
     }
 
     @Override
     public void setOutPara(String paraName, String value) {
-        dataCacheController.setOutParaToCache(paraName, value);
+        cacheController.setOutParaToCache(paraName, value);
     }
 
     @Override
     public void setInPara(String paraName, String value) {
-        dataCacheController.setInParaToCache(paraName, value);
+        cacheController.setInParaToCache(paraName, value);
     }
 
     @Override
     public String getInPara(String paraName) {
-        return dataCacheController.getInParaFromCache(paraName);
+        return cacheController.getInParaFromCache(paraName);
     }
 }
