@@ -38,11 +38,11 @@ public class LB {
         });
     }
 
-    public static void disconnect(Context hostContext) {
+    public static void disconnect() {
         if (!enable) {
             return;
         }
-        LBInternal.getInstance().disconnect(hostContext);
+        LBInternal.getInstance().disconnect();
     }
 
     public static void setOutPara(String paraName, String value) {

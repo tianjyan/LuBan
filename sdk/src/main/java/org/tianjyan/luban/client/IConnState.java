@@ -4,6 +4,9 @@ import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
+/**
+ * 管理Aidl Service 连接状态的接口
+ */
 interface IConnState {
     void init(IService service);
     void finish();

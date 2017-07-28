@@ -48,6 +48,17 @@ class LBInternal {
     //region Internal Method
 
     //region Connect and Disconnect Binder Service and Aidl Service
+
+    /**
+     * 与LuBan主程序连接的入口函数。
+     * 主要连接的有两个：自定义的Android Service 和 Aidl Service
+     * 1. 尝试连接Android Service，并将状态置为Connecting，如果LuBan主程序不存在，则状态变为Disconnected
+     * 2. 当Android Service连接上以后，尝试连接Aidl Service，此时如果失败，会开始Disconnect, 状态变为Disconnected
+     * 3. 当Aidl Service连接上以后，状态变为Connected，并开始将在Connecting状态缓存的数据发送。
+     * @param hostContext 宿主应用
+     * @param loader 需要处理的出入参回调
+     * @return 连接结果
+     */
     boolean connect(Context hostContext, AbsLBParaLoader loader) {
         if (hostContext == null) return false;
         Context app = hostContext.getApplicationContext();
@@ -81,11 +92,15 @@ class LBInternal {
         return true;
     }
 
-    void disconnect(Context hostContext) {
+    /**
+     * 与LuBan主程序断开连接的入口函数。
+     * 断开Aidl Service和Android Service
+     */
+    void disconnect() {
         if (canDisConnect()) {
             setConnState(CONNECT_STATE_DISCONNECTING);
-            boolean isSuccess = disconnectLB() == Config.RES_CODE_OK;
-            if (isSuccess && handler != null) {
+            disconnectLB();
+            if (handler != null) {
                 handler.sendEmptyMessage(SplashHandler.MSG_START_DISCONNECT_SERVICE);
             }
         }
@@ -99,9 +114,15 @@ class LBInternal {
                 setConnState(CONNECT_STATE_CONNECTED);
             } catch (RemoteException e) {
                 Log.e("connectLB Exception", e.getMessage());
+                // 如果连接Aidl Service失败则断开Android Service
+                handler.sendEmptyMessage(SplashHandler.MSG_START_DISCONNECT_SERVICE);
                 result = Config.RES_CODE_REFUSE;
             }
+        } else {
+            // 如果无法连接Aidl Service则断开Android Service
+            handler.sendEmptyMessage(SplashHandler.MSG_START_DISCONNECT_SERVICE);
         }
+
         return result;
     }
 

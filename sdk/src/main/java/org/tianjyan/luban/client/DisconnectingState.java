@@ -1,10 +1,6 @@
 package org.tianjyan.luban.client;
 
-import org.tianjyan.luban.aidl.IService;
-import org.tianjyan.luban.aidl.InPara;
-import org.tianjyan.luban.aidl.OutPara;
-
-class DisconnectingState implements IConnState {
+class DisconnectingState extends AbsEmptyConnState {
     private DataCacheController dataCacheController;
 
     public DisconnectingState(DataCacheController dataCacheController) {
@@ -12,57 +8,10 @@ class DisconnectingState implements IConnState {
     }
 
     @Override
-    public void init(IService service) {
-
-    }
-
-    @Override
     public void finish() {
+        // 只是一个防守性质的操作
+        // 正常情况下，Disconnecting的下一个操作必然是Disconnected，上一个操作必然是Connected，
+        // 在Connected结束的时候，已经清理过dataCacheController的内容了。
         dataCacheController.dispose();
-    }
-
-    @Override
-    public void logI(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logD(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logW(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logE(String tag, String msg) {
-
-    }
-
-    @Override
-    public void registerInParas(InPara[] inParas) {
-
-    }
-
-    @Override
-    public void registerOutParas(OutPara[] outParas) {
-
-    }
-
-    @Override
-    public void setOutPara(String paraName, String value) {
-
-    }
-
-    @Override
-    public void setInPara(String paraName, String value) {
-
-    }
-
-    @Override
-    public String getInPara(String paraName) {
-        return null;
     }
 }

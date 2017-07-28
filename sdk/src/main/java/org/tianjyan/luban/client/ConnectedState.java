@@ -4,6 +4,10 @@ import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
+/**
+ * 连接上Aidl Service的状态类。
+ * 当连接上Aidl Service以后，会启动消费类，并将未连接前的数据发送出去。
+ */
 class ConnectedState extends AbsDataCachedConnState  {
     LogTaskConsumer logTaskConsumer;
     ParaTaskConsumer paraTaskConsumer;
@@ -21,6 +25,12 @@ class ConnectedState extends AbsDataCachedConnState  {
         paraTaskConsumer.start();
     }
 
+    /**
+     * 当Connected状态结束以后，要做清理现场的工作：
+     * 1. 发送停止消费类Thread的请求
+     * 2. 等待信号量可以获取
+     * 3. 清理Controller中暂存的数据
+     */
     @Override
     public void finish() {
         logTaskConsumer.stop(cacheController);

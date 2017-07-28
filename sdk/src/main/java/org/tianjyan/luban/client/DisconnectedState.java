@@ -1,10 +1,8 @@
 package org.tianjyan.luban.client;
 
 import org.tianjyan.luban.aidl.IService;
-import org.tianjyan.luban.aidl.InPara;
-import org.tianjyan.luban.aidl.OutPara;
 
-class DisconnectedState implements IConnState {
+class DisconnectedState extends AbsEmptyConnState {
     private DataCacheController dataCacheController;
 
     public DisconnectedState(DataCacheController dataCacheController) {
@@ -13,56 +11,9 @@ class DisconnectedState implements IConnState {
 
     @Override
     public void init(IService service) {
+        // 此次代码真正生效的时机有两个：
+        // 1. 当连接Aidl Service失败的时候，会从Connecting 状态直接变成Disconnected状态
+        // 2. 当发现根本没有安装LuBan主程序的时候，也会从Connecting 状态直接变成Disconnected状态
         dataCacheController.dispose();
-    }
-
-    @Override
-    public void finish() {
-
-    }
-
-    @Override
-    public void logI(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logD(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logW(String tag, String msg) {
-
-    }
-
-    @Override
-    public void logE(String tag, String msg) {
-
-    }
-
-    @Override
-    public void registerInParas(InPara[] inParas) {
-
-    }
-
-    @Override
-    public void registerOutParas(OutPara[] outParas) {
-
-    }
-
-    @Override
-    public void setOutPara(String paraName, String value) {
-
-    }
-
-    @Override
-    public void setInPara(String paraName, String value) {
-
-    }
-
-    @Override
-    public String getInPara(String paraName) {
-        return null;
     }
 }

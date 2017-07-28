@@ -4,6 +4,10 @@ import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 
+/**
+ * 正在连接上Aidl Service的状态类。
+ * 此时会初始化DataCacheController，并将传输的数据缓存起来，以便在连接上以后发送数据。
+ */
 class ConnectingState extends AbsDataCachedConnState {
 
     ConnectingState(DataCacheController dataCacheController) {
@@ -12,6 +16,8 @@ class ConnectingState extends AbsDataCachedConnState {
 
     @Override
     public void init(IService service) {
+        // cacheController的初始化时机放在这里，也是唯一一处，
+        // 此时可以开始接受数据，放入缓存，等待正式建立连接后将缓存数据再发出
         cacheController.init();
     }
 
