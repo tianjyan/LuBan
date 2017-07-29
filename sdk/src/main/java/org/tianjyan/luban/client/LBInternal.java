@@ -66,7 +66,7 @@ class LBInternal {
             setConnState(CONNECT_STATE_CONNECTING);
             context = app;
 
-            if (isLBInstalled(context)) {
+            if (!isLBInstalled(context)) {
                 setConnState(CONNECT_STATE_DISCONNECTED);
                 return false;
             }

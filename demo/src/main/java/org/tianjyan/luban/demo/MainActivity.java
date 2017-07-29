@@ -2,12 +2,49 @@ package org.tianjyan.luban.demo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import org.tianjyan.luban.client.AbsLBParaLoader;
+import org.tianjyan.luban.client.InParaManager;
+import org.tianjyan.luban.client.LB;
+import org.tianjyan.luban.client.OutParaManager;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.connectBtn).setOnClickListener(this);
+        findViewById(R.id.disconnectBtn).setOnClickListener(this);
+        findViewById(R.id.transportBtn).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.connectBtn:
+                LB.connect(getApplicationContext(), new AbsLBParaLoader() {
+                    @Override
+                    public void loadInParas(InParaManager im) {
+
+                    }
+
+                    @Override
+                    public void loadOutParas(OutParaManager om) {
+                        om.register("Test", "Test");
+                    }
+                });
+                break;
+            case R.id.disconnectBtn:
+                LB.disconnect();
+                break;
+            case R.id.transportBtn:
+                LB.setOutPara("Test", "123");
+                break;
+            default:
+                break;
+        }
     }
 }
