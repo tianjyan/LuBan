@@ -22,7 +22,7 @@ public class DefaultOutParaManager implements IOutParaManager {
             if (outPara != null
                     && outPara.getKey() != null
                     && getOutPara(outPara.getKey()) == null) {
-                outPara.setClient(client.getKey());
+                outPara.setClient(client.getPackageName());
                 outParaMap.put(outPara.getKey(), outPara);
                 //TODO: 处理UI
             }
@@ -67,6 +67,14 @@ public class DefaultOutParaManager implements IOutParaManager {
         OutPara outPara = getOutPara(paraName);
         if (outPara != null) {
             outPara.setValue(value);
+        }
+    }
+
+    @Override
+    public void setOutParaMonitor(String paraName, boolean flag) {
+        OutPara outPara = getOutPara(paraName);
+        if (outPara != null) {
+            outPara.setMonitor(flag);
         }
     }
 }

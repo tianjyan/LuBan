@@ -7,30 +7,23 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class InPara extends AidlEntry {
-    //region Field
     private String key;
     private String alias;
     private List<String> values = new ArrayList<>();
     private int displayProperty;
-    private boolean isRegistering;
     private String client;
-    //endregion
 
-    //region Constructor
     public InPara() {
-        setFunctionId(Functions.REGISTER_IN_PARA);
+
     }
 
     public InPara(Parcel parcel){
-        setFunctionId(parcel.readInt());
         key = parcel.readString();
         alias = parcel.readString();
         parcel.readStringList(values);
         displayProperty = parcel.readInt();
     }
-    //endregion
 
-    //region Setter and Getter
     public String getKey() {
         return key;
     }
@@ -63,14 +56,6 @@ public class InPara extends AidlEntry {
         this.displayProperty = displayProperty;
     }
 
-    public boolean isRegistering() {
-        return isRegistering;
-    }
-
-    public void setRegistering(boolean registering) {
-        isRegistering = registering;
-    }
-
     public String getClient() {
         return client;
     }
@@ -78,12 +63,10 @@ public class InPara extends AidlEntry {
     public void setClient(String client) {
         this.client = client;
     }
-    //endregion
 
-    //region Override
+
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
-        super.writeToParcel(parcel, flags);
         parcel.writeString(key);
         parcel.writeString(alias);
         parcel.writeStringList(values);
@@ -98,5 +81,4 @@ public class InPara extends AidlEntry {
             return new InPara[size];
         }
     };
-    //endregion
 }

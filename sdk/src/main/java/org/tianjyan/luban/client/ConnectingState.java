@@ -46,11 +46,6 @@ class ConnectingState extends AbsDataCachedConnState {
     }
 
     @Override
-    public void setInPara(String paraName, String value) {
-        cacheController.setInParaToCache(paraName, value);
-    }
-
-    @Override
     public String getInPara(String paraName) {
         return cacheController.getInParaFromCache(paraName);
     }

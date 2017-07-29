@@ -6,7 +6,7 @@ import org.tianjyan.luban.aidl.OutPara;
 import java.util.List;
 
 public interface IClient {
-    String getKey();
+    String getPackageName();
     void clear();
     void registerInPara(InPara inPara);
     void unregisterInPara(String paraName);
@@ -20,4 +20,5 @@ public interface IClient {
     OutPara getOutPara(String paraName);
     List<OutPara> getOutPara();
     void setOutPara(String paraName, String value);
+    void setOutParaMonitor(String paraName, boolean flag);
 }

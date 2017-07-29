@@ -23,10 +23,10 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void connectLB(String pkgName) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(pkgName);
+        IClient client = ClientManager.getInstance().getClient(getCallingPid());
         if (client == null) {
             client = new ConnectedClient(pkgName);
-            ClientManager.getInstance().addClient(pkgName, getCallingPid(), client);
+            ClientManager.getInstance().addClient(getCallingPid(), client);
         }
     }
 
@@ -34,7 +34,7 @@ public class LBBinder extends IService.Stub {
     public boolean disconnectLB(String pkgName) throws RemoteException {
         boolean result = true;
         try {
-            IClient client = ClientManager.getInstance().getClient(pkgName);
+            IClient client = ClientManager.getInstance().getClient(getCallingPid());
             if (client != null) {
                 client.clear();
             }

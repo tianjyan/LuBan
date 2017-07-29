@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutPara extends AidlEntry {
-    //region Field
     private String key;
     private String alias;
     private String value;
@@ -17,17 +16,13 @@ public class OutPara extends AidlEntry {
     private long time = -1;
     private boolean isRegistering;
     private boolean monitor;
-    public boolean alert;
     private String client;
-    //endregion
 
-    //region Constructor
     public OutPara() {
-        setFunctionId(Functions.REGISTER_OUT_PARA);
+
     }
 
     public OutPara(Parcel parcel) {
-        setFunctionId(parcel.readInt());
         key = parcel.readString();
         alias = parcel.readString();
         value = parcel.readString();
@@ -36,9 +31,7 @@ public class OutPara extends AidlEntry {
         parcel.readStringList(cacheHistory);
         this.time = parcel.readLong();
     }
-    //endregion
 
-    //region Setter and Getter
     public String getKey() {
         return key;
     }
@@ -107,14 +100,6 @@ public class OutPara extends AidlEntry {
         this.monitor = monitor;
     }
 
-    public boolean isAlert() {
-        return alert;
-    }
-
-    public void setAlert(boolean alert) {
-        this.alert = alert;
-    }
-
     public String getClient() {
         return client;
     }
@@ -122,12 +107,9 @@ public class OutPara extends AidlEntry {
     public void setClient(String client) {
         this.client = client;
     }
-    //endregion
 
-    //region Override
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
-        super.writeToParcel(parcel, flags);
         parcel.writeString(key);
         parcel.writeString(alias);
         parcel.writeString(value);
@@ -145,5 +127,4 @@ public class OutPara extends AidlEntry {
             return new OutPara[size];
         }
     };
-    //endregion
 }

@@ -6,19 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 class OutParaManagerInternal {
-    //region Field
     private List<OutPara> temp;
     private OutParaManager userInterface;
-    //endregion
 
-    //region Constructor
     OutParaManagerInternal() {
         temp = new ArrayList<>();
         userInterface = new OutParaManager();
     }
-    //endregion
 
-    //region Internal Method
     OutParaManager getUserInterface() {
         return userInterface;
     }
@@ -77,5 +72,4 @@ class OutParaManagerInternal {
         temp.clear();
         return result;
     }
-    //endregion
 }

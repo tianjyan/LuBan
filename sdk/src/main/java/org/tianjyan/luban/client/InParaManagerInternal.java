@@ -6,19 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 class InParaManagerInternal {
-    //region Field
     private List<InPara> temp;
     private InParaManager userInterface;
-    //endregion
 
-    //region Constructor
     InParaManagerInternal() {
         temp = new ArrayList<>();
         userInterface = new InParaManager();
     }
-    //endregion
 
-    //region Internal Method
     InParaManager getUserInterface() {
         return userInterface;
     }
@@ -47,7 +42,6 @@ class InParaManagerInternal {
             values.add("<null>");
         }
         inPara.setValues(values);
-        inPara.setRegistering(true);
         temp.add(inPara);
     }
 
@@ -88,5 +82,4 @@ class InParaManagerInternal {
         temp.clear();
         return result;
     }
-    //endregion
 }

@@ -6,21 +6,16 @@ import org.tianjyan.luban.aidl.OutPara;
 import java.util.List;
 
 public abstract class AbsClient implements IClient {
-    protected String key;
+    protected String packageName;
     protected IInParaManager inParaManager;
     protected IOutParaManager outParaManager;
 
-    AbsClient(String key) {
-        this.key = key;
+    AbsClient(String packageName) {
+        this.packageName = packageName;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void clear() {
-        inParaManager.clear();
-        outParaManager.clear();
+    public String getPackageName() {
+        return packageName;
     }
 
     public void registerInPara(InPara inPara) {
@@ -69,5 +64,14 @@ public abstract class AbsClient implements IClient {
 
     public void setOutPara(String paraName, String value) {
         outParaManager.setOutPara(paraName, value);
+    }
+
+    public void setOutParaMonitor(String paraName, boolean flag) {
+        outParaManager.setOutParaMonitor(paraName, flag);
+    }
+
+    public void clear() {
+        inParaManager.clear();
+        outParaManager.clear();
     }
 }

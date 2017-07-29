@@ -21,7 +21,7 @@ public class DefaultInParaManager implements IInParaManager {
             if (inPara != null
                     && null != inPara.getKey()
                     && getInPara(inPara.getKey()) != null) {
-                inPara.setClient(client.getKey());
+                inPara.setClient(client.getPackageName());
                 inParaMap.put(inPara.getKey(), inPara);
                 // TODO: 处理UI
             }
