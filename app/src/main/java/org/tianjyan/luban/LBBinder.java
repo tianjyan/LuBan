@@ -23,10 +23,10 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void connectLB(String pkgName) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        IClient client = ClientManager.getInstance().getClient(getCallingUid());
         if (client == null) {
             client = new ConnectedClient(pkgName);
-            ClientManager.getInstance().addClient(getCallingPid(), client);
+            ClientManager.getInstance().addClient(getCallingUid(), client);
         }
     }
 
@@ -34,7 +34,7 @@ public class LBBinder extends IService.Stub {
     public boolean disconnectLB(String pkgName) throws RemoteException {
         boolean result = true;
         try {
-            IClient client = ClientManager.getInstance().getClient(getCallingPid());
+            IClient client = ClientManager.getInstance().getClient(getCallingUid());
             if (client != null) {
                 client.clear();
             }
@@ -52,25 +52,25 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void registerInPara(InPara inPara) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerInPara(inPara);
     }
 
     @Override
     public void registerOutPara(OutPara outPara) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerOutPara(outPara);
     }
 
     @Override
     public String getInPara(String key, String origVal) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        IClient client = ClientManager.getInstance().getClient(getCallingUid());
         return client.getInPara(key, origVal);
     }
 
     @Override
     public void setOutPara(String key, String value) throws RemoteException {
-        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.setOutPara(key, value);
     }
 }
