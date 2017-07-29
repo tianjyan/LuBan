@@ -6,9 +6,8 @@ import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.manager.AbsClientFactory;
 import org.tianjyan.luban.manager.ClientManager;
-import org.tianjyan.luban.manager.ConnectedClientFactory;
+import org.tianjyan.luban.manager.ConnectedClient;
 import org.tianjyan.luban.manager.IClient;
 
 
@@ -26,8 +25,8 @@ public class LBBinder extends IService.Stub {
     public void connectLB(String pkgName) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(pkgName);
         if (client == null) {
-            AbsClientFactory cf = new ConnectedClientFactory();
-            cf.orderClient(pkgName, getCallingPid());
+            client = new ConnectedClient(pkgName);
+            ClientManager.getInstance().addClient(pkgName, getCallingPid(), client);
         }
     }
 
