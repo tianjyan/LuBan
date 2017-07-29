@@ -6,4 +6,5 @@
 <suppressions>
     <suppress files="LBInternal.java" checks="MemberName"/>
     <suppress files="LBInternal.java" checks="StaticVariableName"/>
+    <suppress files="ClientManager.java" checks="StaticVariableName"/>
 </suppressions>

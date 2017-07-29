@@ -1,9 +1,9 @@
 package org.tianjyan.luban.client;
 
 public class InParaManager {
-    public void register(String paraName, String alias, String defaultValue) {
+    public void register(String paraName, String alias, String defaultValue, String... optionalValues) {
         LBInternal.getInstance().getInParaManager().register(
-                paraName, alias, defaultValue);
+                paraName, alias, defaultValue, optionalValues);
     }
 
     public void setInParasInFloatingArea(String... paraNames) {

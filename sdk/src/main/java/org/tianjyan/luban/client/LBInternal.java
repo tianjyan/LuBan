@@ -110,7 +110,7 @@ class LBInternal {
         int result = canConnectLB();
         if (result == Config.RES_CODE_OK) {
             try {
-                service.connectLB(context.getPackageName(), android.os.Process.myPid());
+                service.connectLB(context.getPackageName());
                 setConnState(CONNECT_STATE_CONNECTED);
             } catch (RemoteException e) {
                 Log.e("connectLB Exception", e.getMessage());

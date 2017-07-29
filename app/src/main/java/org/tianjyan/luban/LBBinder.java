@@ -1,29 +1,49 @@
 package org.tianjyan.luban;
 
 import android.os.RemoteException;
-import android.util.Log;
 
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.manager.AbsClientFactory;
+import org.tianjyan.luban.manager.ClientManager;
+import org.tianjyan.luban.manager.ConnectedClientFactory;
+import org.tianjyan.luban.manager.IClient;
 
 
 public class LBBinder extends IService.Stub {
 
     @Override
     public int canConnectLB(String pkgName, int versionId) throws RemoteException {
-        return Config.RES_CODE_OK;
+        if (versionId == Config.INTERVAL_VID) {
+            return Config.RES_CODE_OK;
+        }
+        return Config.RES_CODE_VERSION_INVALID;
     }
 
     @Override
-    public void connectLB(String pkgName, int pid) throws RemoteException {
-
+    public void connectLB(String pkgName) throws RemoteException {
+        IClient client = ClientManager.getInstance().getClient(pkgName);
+        if (client == null) {
+            AbsClientFactory cf = new ConnectedClientFactory();
+            cf.orderClient(pkgName, getCallingPid());
+        }
     }
 
     @Override
     public boolean disconnectLB(String pkgName) throws RemoteException {
-        return false;
+        boolean result = true;
+        try {
+            IClient client = ClientManager.getInstance().getClient(pkgName);
+            if (client != null) {
+                client.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
     }
 
     @Override
@@ -33,21 +53,25 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void registerInPara(InPara inPara) throws RemoteException {
-
+        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        client.registerInPara(inPara);
     }
 
     @Override
     public void registerOutPara(OutPara outPara) throws RemoteException {
-        Log.d("ytj", "registerOutPara");
+        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        client.registerOutPara(outPara);
     }
 
     @Override
-    public void setInPara(String key, String value) throws RemoteException {
-
+    public String getInPara(String key, String origVal) throws RemoteException {
+        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        return client.getInPara(key, origVal);
     }
 
     @Override
     public void setOutPara(String key, String value) throws RemoteException {
-        Log.d("ytj", "setOutPara");
+        IClient client = ClientManager.getInstance().getClient(getCallingPid());
+        client.setOutPara(key, value);
     }
 }

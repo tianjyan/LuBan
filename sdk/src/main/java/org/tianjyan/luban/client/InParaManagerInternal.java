@@ -23,7 +23,7 @@ class InParaManagerInternal {
         return userInterface;
     }
 
-    void register(String paraName, String alias, String defaultValue) {
+    void register(String paraName, String alias, String defaultValue, String... optionalValues) {
         if (paraName == null || alias == null || defaultValue == null) {
             return;
         }
@@ -38,6 +38,10 @@ class InParaManagerInternal {
         inPara.setDisplayProperty(InPara.DISPLAY_NORMAL);
         List<String> values = new ArrayList<>();
         values.add(defaultValue);
+
+        for (String i: optionalValues) {
+            values.add(i);
+        }
 
         if (!values.contains("<null>")) {
             values.add("<null>");
