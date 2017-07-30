@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#50B3FA</color>
+    <color name="colorPrimaryDark">#50B3FA</color>
+    <color name="colorAccent">#50B3FA</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="app_background">#F8F8F8</color>
+
+    <color name="navigation_menu_bg">#333333</color>
+    <color name="navigation_menu_title_color">#7C7F89</color>
+    <color name="navigation_menu_line_color">#555555</color>
+    <color name="navigation_menu_item_pressed">#555555</color>
+    <color name="navigation_menu_item_color">#EEEEEE</color>
+
+
+
+
+    <color name="text_color">#7C7F89</color>
+    <color name="line_color">#DDDADFE5</color>
+    <color name="title_color">@color/colorPrimary</color>
+    <color name="name_color">#F65EA5</color>
+
+    <color name="item_function_text_color">#333333</color>
+    <color name="item_function_bg_pressed">#7050B3FA</color>
+    <color name="item_group_bg_pressed">#555555</color>
 </resources>

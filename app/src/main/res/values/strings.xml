@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">LuBan</string>
+    <string name="navigation_menu_title">功能：</string>
+    <string name="exit">退出程序</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="about">关于</string>
+
+    <string name="function_out_para">出参监视</string>
+    <string name="function_in_para">入参设置</string>
+
+    <string name="main_thread_error">方法只能在主线程调用!</string>
 </resources>
