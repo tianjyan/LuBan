@@ -15,7 +15,6 @@
 
 
 
-
     <color name="text_color">#7C7F89</color>
     <color name="line_color">#DDDADFE5</color>
     <color name="title_color">@color/colorPrimary</color>
