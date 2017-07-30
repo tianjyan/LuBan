@@ -23,7 +23,6 @@ public class DefaultInParaManager implements IInParaManager {
                     && getInPara(inPara.getKey()) != null) {
                 inPara.setClient(client.getPackageName());
                 inParaMap.put(inPara.getKey(), inPara);
-                // TODO: 处理UI
             }
         }
     }
@@ -31,8 +30,7 @@ public class DefaultInParaManager implements IInParaManager {
     @Override
     public void unregister(String paraName) {
         synchronized (inParaMap) {
-            InPara para = inParaMap.remove(paraName);
-            // TODO: 处理UI
+            inParaMap.remove(paraName);
         }
     }
 

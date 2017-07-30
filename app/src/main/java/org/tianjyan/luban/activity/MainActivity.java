@@ -13,19 +13,25 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.tianjyan.luban.R;
+import org.tianjyan.luban.model.OnFunctionSelected;
 import org.tianjyan.luban.model.SettingKey;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnFunctionSelected {
     private static boolean active = false;
+    private List<String> functions;
 
     @BindView(R.id.main_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.main_navigation_drawer) View mDrawerView;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private MainMenuFragment mainMenuFragment;
+    private OutParaFragment outParaFragment;
 
     public static boolean isActive() {
         return active;
@@ -37,6 +43,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         active = true;
+        functions = new ArrayList<>();
+        functions.add(getString(R.string.function_out_para));
+        functions.add(getString(R.string.function_in_para));
         initDrawer();
         initFragment();
     }
@@ -114,15 +123,39 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void initFragment() {
+    private void initFragment()  {
         FragmentManager fragmentManager = getFragmentManager();
 
         mainMenuFragment = (MainMenuFragment) fragmentManager.findFragmentByTag("MainMenuFragment");
-        if (mainMenuFragment == null)
+        if (mainMenuFragment == null) {
             mainMenuFragment = new MainMenuFragment();
+            mainMenuFragment.setOnFunctionSelected(this);
+            mainMenuFragment.setDataSource(functions);
+        }
+
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_navigation_drawer, mainMenuFragment, "MainMenuFragment");
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onFunctionSelected(String functionName) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        if (outParaFragment != null) transaction.hide(outParaFragment);
+
+        if (functionName.equals(getResources().getString(R.string.function_out_para))) {
+            if (outParaFragment == null) {
+                outParaFragment = new OutParaFragment();
+                transaction.add(R.id.main_container, outParaFragment, "OutParaFragment");
+            } else {
+                transaction.show(outParaFragment);
+            }
+        } else if (functionName.equals(getResources().getString(R.string.function_in_para))) {
+
+        }
+        transaction.commitAllowingStateLoss();
     }
 }

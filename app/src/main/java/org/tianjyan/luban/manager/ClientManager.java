@@ -1,5 +1,6 @@
 package org.tianjyan.luban.manager;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,5 +27,9 @@ public class ClientManager {
             IClient client = clientMap.remove(pid);
             client.clear();
         }
+    }
+
+    public synchronized Collection<IClient> getAllClient() {
+        return clientMap.values();
     }
 }

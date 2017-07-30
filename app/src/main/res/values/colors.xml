@@ -13,14 +13,15 @@
     <color name="navigation_menu_item_pressed">#555555</color>
     <color name="navigation_menu_item_color">#EEEEEE</color>
 
-
+    <color name="action_item_pressed">#7050B3FA</color>
+    <color name="action_item_disable">#DDDADFE5</color>
+    <color name="action_item_title">#7C7F89</color>
+    <color name="action_item_line">#DDDADFE5</color>
 
     <color name="text_color">#7C7F89</color>
-    <color name="line_color">#DDDADFE5</color>
     <color name="title_color">@color/colorPrimary</color>
     <color name="name_color">#F65EA5</color>
 
-    <color name="item_function_text_color">#333333</color>
     <color name="item_function_bg_pressed">#7050B3FA</color>
     <color name="item_group_bg_pressed">#555555</color>
 </resources>

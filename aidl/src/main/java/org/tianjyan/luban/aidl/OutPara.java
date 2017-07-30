@@ -12,8 +12,6 @@ public class OutPara extends AidlEntry {
     private String value;
     private String freezeValue;
     private int displayProperty;
-    private List<String> cacheHistory = new ArrayList<>();
-    private long time = -1;
     private boolean isRegistering;
     private boolean monitor;
     private String client;
@@ -28,8 +26,6 @@ public class OutPara extends AidlEntry {
         value = parcel.readString();
         freezeValue = "";
         displayProperty = parcel.readInt();
-        parcel.readStringList(cacheHistory);
-        this.time = parcel.readLong();
     }
 
     public String getKey() {
@@ -76,14 +72,6 @@ public class OutPara extends AidlEntry {
         this.displayProperty = displayProperty;
     }
 
-    public void addHistory(String h) {
-        cacheHistory.add(h);
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
     public boolean isRegistering() {
         return isRegistering;
     }
@@ -114,8 +102,6 @@ public class OutPara extends AidlEntry {
         parcel.writeString(alias);
         parcel.writeString(value);
         parcel.writeInt(displayProperty);
-        parcel.writeStringList(cacheHistory);
-        parcel.writeLong(time);
     }
 
     public static final Parcelable.Creator<OutPara> CREATOR = new Creator<OutPara>() {

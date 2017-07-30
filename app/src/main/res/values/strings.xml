@@ -5,6 +5,12 @@
     <string name="open">打开</string>
     <string name="close">关闭</string>
     <string name="about">关于</string>
+    <string name="delete">清空</string>
+    <string name="save">保存</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="edit">编辑</string>
+    <string name="ok">确定</string>
 
     <string name="function_out_para">出参监视</string>
     <string name="function_in_para">入参设置</string>

@@ -13,24 +13,24 @@ import org.tianjyan.luban.R;
 import org.tianjyan.luban.model.OnFunctionSelected;
 import org.tianjyan.luban.model.SettingKey;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
     View exitView;
     ListView listView;
-    List<String> functions;
     MainMenuFragmentAdapter adapter;
     OnFunctionSelected onFunctionSelected;
+    List<String> functions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        functions = new ArrayList<>();
-        functions.add(getString(R.string.function_out_para));
-        functions.add(getString(R.string.function_in_para));
         adapter = new MainMenuFragmentAdapter(getActivity());
         adapter.setData(functions);
+        adapter.setCurrentFunction(functions.get(0));
+        if (onFunctionSelected != null) {
+            onFunctionSelected.onFunctionSelected(functions.get(0));
+        }
     }
 
     @Override
@@ -55,6 +55,10 @@ public class MainMenuFragment extends Fragment implements AdapterView.OnItemClic
         if (onFunctionSelected != null) {
             onFunctionSelected.onFunctionSelected(function);
         }
+    }
+
+    public void setDataSource(List<String> source) {
+        this.functions = source;
     }
 
     public void  setOnFunctionSelected(OnFunctionSelected onFunctionSelected) {

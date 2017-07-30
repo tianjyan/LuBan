@@ -16,5 +16,9 @@
     <dimen name="navigation_menu_exit_text_size">16sp</dimen>
     <dimen name="navigation_menu_exit_drawable_padding">8dp</dimen>
     <dimen name="navigation_menu_line">1dp</dimen>
-
+    <dimen name="action_item_height">48dp</dimen>
+    <dimen name="action_item_text_size">14sp</dimen>
+    <dimen name="action_item_drawable_padding">4dp</dimen>
+    <dimen name="action_item_line">0.7dp</dimen>
+    <dimen name="action_item_margin">6dp</dimen>
 </resources>

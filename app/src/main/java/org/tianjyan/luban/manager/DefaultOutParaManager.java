@@ -24,7 +24,6 @@ public class DefaultOutParaManager implements IOutParaManager {
                     && getOutPara(outPara.getKey()) == null) {
                 outPara.setClient(client.getPackageName());
                 outParaMap.put(outPara.getKey(), outPara);
-                //TODO: 处理UI
             }
         }
     }
@@ -32,8 +31,7 @@ public class DefaultOutParaManager implements IOutParaManager {
     @Override
     public void unregister(String paraName) {
         synchronized (outParaMap) {
-            OutPara para = outParaMap.remove(paraName);
-            // TODO: 处理UI
+            outParaMap.remove(paraName);
         }
     }
 

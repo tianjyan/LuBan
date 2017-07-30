@@ -74,7 +74,6 @@ public class MainMenuFragmentAdapter extends BaseAdapter {
     public void setData(List<String> functions) {
         this.mFunctions.clear();
         this.mFunctions.addAll(functions);
-        mCurrentFunction = functions.get(0);
     }
 
     private class ViewHolder {
