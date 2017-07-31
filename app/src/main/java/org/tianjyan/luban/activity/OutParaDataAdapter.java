@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.aidl.AidlEntry;
@@ -45,7 +46,25 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        int type = getItemViewType(position);
+        OutPara outPara = list.get(position);
 
+        switch (type) {
+            case Const.Type_Title:
+                TitleViewHolder titleViewHolder = (TitleViewHolder) holder;
+                titleViewHolder.titleTV.setText(outPara.getKey());
+                break;
+            case Const.Type_Item:
+                ItemEnableViewHolder itemEnableViewHolder = (ItemEnableViewHolder) holder;
+                itemEnableViewHolder.keyTV.setText(outPara.getKey());
+                break;
+            case Const.Type_Item_Disable:
+                ItemDisableViewHolder itemDisableViewHolder = (ItemDisableViewHolder) holder;
+                itemDisableViewHolder.keyTV.setText(outPara.getKey());
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -76,23 +95,29 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
     }
 
     public class ItemEnableViewHolder extends RecyclerView.ViewHolder {
+        TextView keyTV;
 
         public ItemEnableViewHolder(View itemView) {
             super(itemView);
+            keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
         }
     }
 
     public class ItemDisableViewHolder extends RecyclerView.ViewHolder {
+        TextView keyTV;
 
         public ItemDisableViewHolder(View itemView) {
             super(itemView);
+            keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
         }
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTV;
 
         public TitleViewHolder(View itemView) {
             super(itemView);
+            titleTV = (TextView) itemView.findViewById(R.id.para_title_tv);
         }
     }
 }

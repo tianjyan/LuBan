@@ -117,9 +117,10 @@
 
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/para_rv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     <com.mobeta.android.dslv.DragSortListView
         android:layout_width="wrap_content"
