@@ -30,13 +30,13 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder viewHolder = null;
         switch (viewType) {
             case Const.Type_Title:
-                viewHolder = new TitleViewHolder(inflate.inflate(R.layout.list_view_para_item_title, null));
+                viewHolder = new TitleViewHolder(inflate.inflate(R.layout.list_view_para_item_title, parent, false));
                 break;
             case Const.Type_Item:
-                viewHolder = new ItemEnableViewHolder(inflate.inflate(R.layout.list_view_para_item, null));
+                viewHolder = new ItemEnableViewHolder(inflate.inflate(R.layout.list_view_para_item, parent, false));
                 break;
             case Const.Type_Item_Disable:
-                viewHolder = new ItemDisableViewHolder(inflate.inflate(R.layout.list_view_para_item_disable, null));
+                viewHolder = new ItemDisableViewHolder(inflate.inflate(R.layout.list_view_para_item_disable, parent, false));
                 break;
             default:
                 break;

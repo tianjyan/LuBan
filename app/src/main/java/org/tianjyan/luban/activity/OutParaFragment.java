@@ -26,12 +26,15 @@ public class OutParaFragment extends Fragment {
         OutPara outPara = new OutPara();
         outPara.setKey(Const.Floating_Area_Title);
         outParas.add(outPara);
-        outPara.setKey("Test");
-        outParas.add(outPara);
-        outPara.setKey(Const.Normal_Area_Title);
-        outParas.add(outPara);
-        outPara.setKey("Test2");
-        outParas.add(outPara);
+        OutPara outPara1 = new OutPara();
+        outPara1.setKey("Test1");
+        outParas.add(outPara1);
+//        outPara.setKey("Test");
+//        outParas.add(outPara);
+//        outPara.setKey(Const.Normal_Area_Title);
+//        outParas.add(outPara);
+//        outPara.setKey("Test2");
+//        outParas.add(outPara);
 
         OutParaDataAdapter outParaDataAdapter = new OutParaDataAdapter(getActivity(), outParas);
         recyclerView.setAdapter(outParaDataAdapter);
