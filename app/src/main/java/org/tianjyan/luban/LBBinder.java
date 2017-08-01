@@ -2,10 +2,14 @@ package org.tianjyan.luban;
 
 import android.os.RemoteException;
 
+import org.greenrobot.eventbus.EventBus;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.event.RegisterInParaEvent;
+import org.tianjyan.luban.event.RegisterOutParaEvent;
+import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.ConnectedClient;
 import org.tianjyan.luban.manager.IClient;
@@ -54,12 +58,14 @@ public class LBBinder extends IService.Stub {
     public void registerInPara(InPara inPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerInPara(inPara);
+        EventBus.getDefault().post(new RegisterInParaEvent());
     }
 
     @Override
     public void registerOutPara(OutPara outPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerOutPara(outPara);
+        EventBus.getDefault().post(new RegisterOutParaEvent());
     }
 
     @Override
@@ -72,5 +78,6 @@ public class LBBinder extends IService.Stub {
     public void setOutPara(String key, String value) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.setOutPara(key, value);
+        EventBus.getDefault().post(new SetOutParaEvent());
     }
 }

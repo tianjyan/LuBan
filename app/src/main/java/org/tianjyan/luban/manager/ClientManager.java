@@ -1,5 +1,7 @@
 package org.tianjyan.luban.manager;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
