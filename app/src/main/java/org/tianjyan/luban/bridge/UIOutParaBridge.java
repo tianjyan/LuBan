@@ -8,7 +8,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.event.RegisterInParaEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
@@ -34,13 +33,22 @@ public class UIOutParaBridge {
     }
 
     @Subscribe(threadMode = ThreadMode.POSTING)
-    public void onRegisterInPara(RegisterInParaEvent event){
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.POSTING)
     public void onRegisterOutPara(RegisterOutParaEvent event) {
-
+        OutPara outPara = event.getOutPara();
+        switch (outPara.getDisplayProperty()) {
+            case AidlEntry.DISPLAY_FLOATING:
+                addParaToFloatingArea(outPara);
+                break;
+            case AidlEntry.DISPLAY_NORMAL:
+                addParaToNormalArea(outPara);
+                break;
+            case AidlEntry.DISPLAY_DISABLE:
+                addParaToDisableArea(outPara);
+                break;
+            default:
+                break;
+        }
+        outParaDataAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.POSTING)
@@ -77,11 +85,16 @@ public class UIOutParaBridge {
     }
 
     private void addParas(int type, List<OutPara> sources) {
-        sources.stream().forEach(para -> {
+        for (OutPara para: sources) {
             if (para.getDisplayProperty() == type) {
                 outParas.add(para);
             }
-        });
+        }
+//        sources.stream().forEach(para -> {
+//            if (para.getDisplayProperty() == type) {
+//                outParas.add(para);
+//            }
+//        });
     }
 
     private void addParaToFloatingArea(OutPara outPara) {
@@ -96,7 +109,27 @@ public class UIOutParaBridge {
             outParas.add(normalAreaPosition, outPara);
         } else {
             outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);
+            addParaToNormalArea(outPara);
         }
+    }
+
+    private void addParaToNormalArea(OutPara outPara) {
+        if (outParas.contains(outPara) ||
+                outPara.getDisplayProperty() != AidlEntry.DISPLAY_NORMAL) {
+            return;
+        }
+
+        int disableAreaPosition = getDisableDividePosition();
+        outParas.add(disableAreaPosition, outPara);
+    }
+
+    private void addParaToDisableArea(OutPara outPara) {
+        if (outParas.contains(outPara) ||
+                outPara.getDisplayProperty() != AidlEntry.DISPLAY_DISABLE) {
+            return;
+        }
+
+        outParas.add(outPara);
     }
 
     private int getNormalDividePosition() {

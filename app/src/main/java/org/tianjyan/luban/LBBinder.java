@@ -58,14 +58,14 @@ public class LBBinder extends IService.Stub {
     public void registerInPara(InPara inPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerInPara(inPara);
-        EventBus.getDefault().post(new RegisterInParaEvent());
+        EventBus.getDefault().post(new RegisterInParaEvent(inPara));
     }
 
     @Override
     public void registerOutPara(OutPara outPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.registerOutPara(outPara);
-        EventBus.getDefault().post(new RegisterOutParaEvent());
+        EventBus.getDefault().post(new RegisterOutParaEvent(outPara));
     }
 
     @Override
