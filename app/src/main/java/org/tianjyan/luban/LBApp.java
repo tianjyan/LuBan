@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Looper;
 
+import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.manager.ConnectedClient;
 import org.tianjyan.luban.model.OnSettingChangeListener;
 import org.tianjyan.luban.model.SettingKey;
 

@@ -1,8 +1,11 @@
 package org.tianjyan.luban.bridge;
 
+import android.content.Context;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.RegisterInParaEvent;
@@ -22,8 +25,12 @@ public class UIOutParaBridge {
         return INSTANCE;
     }
 
+    private OutParaDataAdapter outParaDataAdapter;
+    private List<OutPara> outParas = Collections.synchronizedList(new ArrayList<>());
+
     public UIOutParaBridge() {
         EventBus.getDefault().register(this);
+        initParamList();
     }
 
     @Subscribe(threadMode = ThreadMode.POSTING)
@@ -41,9 +48,43 @@ public class UIOutParaBridge {
 
     }
 
-    public static List<OutPara> outParas = Collections.synchronizedList(new ArrayList<>());
+    public OutParaDataAdapter getOutParaDataAdapter(Context context) {
+        if (outParaDataAdapter == null) {
+            outParaDataAdapter = new OutParaDataAdapter(context, outParas);
+        }
+        return outParaDataAdapter;
+    }
 
-    public static void addParaToFloatingArea(OutPara outPara) {
+    private void initParamList() {
+        List<OutPara> temps = getAll();
+
+        outParas.clear();
+
+        OutPara floatingPara = new OutPara();
+        floatingPara.setKey(Const.Floating_Area_Title);
+        outParas.add(floatingPara);
+        addParas(AidlEntry.DISPLAY_FLOATING, temps);
+
+        OutPara normalPara = new OutPara();
+        normalPara.setKey(Const.Normal_Area_Title);
+        outParas.add(normalPara);
+        addParas(AidlEntry.DISPLAY_NORMAL, temps);
+
+        OutPara disablePara = new OutPara();
+        disablePara.setKey(Const.Disable_Area_Title);
+        outParas.add(disablePara);
+        addParas(AidlEntry.DISPLAY_DISABLE, temps);
+    }
+
+    private void addParas(int type, List<OutPara> sources) {
+        sources.stream().forEach(para -> {
+            if (para.getDisplayProperty() == type) {
+                outParas.add(para);
+            }
+        });
+    }
+
+    private void addParaToFloatingArea(OutPara outPara) {
         if (outParas.contains(outPara) ||
                 outPara.getDisplayProperty() != AidlEntry.DISPLAY_FLOATING) {
             return;
@@ -58,15 +99,15 @@ public class UIOutParaBridge {
         }
     }
 
-    public static int getNormalDividePosition() {
+    private int getNormalDividePosition() {
         return getDividePosition(Const.Normal_Area_Title);
     }
 
-    public static int getDisableDividePosition() {
+    private int getDisableDividePosition() {
         return getDividePosition(Const.Disable_Area_Title);
     }
 
-    private static List<OutPara> getAll() {
+    private List<OutPara> getAll() {
         List<OutPara> tempOutParas = new ArrayList<>();
         for (IClient client : ClientManager.getInstance().getAllClient()) {
             tempOutParas.addAll(client.getOutPara());
@@ -74,7 +115,7 @@ public class UIOutParaBridge {
         return tempOutParas;
     }
 
-    private static int getDividePosition(String title) {
+    private int getDividePosition(String title) {
         int pos = 0;
         for (int i = 0; i < outParas.size(); i++) {
             if (outParas.get(i).getKey() == title) {
