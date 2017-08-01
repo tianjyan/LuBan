@@ -15,5 +15,7 @@
     <string name="function_out_para">出参监视</string>
     <string name="function_in_para">入参设置</string>
 
+    <string name="key">key: </string>
+
     <string name="main_thread_error">方法只能在主线程调用!</string>
 </resources>

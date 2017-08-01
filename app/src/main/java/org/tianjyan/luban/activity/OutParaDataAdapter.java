@@ -57,6 +57,8 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
             case Const.Type_Item:
                 ItemEnableViewHolder itemEnableViewHolder = (ItemEnableViewHolder) holder;
                 itemEnableViewHolder.keyTV.setText(outPara.getKey());
+                itemEnableViewHolder.pkgNameTV.setText(outPara.getClient());
+                itemEnableViewHolder.valueTV.setText(outPara.getValue());
                 break;
             case Const.Type_Item_Disable:
                 ItemDisableViewHolder itemDisableViewHolder = (ItemDisableViewHolder) holder;
@@ -96,10 +98,14 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
 
     public class ItemEnableViewHolder extends RecyclerView.ViewHolder {
         TextView keyTV;
+        TextView pkgNameTV;
+        TextView valueTV;
 
         public ItemEnableViewHolder(View itemView) {
             super(itemView);
             keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
+            pkgNameTV = (TextView) itemView.findViewById(R.id.pkg_name_tv);
+            valueTV = (TextView) itemView.findViewById(R.id.para_value_tv);
         }
     }
 

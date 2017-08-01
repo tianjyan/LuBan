@@ -21,4 +21,10 @@
     <dimen name="action_item_drawable_padding">4dp</dimen>
     <dimen name="action_item_line">0.7dp</dimen>
     <dimen name="action_item_margin">6dp</dimen>
+    <dimen name="para_layout_height">42dp</dimen>
+    <dimen name="para_pkg_margin">6dp</dimen>
+    <dimen name="para_pkg_size">17sp</dimen>
+    <dimen name="para_line">1dp</dimen>
+    <dimen name="para_item_margin">8dp</dimen>
+    <dimen name="para_item_title_size">15sp</dimen>
 </resources>
