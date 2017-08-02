@@ -82,7 +82,7 @@ public class OutParaEditDataAdapter extends BaseAdapter {
             default:
                 ItemDisableViewHolder itemDisableViewHolder;
                 if (convertView == null) {
-                    convertView = inflate.inflate(R.layout.list_view_para_item_disable, parent, false);
+                    convertView = inflate.inflate(R.layout.list_view_para_item_drag, parent, false);
                     itemDisableViewHolder = new ItemDisableViewHolder(convertView);
                     convertView.setTag(itemDisableViewHolder);
                 } else {

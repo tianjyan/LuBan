@@ -39,4 +39,5 @@
         <attr name="click_remove_id" format="integer" />
         <attr name="use_default_controller" format="boolean" />
     </declare-styleable>
+    <item type="id" name="drag_handle" />
 </resources>
