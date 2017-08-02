@@ -17,11 +17,13 @@ public class OutParaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_out_para, container, false);
+        DividerLine dividerLine = new DividerLine(DividerLine.VERTICAL);
+        dividerLine.setSize(1);
+        dividerLine.setColor(R.color.para_line_color);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.para_rv);
+        recyclerView.addItemDecoration(dividerLine);
         recyclerView.setAdapter(UIOutParaBridge.getInstance().getOutParaDataAdapter(getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return rootView;
     }
-
-
 }

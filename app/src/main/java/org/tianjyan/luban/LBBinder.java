@@ -78,6 +78,7 @@ public class LBBinder extends IService.Stub {
     public void setOutPara(String key, String value) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         client.setOutPara(key, value);
-        EventBus.getDefault().post(new SetOutParaEvent());
+        OutPara outPara = client.getOutPara(key);
+        EventBus.getDefault().post(new SetOutParaEvent(outPara));
     }
 }

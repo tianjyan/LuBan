@@ -18,10 +18,10 @@
     <color name="action_item_title">#7C7F89</color>
     <color name="action_item_line">#DDDADFE5</color>
 
-    <color name="para_pkg_color">@color/colorPrimary</color>
     <color name="para_line_color">#DDDADFE5</color>
+    <color name="para_pkg_color">#7C7F89</color>
     <color name="para_title_color">#F65EA5</color>
-    <color name="para_content_color">#7C7F89</color>
+    <color name="para_content_color">#228B22</color>
 
 
     <color name="text_color">#7C7F89</color>

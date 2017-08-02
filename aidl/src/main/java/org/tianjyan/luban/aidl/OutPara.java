@@ -8,7 +8,6 @@ import java.util.List;
 
 public class OutPara extends AidlEntry {
     private String key;
-    private String alias;
     private String value;
     private String freezeValue;
     private int displayProperty;
@@ -22,7 +21,6 @@ public class OutPara extends AidlEntry {
 
     public OutPara(Parcel parcel) {
         key = parcel.readString();
-        alias = parcel.readString();
         value = parcel.readString();
         freezeValue = "";
         displayProperty = parcel.readInt();
@@ -34,14 +32,6 @@ public class OutPara extends AidlEntry {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
     }
 
     public String getValue() {
@@ -99,7 +89,6 @@ public class OutPara extends AidlEntry {
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(key);
-        parcel.writeString(alias);
         parcel.writeString(value);
         parcel.writeInt(displayProperty);
     }

@@ -18,17 +18,13 @@ class OutParaManagerInternal {
         return userInterface;
     }
 
-    void register(String paraName, String alias) {
-        if (paraName == null || alias == null) {
+    void register(String paraName) {
+        if (paraName == null) {
             return;
-        }
-        if (alias.length() > 4) {
-            alias = alias.substring(0, 3) + ".";
         }
 
         OutPara outPara = new OutPara();
         outPara.setKey(paraName);
-        outPara.setAlias(alias);
         outPara.setRegistering(true);
         outPara.setDisplayProperty(OutPara.DISPLAY_NORMAL);
         temp.add(outPara);

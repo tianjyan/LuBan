@@ -32,7 +32,7 @@ public class UIOutParaBridge {
         initParamList();
     }
 
-    @Subscribe(threadMode = ThreadMode.POSTING)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRegisterOutPara(RegisterOutParaEvent event) {
         OutPara outPara = event.getOutPara();
         switch (outPara.getDisplayProperty()) {
@@ -51,9 +51,12 @@ public class UIOutParaBridge {
         outParaDataAdapter.notifyDataSetChanged();
     }
 
-    @Subscribe(threadMode = ThreadMode.POSTING)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSetOutPara(SetOutParaEvent event) {
-
+        int position = outParas.indexOf(event.getOutPara());
+        if (position > -1) {
+            outParaDataAdapter.notifyItemChanged(position);
+        }
     }
 
     public OutParaDataAdapter getOutParaDataAdapter(Context context) {

@@ -18,18 +18,13 @@ class InParaManagerInternal {
         return userInterface;
     }
 
-    void register(String paraName, String alias, String defaultValue, String... optionalValues) {
-        if (paraName == null || alias == null || defaultValue == null) {
+    void register(String paraName, String defaultValue, String... optionalValues) {
+        if (paraName == null || defaultValue == null) {
             return;
-        }
-
-        if (alias.length() > 4) {
-            alias = alias.substring(0, 3) + ".";
         }
 
         InPara inPara = new InPara();
         inPara.setKey(paraName);
-        inPara.setAlias(alias);
         inPara.setDisplayProperty(InPara.DISPLAY_NORMAL);
         List<String> values = new ArrayList<>();
         values.add(defaultValue);

@@ -12,6 +12,10 @@ public class ClientManager {
         return INSTANCE;
     }
 
+    private ClientManager() {
+        clientMap.put(0, DefaultClient.getInstance());
+    }
+
     private Map<Integer, IClient> clientMap = new HashMap<>();
 
     public IClient getClient(int pid) {

@@ -23,8 +23,10 @@
     <dimen name="action_item_margin">6dp</dimen>
     <dimen name="para_layout_height">42dp</dimen>
     <dimen name="para_pkg_margin">6dp</dimen>
-    <dimen name="para_pkg_size">17sp</dimen>
+    <dimen name="para_pkg_size">12sp</dimen>
     <dimen name="para_line">1dp</dimen>
     <dimen name="para_item_margin">8dp</dimen>
     <dimen name="para_item_title_size">15sp</dimen>
+    <dimen name="para_padding">8dp</dimen>
+    <dimen name="para_title_height">32dp</dimen>
 </resources>
