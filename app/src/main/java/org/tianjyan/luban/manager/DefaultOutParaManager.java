@@ -20,8 +20,7 @@ public class DefaultOutParaManager implements IOutParaManager {
     public void register(OutPara outPara) {
         synchronized (outParaMap) {
             if (outPara != null
-                    && outPara.getKey() != null
-                    && getOutPara(outPara.getKey()) == null) {
+                    && outPara.getKey() != null) {
                 outPara.setClient(client.getPackageName());
                 outParaMap.put(outPara.getKey(), outPara);
             }

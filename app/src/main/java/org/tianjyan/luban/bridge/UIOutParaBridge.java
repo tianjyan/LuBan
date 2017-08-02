@@ -6,6 +6,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
+import org.tianjyan.luban.activity.OutParaEditDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
@@ -25,6 +26,7 @@ public class UIOutParaBridge {
     }
 
     private OutParaDataAdapter outParaDataAdapter;
+    private OutParaEditDataAdapter outParaEditDataAdapter;
     private List<OutPara> outParas = Collections.synchronizedList(new ArrayList<>());
 
     public UIOutParaBridge() {
@@ -64,6 +66,13 @@ public class UIOutParaBridge {
             outParaDataAdapter = new OutParaDataAdapter(context, outParas);
         }
         return outParaDataAdapter;
+    }
+
+    public OutParaEditDataAdapter getOutParaEditDataAdapter(Context context) {
+        if (outParaEditDataAdapter == null) {
+            outParaEditDataAdapter = new OutParaEditDataAdapter(context, outParas);
+        }
+        return outParaEditDataAdapter;
     }
 
     private void initParamList() {

@@ -19,8 +19,7 @@ public class DefaultInParaManager implements IInParaManager {
     public void register(InPara inPara) {
         synchronized (inParaMap) {
             if (inPara != null
-                    && null != inPara.getKey()
-                    && getInPara(inPara.getKey()) != null) {
+                    && inPara.getKey() != null) {
                 inPara.setClient(client.getPackageName());
                 inParaMap.put(inPara.getKey(), inPara);
             }

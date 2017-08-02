@@ -35,6 +35,9 @@ class ParaTaskConsumer {
                 Log.e("ParaTask Interrupted", e.getMessage());
             } catch (RemoteException e) {
                 Log.e("ParaTask Remote", e.getMessage());
+            } catch (NullPointerException e) {
+                Log.e("Disconnected", e.getMessage());
+                flag = false;
             }
         }, ParaTaskConsumer.this.getClass().getSimpleName());
     }

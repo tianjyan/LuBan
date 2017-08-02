@@ -57,28 +57,37 @@ public class LBBinder extends IService.Stub {
     @Override
     public void registerInPara(InPara inPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
-        client.registerInPara(inPara);
-        EventBus.getDefault().post(new RegisterInParaEvent(inPara));
+        if (client != null && client.getInPara(inPara.getKey()) == null) {
+            client.registerInPara(inPara);
+            EventBus.getDefault().post(new RegisterInParaEvent(inPara));
+        }
     }
 
     @Override
     public void registerOutPara(OutPara outPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
-        client.registerOutPara(outPara);
-        EventBus.getDefault().post(new RegisterOutParaEvent(outPara));
+        if (client != null && client.getOutPara(outPara.getKey()) == null) {
+            client.registerOutPara(outPara);
+            EventBus.getDefault().post(new RegisterOutParaEvent(outPara));
+        }
     }
 
     @Override
     public String getInPara(String key, String origVal) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
+        if (client == null) {
+            return origVal;
+        }
         return client.getInPara(key, origVal);
     }
 
     @Override
     public void setOutPara(String key, String value) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
+        if (client == null) return;
         client.setOutPara(key, value);
         OutPara outPara = client.getOutPara(key);
+        if (outPara == null) return;
         EventBus.getDefault().post(new SetOutParaEvent(outPara));
     }
 }
