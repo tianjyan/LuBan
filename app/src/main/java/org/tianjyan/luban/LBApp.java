@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Looper;
 
-import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.manager.ConnectedClient;
+import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
+
 import org.tianjyan.luban.model.OnSettingChangeListener;
 import org.tianjyan.luban.model.SettingKey;
 
@@ -36,6 +37,15 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
     @Override
     public void onCreate() {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
+        if (BuildConfig.ENABLE_LEAK_CANARY) {
+            if (LeakCanary.isInAnalyzerProcess(this)) {
+                // This process is dedicated to LeakCanary for heap analysis.
+                // You should not init your app in this process.
+                return;
+            }
+            LeakCanary.install(this);
+        }
         mContext = getApplicationContext();
         loadSettings();
         final String key = getSetting(SettingKey.KEY, "");
