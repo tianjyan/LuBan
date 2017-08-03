@@ -35,9 +35,6 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
             case Const.Type_Item:
                 viewHolder = new ItemEnableViewHolder(inflate.inflate(R.layout.list_view_para_item, parent, false));
                 break;
-            case Const.Type_Item_Disable:
-                viewHolder = new ItemDisableViewHolder(inflate.inflate(R.layout.list_view_para_item_disable, parent, false));
-                break;
             default:
                 break;
         }
@@ -60,10 +57,6 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
                 itemEnableViewHolder.pkgNameTV.setText(outPara.getClient());
                 itemEnableViewHolder.valueTV.setText(outPara.getValue());
                 break;
-            case Const.Type_Item_Disable:
-                ItemDisableViewHolder itemDisableViewHolder = (ItemDisableViewHolder) holder;
-                itemDisableViewHolder.keyTV.setText(outPara.getKey());
-                break;
             default:
                 break;
         }
@@ -81,15 +74,10 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
         switch (outPara.getKey()) {
             case Const.Floating_Area_Title:
             case Const.Normal_Area_Title:
-            case Const.Disable_Area_Title:
                 type = Const.Type_Title;
                 break;
             default:
-                if (outPara.getDisplayProperty() == AidlEntry.DISPLAY_DISABLE) {
-                    type = Const.Type_Item_Disable;
-                } else {
-                    type = Const.Type_Item;
-                }
+                type = Const.Type_Item;
                 break;
         }
 

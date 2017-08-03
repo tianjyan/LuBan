@@ -42,9 +42,6 @@ public class UIOutParaBridge {
             case AidlEntry.DISPLAY_NORMAL:
                 addParaToNormalArea(outPara);
                 break;
-            case AidlEntry.DISPLAY_DISABLE:
-                addParaToDisableArea(outPara);
-                break;
             default:
                 break;
         }
@@ -80,11 +77,6 @@ public class UIOutParaBridge {
         normalPara.setKey(Const.Normal_Area_Title);
         outParas.add(normalPara);
         addParas(AidlEntry.DISPLAY_NORMAL, temps);
-
-        OutPara disablePara = new OutPara();
-        disablePara.setKey(Const.Disable_Area_Title);
-        outParas.add(disablePara);
-        addParas(AidlEntry.DISPLAY_DISABLE, temps);
     }
 
     private void addParas(int type, List<OutPara> sources) {
@@ -122,25 +114,11 @@ public class UIOutParaBridge {
             return;
         }
 
-        int disableAreaPosition = getDisableDividePosition();
-        outParas.add(disableAreaPosition, outPara);
-    }
-
-    private void addParaToDisableArea(OutPara outPara) {
-        if (outParas.contains(outPara) ||
-                outPara.getDisplayProperty() != AidlEntry.DISPLAY_DISABLE) {
-            return;
-        }
-
         outParas.add(outPara);
     }
 
     private int getNormalDividePosition() {
         return getDividePosition(Const.Normal_Area_Title);
-    }
-
-    private int getDisableDividePosition() {
-        return getDividePosition(Const.Disable_Area_Title);
     }
 
     private List<OutPara> getAll() {

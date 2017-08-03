@@ -22,11 +22,7 @@ public class OutParaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_out_para, container, false);
         ButterKnife.bind(this, rootView);
-        DividerLine dividerLine = new DividerLine(DividerLine.VERTICAL);
-        dividerLine.setSize(1);
-        dividerLine.setColor(R.color.para_line_color);
         OutParaDataAdapter adapter = UIOutParaBridge.getInstance().getOutParaDataAdapter(getActivity());
-        recyclerView.addItemDecoration(dividerLine);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return rootView;
