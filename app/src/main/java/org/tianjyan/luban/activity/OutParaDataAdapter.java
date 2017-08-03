@@ -96,7 +96,7 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
         return type;
     }
 
-    public class ItemEnableViewHolder extends RecyclerView.ViewHolder {
+    public class ItemEnableViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView keyTV;
         TextView pkgNameTV;
         TextView valueTV;
@@ -106,15 +106,27 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
             keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
             pkgNameTV = (TextView) itemView.findViewById(R.id.pkg_name_tv);
             valueTV = (TextView) itemView.findViewById(R.id.para_value_tv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
-    public class ItemDisableViewHolder extends RecyclerView.ViewHolder {
+    public class ItemDisableViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView keyTV;
 
         public ItemDisableViewHolder(View itemView) {
             super(itemView);
             keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
