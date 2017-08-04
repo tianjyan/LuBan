@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.tianjyan.luban.R;
-import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.model.Const;
 
@@ -34,7 +33,7 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
                 viewHolder = new TitleViewHolder(inflate.inflate(R.layout.list_view_para_item_title, parent, false));
                 break;
             case Const.Type_Item:
-                viewHolder = new ItemEnableViewHolder(inflate.inflate(R.layout.list_view_para_item, parent, false));
+                viewHolder = new ItemViewHolder(inflate.inflate(R.layout.list_view_para_item, parent, false));
                 break;
             default:
                 break;
@@ -53,7 +52,7 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
                 titleViewHolder.titleTV.setText(outPara.getKey());
                 break;
             case Const.Type_Item:
-                ItemEnableViewHolder itemEnableViewHolder = (ItemEnableViewHolder) holder;
+                ItemViewHolder itemEnableViewHolder = (ItemViewHolder) holder;
                 itemEnableViewHolder.keyTV.setText(outPara.getKey());
                 itemEnableViewHolder.pkgNameTV.setText(outPara.getClient());
                 itemEnableViewHolder.valueTV.setText(outPara.getValue());
@@ -85,12 +84,12 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
         return type;
     }
 
-    public class ItemEnableViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView keyTV;
         TextView pkgNameTV;
         TextView valueTV;
 
-        public ItemEnableViewHolder(View itemView) {
+        public ItemViewHolder(View itemView) {
             super(itemView);
             keyTV = (TextView) itemView.findViewById(R.id.para_key_tv);
             pkgNameTV = (TextView) itemView.findViewById(R.id.pkg_name_tv);
@@ -101,6 +100,8 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, OutParaDetailActivity.class);
+            intent.putExtra("pkgName", list.get(getAdapterPosition()).getClient());
+            intent.putExtra("paraName", list.get(getAdapterPosition()).getKey());
             context.startActivity(intent);
         }
     }

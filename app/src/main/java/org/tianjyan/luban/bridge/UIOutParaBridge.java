@@ -14,12 +14,15 @@ import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.IClient;
 import org.tianjyan.luban.model.Const;
+import org.tianjyan.luban.model.ParaHistory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 public class UIOutParaBridge {
+    private boolean isRunning;
     private static UIOutParaBridge INSTANCE = new UIOutParaBridge();
     public static UIOutParaBridge getInstance() {
         return INSTANCE;
@@ -31,8 +34,8 @@ public class UIOutParaBridge {
 
     public UIOutParaBridge() {
         EventBus.getDefault().register(this);
-        initParamList();
         historyBridge = UIOutParaHistoryBridge.getInstance();
+        initParamList();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -44,6 +47,7 @@ public class UIOutParaBridge {
                 break;
             case AidlEntry.DISPLAY_NORMAL:
                 addParaToNormalArea(outPara);
+                historyBridge.addOutPara(outPara);
                 break;
             default:
                 break;
@@ -53,10 +57,11 @@ public class UIOutParaBridge {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSetOutPara(SetOutParaEvent event) {
+        if (!isRunning) return;
         int position = outParas.indexOf(event.getOutPara());
         if (position > -1) {
-            outParaDataAdapter.notifyItemChanged(position);
             historyBridge.addHistory(event.getOutPara(), event.getValue());
+            outParaDataAdapter.notifyItemChanged(position);
             EventBus.getDefault().post(
                     new OutParaHistoryUpdateEvent(event.getOutPara(), event.getValue()));
         }
@@ -67,6 +72,34 @@ public class UIOutParaBridge {
             outParaDataAdapter = new OutParaDataAdapter(context, outParas);
         }
         return outParaDataAdapter;
+    }
+
+    public OutPara getOutPara(String paraName, String pkgName) {
+        synchronized (outParas) {
+            for (OutPara p : outParas) {
+                if (p.getClient() != null
+                        && p.getClient().equals(pkgName)
+                        && p.getKey().equals(paraName))
+                    return p;
+            }
+        }
+        throw new IllegalArgumentException("Can't find the para.");
+    }
+
+    public Vector<ParaHistory> getHistories(OutPara outPara) {
+        return historyBridge.getHistories(outPara);
+    }
+
+    public void clearHistories() {
+        historyBridge.clearHistories();
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
     }
 
     private void initParamList() {
@@ -89,6 +122,7 @@ public class UIOutParaBridge {
         for (OutPara para: sources) {
             if (para.getDisplayProperty() == type) {
                 outParas.add(para);
+                historyBridge.addOutPara(para);
             }
         }
 //        sources.stream().forEach(para -> {
