@@ -12,5 +12,4 @@ interface IOutParaManager {
     List<OutPara> getAll();
     OutPara getOutPara(String paraName);
     void setOutPara(String paraName, String value);
-    void setOutParaMonitor(String paraName, boolean flag);
 }

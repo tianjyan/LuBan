@@ -2,20 +2,20 @@ package org.tianjyan.luban.event;
 
 import org.tianjyan.luban.aidl.OutPara;
 
-public class SetOutParaEvent {
+public class OutParaHistoryUpdateEvent {
     private OutPara outPara;
     private String value;
 
-    public SetOutParaEvent(OutPara outPara, String value) {
+    public OutParaHistoryUpdateEvent(OutPara outPara, String value) {
         this.outPara = outPara;
         this.value = value;
     }
 
-    public OutPara getOutPara() {
-        return outPara;
-    }
-
     public String getValue() {
         return value;
+    }
+
+    public OutPara getOutPara() {
+        return outPara;
     }
 }

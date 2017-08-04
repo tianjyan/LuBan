@@ -8,9 +8,11 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
+import org.tianjyan.luban.manager.DefaultOutParaManager;
 import org.tianjyan.luban.manager.IClient;
 import org.tianjyan.luban.model.Const;
 
@@ -26,10 +28,12 @@ public class UIOutParaBridge {
 
     private OutParaDataAdapter outParaDataAdapter;
     private List<OutPara> outParas = Collections.synchronizedList(new ArrayList<>());
+    private UIOutParaHistoryBridge historyBridge;
 
     public UIOutParaBridge() {
         EventBus.getDefault().register(this);
         initParamList();
+        historyBridge = UIOutParaHistoryBridge.getInstance();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -53,6 +57,9 @@ public class UIOutParaBridge {
         int position = outParas.indexOf(event.getOutPara());
         if (position > -1) {
             outParaDataAdapter.notifyItemChanged(position);
+            historyBridge.addHistory(event.getOutPara(), event.getValue());
+            EventBus.getDefault().post(
+                    new OutParaHistoryUpdateEvent(event.getOutPara(), event.getValue()));
         }
     }
 

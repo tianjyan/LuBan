@@ -66,12 +66,4 @@ public class DefaultOutParaManager implements IOutParaManager {
             outPara.setValue(value);
         }
     }
-
-    @Override
-    public void setOutParaMonitor(String paraName, boolean flag) {
-        OutPara outPara = getOutPara(paraName);
-        if (outPara != null) {
-            outPara.setMonitor(flag);
-        }
-    }
 }

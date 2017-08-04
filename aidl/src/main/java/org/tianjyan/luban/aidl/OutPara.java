@@ -9,10 +9,8 @@ import java.util.List;
 public class OutPara extends AidlEntry {
     private String key;
     private String value;
-    private String freezeValue;
     private int displayProperty;
     private boolean isRegistering;
-    private boolean monitor;
     private String client;
 
     public OutPara() {
@@ -22,7 +20,6 @@ public class OutPara extends AidlEntry {
     public OutPara(Parcel parcel) {
         key = parcel.readString();
         value = parcel.readString();
-        freezeValue = "";
         displayProperty = parcel.readInt();
     }
 
@@ -46,14 +43,6 @@ public class OutPara extends AidlEntry {
         }
     }
 
-    public String getFreezeValue() {
-        return freezeValue;
-    }
-
-    public void setFreezeValue(String freezeValue) {
-        this.freezeValue = freezeValue;
-    }
-
     public int getDisplayProperty() {
         return displayProperty;
     }
@@ -68,14 +57,6 @@ public class OutPara extends AidlEntry {
 
     public void setRegistering(boolean isRegistering) {
         this.isRegistering = isRegistering;
-    }
-
-    public boolean isMonitor() {
-        return monitor;
-    }
-
-    public void setMonitor(boolean monitor) {
-        this.monitor = monitor;
     }
 
     public String getClient() {

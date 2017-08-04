@@ -9,7 +9,6 @@ import android.os.Parcelable;
 public class InPara extends AidlEntry {
     private String key;
     private List<String> values = new ArrayList<>();
-    private int displayProperty;
     private String client;
 
     public InPara() {
@@ -19,7 +18,6 @@ public class InPara extends AidlEntry {
     public InPara(Parcel parcel){
         key = parcel.readString();
         parcel.readStringList(values);
-        displayProperty = parcel.readInt();
     }
 
     public String getKey() {
@@ -38,14 +36,6 @@ public class InPara extends AidlEntry {
         this.values = values;
     }
 
-    public int getDisplayProperty() {
-        return displayProperty;
-    }
-
-    public void setDisplayProperty(int displayProperty) {
-        this.displayProperty = displayProperty;
-    }
-
     public String getClient() {
         return client;
     }
@@ -59,7 +49,6 @@ public class InPara extends AidlEntry {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(key);
         parcel.writeStringList(values);
-        parcel.writeInt(displayProperty);
     }
 
     public static final Parcelable.Creator<InPara> CREATOR = new Creator<InPara>(){

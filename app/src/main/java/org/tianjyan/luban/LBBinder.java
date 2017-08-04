@@ -88,6 +88,6 @@ public class LBBinder extends IService.Stub {
         client.setOutPara(key, value);
         OutPara outPara = client.getOutPara(key);
         if (outPara == null) return;
-        EventBus.getDefault().post(new SetOutParaEvent(outPara));
+        EventBus.getDefault().post(new SetOutParaEvent(outPara, value));
     }
 }
