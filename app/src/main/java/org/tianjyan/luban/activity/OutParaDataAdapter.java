@@ -1,6 +1,7 @@
 package org.tianjyan.luban.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +100,8 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(context, OutParaDetailActivity.class);
+            context.startActivity(intent);
         }
     }
 

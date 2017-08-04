@@ -20,5 +20,4 @@ public interface IClient {
     OutPara getOutPara(String paraName);
     List<OutPara> getOutPara();
     void setOutPara(String paraName, String value);
-    void setOutParaMonitor(String paraName, boolean flag);
 }

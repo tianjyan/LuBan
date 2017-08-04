@@ -12,7 +12,6 @@ import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
-import org.tianjyan.luban.manager.DefaultOutParaManager;
 import org.tianjyan.luban.manager.IClient;
 import org.tianjyan.luban.model.Const;
 

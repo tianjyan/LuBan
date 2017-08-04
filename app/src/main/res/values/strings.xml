@@ -18,4 +18,5 @@
     <string name="key">key: </string>
 
     <string name="main_thread_error">方法只能在主线程调用!</string>
+    <string name="title_activity_out_para_detail">OutParaDetail</string>
 </resources>

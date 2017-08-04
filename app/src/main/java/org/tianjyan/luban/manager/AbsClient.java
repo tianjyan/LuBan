@@ -66,10 +66,6 @@ public abstract class AbsClient implements IClient {
         outParaManager.setOutPara(paraName, value);
     }
 
-    public void setOutParaMonitor(String paraName, boolean flag) {
-        outParaManager.setOutParaMonitor(paraName, flag);
-    }
-
     public void clear() {
         inParaManager.clear();
         outParaManager.clear();
