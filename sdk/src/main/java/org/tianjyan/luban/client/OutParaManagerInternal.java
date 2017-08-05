@@ -43,26 +43,6 @@ class OutParaManagerInternal {
         }
     }
 
-    void setOutParasInDisableArea() {
-        for (int i = 0; i < temp.size(); i++) {
-            temp.get(i).setDisplayProperty(OutPara.DISPLAY_DISABLE);
-        }
-    }
-
-    void setOutParasInDisableArea(String... paraNames) {
-        if (paraNames != null) {
-            int len = paraNames.length;
-
-            for (int i = 0; i < temp.size(); i++) {
-                for (int j = 0; j < len; j++) {
-                    if (temp.get(i).getKey().equals(paraNames[j])) {
-                        temp.get(i).setDisplayProperty(OutPara.DISPLAY_DISABLE);
-                    }
-                }
-            }
-        }
-    }
-
     OutPara[] getAndClearTempParas() {
         OutPara[] result = temp.toArray(new OutPara[]{});
         temp.clear();

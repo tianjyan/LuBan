@@ -3,9 +3,6 @@ package org.tianjyan.luban.aidl;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OutPara extends AidlEntry {
     private String key;
     private String value;
@@ -65,6 +62,30 @@ public class OutPara extends AidlEntry {
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (obj instanceof OutPara) {
+            OutPara para = (OutPara) obj;
+            if (para.getKey() != null && para.getKey().equals(key)
+                    && para.getClient() != null && para.getClient().equals(client))
+                result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        if (key != null) {
+            result = 31 * result + key.hashCode();
+        }
+        if (client != null) {
+            result = 31 * result + client.hashCode();
+        }
+        return result;
     }
 
     @Override

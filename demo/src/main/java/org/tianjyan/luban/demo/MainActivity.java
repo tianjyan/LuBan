@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LB.connect(getApplicationContext(), new AbsLBParaLoader() {
                     @Override
                     public void loadInParas(InParaManager im) {
-
+                        im.register("Value1", "Default", "abc");
+                        im.register("Value2", "Default2", "bcd");
                     }
 
                     @Override

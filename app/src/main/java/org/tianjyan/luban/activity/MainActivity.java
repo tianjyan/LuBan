@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
 
     private MainMenuFragment mainMenuFragment;
     private OutParaFragment outParaFragment;
+    private InParaFragment inParaFragment;
 
     public static boolean isActive() {
         return active;
@@ -145,6 +146,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         if (outParaFragment != null) transaction.hide(outParaFragment);
+        if (inParaFragment != null) transaction.hide(inParaFragment);
 
         if (functionName.equals(getResources().getString(R.string.function_out_para))) {
             if (outParaFragment == null) {
@@ -154,7 +156,12 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
                 transaction.show(outParaFragment);
             }
         } else if (functionName.equals(getResources().getString(R.string.function_in_para))) {
-
+            if (inParaFragment == null) {
+                inParaFragment = new InParaFragment();
+                transaction.add(R.id.main_container, inParaFragment, "InParaFragment");
+            } else {
+                transaction.show(inParaFragment);
+            }
         }
         transaction.commitAllowingStateLoss();
     }

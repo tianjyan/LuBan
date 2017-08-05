@@ -25,7 +25,6 @@ class InParaManagerInternal {
 
         InPara inPara = new InPara();
         inPara.setKey(paraName);
-        inPara.setDisplayProperty(InPara.DISPLAY_NORMAL);
         List<String> values = new ArrayList<>();
         values.add(defaultValue);
 
@@ -33,43 +32,11 @@ class InParaManagerInternal {
             values.add(i);
         }
 
-        if (!values.contains("<null>")) {
-            values.add("<null>");
+        if (!values.contains("None")) {
+            values.add("None");
         }
         inPara.setValues(values);
         temp.add(inPara);
-    }
-
-    void setInParasInFloatingArea(String... paraNames) {
-        if (paraNames != null) {
-            int len = paraNames.length;
-            for (int i = 0; i < temp.size(); i++) {
-                for (int j = 0; j < len; j++) {
-                    if (temp.get(i).getKey().equals(paraNames[j])) {
-                        temp.get(i).setDisplayProperty(InPara.DISPLAY_FLOATING);
-                    }
-                }
-            }
-        }
-    }
-
-    void setInParasInDisableArea() {
-        for (int i = 0; i < temp.size(); i++) {
-            temp.get(i).setDisplayProperty(InPara.DISPLAY_DISABLE);
-        }
-    }
-
-    void setInParasInDisableArea(String... paraNames) {
-        if (paraNames != null) {
-            int len = paraNames.length;
-            for (int i = 0; i < temp.size(); i++) {
-                for (int j = 0; j < len; j++) {
-                    if (temp.get(i).getKey().equals(paraNames[j])) {
-                        temp.get(i).setDisplayProperty(InPara.DISPLAY_DISABLE);
-                    }
-                }
-            }
-        }
     }
 
     InPara[] getAndClearTempParas() {

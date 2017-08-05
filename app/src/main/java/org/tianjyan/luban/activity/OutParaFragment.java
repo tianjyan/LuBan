@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.tianjyan.luban.R;
-import org.tianjyan.luban.bridge.UIInParaBridge;
 import org.tianjyan.luban.bridge.UIOutParaBridge;
 
 import butterknife.BindView;

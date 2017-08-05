@@ -44,6 +44,29 @@ public class InPara extends AidlEntry {
         this.client = client;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (obj instanceof InPara) {
+            InPara para = (InPara) obj;
+            if (para.getKey() != null && para.getKey().equals(key)
+                    && para.getClient() != null && para.getClient().equals(client))
+                result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        if (key != null) {
+            result = 31 * result + key.hashCode();
+        }
+        if (client != null) {
+            result = 31 * result + client.hashCode();
+        }
+        return result;
+    }
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
