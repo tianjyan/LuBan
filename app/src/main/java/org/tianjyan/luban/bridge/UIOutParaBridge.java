@@ -7,6 +7,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
+import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
@@ -23,6 +24,7 @@ import java.util.Vector;
 
 public class UIOutParaBridge {
     private boolean isRunning;
+    private int floatingItemCount = 0;
     private static UIOutParaBridge INSTANCE = new UIOutParaBridge();
     public static UIOutParaBridge getInstance() {
         return INSTANCE;
@@ -102,6 +104,29 @@ public class UIOutParaBridge {
         isRunning = running;
     }
 
+    public void moveParaFromFloatingToNormal(OutPara outPara) {
+        int position = getNormalDividePosition();
+        outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);
+        outParas.remove(outPara);
+        outParas.add(position, outPara);
+        floatingItemCount--;
+        outParaDataAdapter.notifyDataSetChanged();
+    }
+
+    public void moveParaFromNormalToFloating(OutPara outPara) {
+        int position = getNormalDividePosition();
+        outPara.setDisplayProperty(AidlEntry.DISPLAY_FLOATING);
+        outParas.remove(outPara);
+        outParas.add(position, outPara);
+        floatingItemCount++;
+        outParaDataAdapter.notifyDataSetChanged();
+    }
+
+    public int getFloatingItemCount() {
+        return floatingItemCount;
+    }
+
+
     private void initParamList() {
         List<OutPara> temps = getAll();
 
@@ -140,7 +165,8 @@ public class UIOutParaBridge {
 
         int normalAreaPosition = getNormalDividePosition();
 
-        if (normalAreaPosition < 4) {
+        if (normalAreaPosition <= Config.MAX_FLOATING_COUNT) {
+            floatingItemCount++;
             outParas.add(normalAreaPosition, outPara);
         } else {
             outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);

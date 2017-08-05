@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         functions = new ArrayList<>();
         functions.add(getString(R.string.function_out_para));
         functions.add(getString(R.string.function_in_para));
+        functions.add(getString(R.string.function_log));
+        functions.add(getString(R.string.function_performance));
         initDrawer();
         initFragment();
     }
@@ -164,5 +166,6 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             }
         }
         transaction.commitAllowingStateLoss();
+        mDrawerLayout.closeDrawer(mDrawerView);
     }
 }

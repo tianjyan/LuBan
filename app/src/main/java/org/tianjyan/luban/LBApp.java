@@ -97,6 +97,10 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         }
     }
 
+    public static Context getContext() {
+        return mContext;
+    }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         SettingKey settingKey = SettingKey.valueOf(SettingKey.class, key);

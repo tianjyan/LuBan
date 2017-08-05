@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">LuBan</string>
+    <string name="client_default">默认</string>
     <string name="navigation_menu_title">功能：</string>
     <string name="exit">退出程序</string>
     <string name="open">打开</string>
@@ -14,9 +15,14 @@
 
     <string name="function_out_para">出参监视</string>
     <string name="function_in_para">入参设置</string>
-
-    <string name="key">key: </string>
+    <string name="function_log">日志查看</string>
+    <string name="function_performance">耗时统计</string>
 
     <string name="main_thread_error">方法只能在主线程调用!</string>
-    <string name="title_activity_out_para_detail">OutParaDetail</string>
+
+    <string name="para_floating_title">显示在悬浮窗的监视参数(最多三个)</string>
+    <string name="para_normal_title">其他监视参数</string>
+
+    <string name="menu_move_to_floating">添加到悬浮窗</string>
+    <string name="menu_move_out_floating">从悬浮窗移除</string>
 </resources>

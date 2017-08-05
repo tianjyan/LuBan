@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void loadOutParas(OutParaManager om) {
                         om.register("Test");
                         om.register("Test2");
+                        om.register("Test3");
                     }
                 });
                 break;

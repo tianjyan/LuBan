@@ -12,4 +12,9 @@ public class Config {
     public final static int LOG_ERROR = 4;
 
     public final static int INTERVAL_VID = 10000;
+
+    public final static int MAX_CLIENT_SUPPORT = 5;
+    public final static int MAX_OUT_PARA_SUPPORT = 20;
+    public final static int MAX_IN_PARA_SUPPORT = 5;
+    public final static int MAX_FLOATING_COUNT = 3;
 }
