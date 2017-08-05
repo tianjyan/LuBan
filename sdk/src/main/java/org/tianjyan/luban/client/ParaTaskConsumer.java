@@ -21,11 +21,7 @@ class ParaTaskConsumer {
                     if (task == null) continue;
                     if (task instanceof InPara) {
                         InPara inPara = (InPara) task;
-                        if (inPara.isRegistering()) {
-                            service.registerInPara(inPara);
-                        } else if (inPara.getValues() != null && inPara.getValues().size() > 0) {
-                            service.setInPara(inPara.getKey(), inPara.getValues().get(0));
-                        }
+                        service.registerInPara(inPara);
                     } else if (task instanceof OutPara) {
                         OutPara outPara = (OutPara) task;
                         if (outPara.isRegistering()) {
@@ -39,6 +35,9 @@ class ParaTaskConsumer {
                 Log.e("ParaTask Interrupted", e.getMessage());
             } catch (RemoteException e) {
                 Log.e("ParaTask Remote", e.getMessage());
+            } catch (NullPointerException e) {
+                Log.e("Disconnected", e.getMessage());
+                flag = false;
             }
         }, ParaTaskConsumer.this.getClass().getSimpleName());
     }

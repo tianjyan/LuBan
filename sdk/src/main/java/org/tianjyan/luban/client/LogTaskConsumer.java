@@ -26,6 +26,9 @@ class LogTaskConsumer {
                 Log.e("LogTask Interrupted", e.getMessage());
             } catch (RemoteException e) {
                 Log.e("LogTask Remote", e.getMessage());
+            } catch (NullPointerException e) {
+                Log.e("Disconnected", e.getMessage());
+                flag = false;
             }
         }, LogTaskConsumer.this.getClass().getSimpleName());
     }

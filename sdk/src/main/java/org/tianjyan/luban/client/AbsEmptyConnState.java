@@ -51,11 +51,6 @@ abstract class AbsEmptyConnState implements IConnState {
     }
 
     @Override
-    public void setInPara(String paraName, String value) {
-
-    }
-
-    @Override
     public String getInPara(String paraName) {
         return null;
     }

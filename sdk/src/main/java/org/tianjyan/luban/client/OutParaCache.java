@@ -22,9 +22,6 @@ class OutParaCache {
     void put(String key, String newValue) {
         OutPara outPara = map.get(key);
         if (outPara != null) {
-            if (outPara.getValue() != null) {
-                outPara.addHistory(outPara.getValue());
-            }
             outPara.setValue(newValue);
         }
     }

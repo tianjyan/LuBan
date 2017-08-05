@@ -11,7 +11,6 @@ import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 
 class LBInternal {
-    //region Field
     static final String LB_PACKAGE_NAME = "org.tianjyan.luban";
     static final String ACTION = "org.tianjyan.luban.service";
 
@@ -27,9 +26,7 @@ class LBInternal {
     IConnState CONNECT_STATE_DISCONNECTING;
     IConnState CONNECT_STATE_DISCONNECTED;
     IConnState currentConnState;
-    //endregion
 
-    //region Singleton
     private static LBInternal INSTANCE = new LBInternal();
     static LBInternal getInstance() {
         return INSTANCE;
@@ -43,11 +40,6 @@ class LBInternal {
         CONNECT_STATE_DISCONNECTED = new DisconnectedState(cacheController);
         currentConnState = CONNECT_STATE_DISCONNECTED;
     }
-    //endregion
-
-    //region Internal Method
-
-    //region Connect and Disconnect Binder Service and Aidl Service
 
     /**
      * 与LuBan主程序连接的入口函数。
@@ -110,7 +102,7 @@ class LBInternal {
         int result = canConnectLB();
         if (result == Config.RES_CODE_OK) {
             try {
-                service.connectLB(context.getPackageName(), android.os.Process.myPid());
+                service.connectLB(context.getPackageName());
                 setConnState(CONNECT_STATE_CONNECTED);
             } catch (RemoteException e) {
                 Log.e("connectLB Exception", e.getMessage());
@@ -183,9 +175,6 @@ class LBInternal {
         Log.w("setConnState", "Now State:" + this.currentConnState.getClass().getName());
     }
 
-    //endregion
-
-    //region InParaManager and OutParaManager
     InParaManagerInternal getInParaManager() {
         return inParaManager;
     }
@@ -193,23 +182,15 @@ class LBInternal {
     OutParaManagerInternal getOutParaManager() {
         return outParaManager;
     }
-    //endregion
 
-    //region InPara and OutPara
     void setOutPara(String paraName, String value) {
         currentConnState.setOutPara(paraName, value);
-    }
-
-    void setInPara(String paraName, String value) {
-        currentConnState.setInPara(paraName, value);
     }
 
     String getInPara(String paraName) {
         return currentConnState.getInPara(paraName);
     }
-    //endregion
 
-    //region Log
     void logI(String tag, String msg) {
         if (currentConnState != null) {
             currentConnState.logI(tag, msg);
@@ -233,9 +214,7 @@ class LBInternal {
             currentConnState.logE(tag, msg);
         }
     }
-    //endregion
 
-    //region Misc.
     private boolean isLBInstalled(Context hostContext) {
         if (getLBContext(hostContext) == null) {
             return false;
@@ -253,7 +232,4 @@ class LBInternal {
         }
         return context;
     }
-    //endregion
-
-    //endregion
 }

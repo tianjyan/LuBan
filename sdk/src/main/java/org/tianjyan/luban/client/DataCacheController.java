@@ -72,37 +72,12 @@ class DataCacheController {
         outParaCache.put(paraName, "");
     }
 
-    String getOutParaFromCache(String paraName) {
-        String result = "";
-        if (paraName != null && outParaCache.get(paraName) != null) {
-            result = outParaCache.get(paraName).getValue();
-        }
-        return result;
-    }
-
-    void setInPara(String paraName, String value) {
-        if (paraName != null) {
-            InPara inPara = new InPara();
-            inPara.setKey(paraName);
-            value = value != null ? value : "";
-            List<String> values = new ArrayList<>();
-            values.add(value);
-            inPara.setValues(values);
-        }
-    }
-
     void registerInParaToCache(InPara inPara) {
         if (inPara != null && inPara.getKey() != null) {
             if (inPara.getValues() == null) {
                 inPara.setValues(new ArrayList<>());
             }
             inParaCache.register(inPara);
-        }
-    }
-
-    void setInParaToCache(String paraName, String value) {
-        if (value != null) {
-            inParaCache.put(paraName, value);
         }
     }
 

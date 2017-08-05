@@ -11,6 +11,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        buildConfigField "boolean", "ENABLE_LEAK_CANARY", "false"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
@@ -18,6 +19,11 @@ android {
         }
     }
     buildTypes {
+        debugMemoryLeak {
+            initWith debug
+            buildConfigField "boolean", "ENABLE_LEAK_CANARY", "true"
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -31,17 +37,28 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile fileTree(include: ['*.aidl'], dir: '../aidl')
+    compile project(':aidl')
+    compile 'com.jakewharton:butterknife:8.7.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'junit:junit:4.12'
-    compile project(':aidl')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    debugMemoryLeakCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }
 
 task styleCheck(type: Checkstyle) {
     configFile new File(rootDir, "config/checkstyle.xml")
     source 'src'
     include '**/*.java'
-    exclude '**/gen/**'
+    exclude '**/gen/**', '**/mobeta/**'
 
     classpath = files()
 }
