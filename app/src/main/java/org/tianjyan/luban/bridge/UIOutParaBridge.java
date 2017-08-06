@@ -103,6 +103,10 @@ public class UIOutParaBridge {
         historyBridge.clearHistories();
     }
 
+    public void saveHistories() {
+        historyBridge.saveHistories();
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
@@ -157,6 +161,7 @@ public class UIOutParaBridge {
                 outParas.add(para);
                 if (type == AidlEntry.DISPLAY_FLOATING) {
                     EventBus.getDefault().post(new AddFloatingOutParaEvent(para));
+                    floatingItemCount++;
                 }
                 historyBridge.addOutPara(para);
             }

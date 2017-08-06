@@ -44,6 +44,7 @@ public class OutParaFragment extends Fragment {
 
     @OnClick(R.id.action_save)
     public void saveHistories() {
+        UIOutParaBridge.getInstance().saveHistories();
     }
 
     @OnClick(R.id.action_start)

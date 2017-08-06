@@ -29,4 +29,5 @@
     <color name="item_group_bg_pressed">#555555</color>
     
     <color name="floating_detail_background">#DD202020</color>
+    <color name="floating_text_color">#F8F8F8</color>
 </resources>
