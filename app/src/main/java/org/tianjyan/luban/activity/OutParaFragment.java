@@ -44,7 +44,6 @@ public class OutParaFragment extends Fragment {
 
     @OnClick(R.id.action_save)
     public void saveHistories() {
-
     }
 
     @OnClick(R.id.action_start)

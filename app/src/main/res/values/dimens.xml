@@ -29,5 +29,8 @@
     <dimen name="para_item_title_size">15sp</dimen>
     <dimen name="para_padding">8dp</dimen>
     <dimen name="para_title_height">32dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="floating_logo_elevation">5dp</dimen>
+    <dimen name="floating_logo_size">48dp</dimen>
+    <dimen name="floating_logo_image_padding">12dp</dimen>
 </resources>

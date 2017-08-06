@@ -10,6 +10,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import org.tianjyan.luban.model.OnSettingChangeListener;
 import org.tianjyan.luban.model.SettingKey;
+import org.tianjyan.luban.view.FloatingView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
     private static Context mContext;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
+    private FloatingView floatingView;
 
     public static void setAppRunning(boolean isRunning) {
         isAppRunning = isRunning;
@@ -49,6 +51,8 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         mContext = getApplicationContext();
         loadSettings();
         final String key = getSetting(SettingKey.KEY, "");
+        floatingView = new FloatingView(LBApp.getContext());
+        floatingView.showLogo();
     }
 
     private  void loadSettings() {

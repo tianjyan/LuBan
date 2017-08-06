@@ -9,8 +9,11 @@ import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
+import org.tianjyan.luban.event.RemoveFloatingOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.IClient;
@@ -66,6 +69,10 @@ public class UIOutParaBridge {
             outParaDataAdapter.notifyItemChanged(position);
             EventBus.getDefault().post(
                     new OutParaHistoryUpdateEvent(event.getOutPara(), event.getValue()));
+            if (event.getOutPara().getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
+                EventBus.getDefault().post(
+                        new FloatingOutParaValueUpdateEvent(event.getOutPara(), event.getValue()));
+            }
         }
     }
 
@@ -111,6 +118,7 @@ public class UIOutParaBridge {
         outParas.add(position, outPara);
         floatingItemCount--;
         outParaDataAdapter.notifyDataSetChanged();
+        EventBus.getDefault().post(new RemoveFloatingOutParaEvent(outPara));
     }
 
     public void moveParaFromNormalToFloating(OutPara outPara) {
@@ -120,12 +128,12 @@ public class UIOutParaBridge {
         outParas.add(position, outPara);
         floatingItemCount++;
         outParaDataAdapter.notifyDataSetChanged();
+        EventBus.getDefault().post(new AddFloatingOutParaEvent(outPara));
     }
 
     public int getFloatingItemCount() {
         return floatingItemCount;
     }
-
 
     private void initParamList() {
         List<OutPara> temps = getAll();
@@ -147,6 +155,9 @@ public class UIOutParaBridge {
         for (OutPara para: sources) {
             if (para.getDisplayProperty() == type) {
                 outParas.add(para);
+                if (type == AidlEntry.DISPLAY_FLOATING) {
+                    EventBus.getDefault().post(new AddFloatingOutParaEvent(para));
+                }
                 historyBridge.addOutPara(para);
             }
         }
@@ -168,6 +179,7 @@ public class UIOutParaBridge {
         if (normalAreaPosition <= Config.MAX_FLOATING_COUNT) {
             floatingItemCount++;
             outParas.add(normalAreaPosition, outPara);
+            EventBus.getDefault().post(new AddFloatingOutParaEvent(outPara));
         } else {
             outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);
             addParaToNormalArea(outPara);
