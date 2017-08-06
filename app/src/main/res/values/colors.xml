@@ -25,10 +25,8 @@
     <color name="para_title_color">#F65EA5</color>
     <color name="para_content_color">#228B22</color>
 
-
-    <color name="text_color">#7C7F89</color>
-    <color name="name_color">#F65EA5</color>
-
     <color name="item_function_bg_pressed">#7050B3FA</color>
     <color name="item_group_bg_pressed">#555555</color>
+    
+    <color name="floating_detail_background">#DD202020</color>
 </resources>

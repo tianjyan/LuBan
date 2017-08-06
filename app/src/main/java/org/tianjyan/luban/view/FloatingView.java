@@ -19,9 +19,7 @@ import android.widget.LinearLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.tianjyan.luban.LBApp;
 import org.tianjyan.luban.R;
-import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.AddFloatingOutParaEvent;
 import org.tianjyan.luban.event.FloatingOutParaValueUpdateEvent;
@@ -36,7 +34,7 @@ public class FloatingView {
     private WindowManager windowManager;
     private WindowManager.LayoutParams logoLayoutParams;
     private WindowManager.LayoutParams detailLayoutParams;
-    private OutParaDataAdapter outParaDataAdapter;
+    private FloatingAdapter floatingAdapter;
     private List<OutPara> floatingParas = Collections.synchronizedList(new ArrayList<>());
     private Context context;
     private LinearLayout logoLinearLayout;
@@ -63,7 +61,7 @@ public class FloatingView {
         windowManager = (WindowManager) this.context.getSystemService(Context.WINDOW_SERVICE);
         mTouchSlop = ViewConfiguration.get(this.context).getScaledTouchSlop();
         mDisplayMetrics = this.context.getResources().getDisplayMetrics();
-
+        floatingAdapter = new FloatingAdapter(context, floatingParas);
         handler = new Handler(FloatingView.this.context.getMainLooper()) {
 
             @Override
@@ -254,10 +252,12 @@ public class FloatingView {
         if (detailLinearLayout == null) {
             detailLinearLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.floating_detail, null);
             recyclerView = (RecyclerView) detailLinearLayout.findViewById(R.id.para_rv);
-            outParaDataAdapter = new OutParaDataAdapter(LBApp.getContext(), floatingParas);
-            recyclerView.setAdapter(outParaDataAdapter);
+            recyclerView.setAdapter(floatingAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
+            DividerLine dividerLine = new DividerLine(DividerLine.VERTICAL);
+            dividerLine.setSize(1);
+            dividerLine.setColor(R.color.para_line_color);
+            recyclerView.addItemDecoration(dividerLine);
             recyclerView.setOnTouchListener(new DetailTouchListener());
             detailLinearLayout.setOnTouchListener(new DetailTouchListener());
         }
@@ -278,17 +278,17 @@ public class FloatingView {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddFloatingOutPara(AddFloatingOutParaEvent event) {
         floatingParas.add(event.getOutPara());
-        outParaDataAdapter.notifyDataSetChanged();
+        floatingAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRemoveFloatingOutPara(RemoveFloatingOutParaEvent event) {
         floatingParas.remove(event.getOutPara());
-        outParaDataAdapter.notifyDataSetChanged();
+        floatingAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFloatingOutParaValueUpdate(FloatingOutParaValueUpdateEvent event) {
-        outParaDataAdapter.notifyDataSetChanged();
+        floatingAdapter.notifyDataSetChanged();
     }
 }

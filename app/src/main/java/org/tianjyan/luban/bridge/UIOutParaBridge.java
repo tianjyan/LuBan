@@ -207,7 +207,7 @@ public class UIOutParaBridge {
         return tempOutParas;
     }
 
-    private int getDividePosition(String title) {
+    private int getDividePosition(String title)  {
         int pos = 0;
         for (int i = 0; i < outParas.size(); i++) {
             if (outParas.get(i).getKey() == title) {

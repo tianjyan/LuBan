@@ -33,4 +33,5 @@
     <dimen name="floating_logo_elevation">5dp</dimen>
     <dimen name="floating_logo_size">48dp</dimen>
     <dimen name="floating_logo_image_padding">12dp</dimen>
+    <dimen name="floating_detail_width">320dp</dimen>
 </resources>
