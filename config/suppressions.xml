@@ -11,4 +11,5 @@
     <suppress files="UIOutParaBridge.java" checks="StaticVariableName"/>
     <suppress files="UIOutParaHistoryBridge.java" checks="StaticVariableName"/>
     <suppress files="DefaultClient.java" checks="StaticVariableName"/>
+    <suppress files="MainActivity.java" checks="StaticVariableName"/>
 </suppressions>

@@ -3,8 +3,10 @@ package org.tianjyan.luban.view;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -80,6 +82,7 @@ public class FloatingView {
     }
 
     public void showLogo() {
+        if (!permissionAllowed()) return;
         if (!isLogoShowing) {
             windowManager.addView(getLogoContentView(), getLogoLayoutParams());
             isLogoShowing = true;
@@ -88,6 +91,7 @@ public class FloatingView {
     }
 
     public void hideLogo() {
+        if (!permissionAllowed()) return;
         if (isLogoShowing) {
             windowManager.removeView(getLogoContentView());
             handler.removeMessages(HIDE);
@@ -96,6 +100,7 @@ public class FloatingView {
     }
 
     public void showDetail() {
+        if (!permissionAllowed()) return;
         if (!isDetailShowing) {
             windowManager.addView(getDetailContentView(), getDetailLayoutParams());
             isDetailShowing = true;
@@ -103,6 +108,7 @@ public class FloatingView {
     }
 
     public void hideDetail() {
+        if (!permissionAllowed()) return;
         if (isDetailShowing) {
             windowManager.removeView(getDetailContentView());
             isDetailShowing = false;
@@ -290,5 +296,12 @@ public class FloatingView {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFloatingOutParaValueUpdate(FloatingOutParaValueUpdateEvent event) {
         floatingAdapter.notifyDataSetChanged();
+    }
+
+    private boolean permissionAllowed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return Settings.canDrawOverlays(context);
+        }
+        return true;
     }
 }

@@ -1,9 +1,14 @@
 package org.tianjyan.luban.activity;
 
+import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -51,6 +56,10 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         functions.add(getString(R.string.function_performance));
         initDrawer();
         initFragment();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestDrawOverLays();
+        }
     }
 
     @Override
@@ -167,5 +176,24 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         }
         transaction.commitAllowingStateLoss();
         mDrawerLayout.closeDrawer(mDrawerView);
+    }
+
+    public static int OVERLAY_PERMISSION_REQ_CODE = 1234;
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestDrawOverLays() {
+        if (!Settings.canDrawOverlays(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
+            startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+            }
+        }
     }
 }
