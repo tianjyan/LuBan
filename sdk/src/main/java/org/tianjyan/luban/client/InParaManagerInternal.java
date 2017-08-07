@@ -25,6 +25,7 @@ class InParaManagerInternal {
 
         InPara inPara = new InPara();
         inPara.setKey(paraName);
+        inPara.setSelectedValue(defaultValue);
         List<String> values = new ArrayList<>();
         values.add(defaultValue);
 

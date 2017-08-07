@@ -9,6 +9,7 @@ import android.os.Parcelable;
 public class InPara extends AidlEntry {
     private String key;
     private List<String> values = new ArrayList<>();
+    private String selectedValue;
     private String client;
 
     public InPara() {
@@ -17,6 +18,7 @@ public class InPara extends AidlEntry {
 
     public InPara(Parcel parcel){
         key = parcel.readString();
+        selectedValue = parcel.readString();
         parcel.readStringList(values);
     }
 
@@ -34,6 +36,14 @@ public class InPara extends AidlEntry {
 
     public void setValues(List<String> values) {
         this.values = values;
+    }
+
+    public void setSelectedValue(String selectedValue) {
+        this.selectedValue = selectedValue;
+    }
+
+    public String getSelectedValue() {
+        return selectedValue;
     }
 
     public String getClient() {
@@ -71,6 +81,7 @@ public class InPara extends AidlEntry {
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(key);
+        parcel.writeString(selectedValue);
         parcel.writeStringList(values);
     }
 

@@ -33,6 +33,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.OutParaDetailActivity" />
+        <activity
+            android:name=".activity.InParaDetailActivity" />
 
         <service
             android:name=".LBService"

@@ -63,10 +63,14 @@ public class DefaultInParaManager implements IInParaManager {
         InPara inPara = getInPara(paraName);
         if (inPara == null
                 || inPara.getValues() == null
-                || inPara.getValues().size() == 0) {
+                || inPara.getValues().size() == 0
+                || inPara.getSelectedValue() == null
+                || inPara.getSelectedValue().isEmpty()) {
+            return origVal;
+        } else if (inPara.getSelectedValue() == "None") {
             return origVal;
         } else {
-            return inPara.getValues().get(0);
+            return inPara.getSelectedValue();
         }
     }
 }

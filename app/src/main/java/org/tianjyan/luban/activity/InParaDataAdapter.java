@@ -1,6 +1,7 @@
 package org.tianjyan.luban.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ public class InParaDataAdapter extends RecyclerView.Adapter<InParaDataAdapter.It
         InPara inPara = list.get(position);
         holder.keyTV.setText(inPara.getKey());
         holder.pkgNameTV.setText(inPara.getClient());
-        holder.valueTV.setText(inPara.getValues().get(0));
+        holder.valueTV.setText(inPara.getSelectedValue());
     }
 
     @Override
@@ -62,10 +63,10 @@ public class InParaDataAdapter extends RecyclerView.Adapter<InParaDataAdapter.It
 
         @Override
         public void onClick(View v) {
-//            Intent intent = new Intent(context, OutParaDetailActivity.class);
-//            intent.putExtra("pkgName", list.get(getAdapterPosition()).getClient());
-//            intent.putExtra("paraName", list.get(getAdapterPosition()).getKey());
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, InParaDetailActivity.class);
+            intent.putExtra("pkgName", list.get(getAdapterPosition()).getClient());
+            intent.putExtra("paraName", list.get(getAdapterPosition()).getKey());
+            context.startActivity(intent);
         }
     }
 }
