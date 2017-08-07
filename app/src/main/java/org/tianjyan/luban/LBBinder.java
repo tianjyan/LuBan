@@ -13,6 +13,7 @@ import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.ConnectedClient;
 import org.tianjyan.luban.manager.IClient;
+import org.tianjyan.luban.model.Const;
 
 
 public class LBBinder extends IService.Stub {
@@ -22,11 +23,21 @@ public class LBBinder extends IService.Stub {
         if (versionId == Config.INTERVAL_VID) {
             return Config.RES_CODE_OK;
         }
+
+        int count = ClientManager.getInstance().getAllClient().size();
+
+        if (count == Config.MAX_CLIENT_SUPPORT) {
+            return Config.RES_CODE_REFUSE;
+        }
+
         return Config.RES_CODE_VERSION_INVALID;
     }
 
     @Override
     public void connectLB(String pkgName) throws RemoteException {
+        if (ClientManager.getInstance().getAllClient().size() == Config.MAX_CLIENT_SUPPORT)
+            return;
+
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         if (client == null) {
             client = new ConnectedClient(pkgName);
@@ -58,6 +69,9 @@ public class LBBinder extends IService.Stub {
     public void registerInPara(InPara inPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         if (client != null && client.getInPara(inPara.getKey()) == null) {
+            if (client.getInPara().size() >= Config.MAX_IN_PARA_SUPPORT) {
+                return;
+            }
             client.registerInPara(inPara);
             EventBus.getDefault().post(new RegisterInParaEvent(inPara));
         }
@@ -67,6 +81,15 @@ public class LBBinder extends IService.Stub {
     public void registerOutPara(OutPara outPara) throws RemoteException {
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         if (client != null && client.getOutPara(outPara.getKey()) == null) {
+            if (client.getOutPara().size() >= Config.MAX_OUT_PARA_SUPPORT) {
+                return;
+            }
+
+            if (outPara.getKey() == Const.Floating_Area_Title ||
+                    outPara.getKey() == Const.Normal_Area_Title) {
+                return;
+            }
+
             client.registerOutPara(outPara);
             EventBus.getDefault().post(new RegisterOutParaEvent(outPara));
         }

@@ -1,9 +1,14 @@
 package org.tianjyan.luban.activity;
 
+import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,6 +38,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
     private MainMenuFragment mainMenuFragment;
     private OutParaFragment outParaFragment;
     private InParaFragment inParaFragment;
+    private LogFragment logFragment;
+    private PerformanceFragment performanceFragment;
 
     public static boolean isActive() {
         return active;
@@ -47,8 +54,14 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         functions = new ArrayList<>();
         functions.add(getString(R.string.function_out_para));
         functions.add(getString(R.string.function_in_para));
+        functions.add(getString(R.string.function_log));
+        functions.add(getString(R.string.function_performance));
         initDrawer();
         initFragment();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestDrawOverLays();
+        }
     }
 
     @Override
@@ -76,6 +89,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         int id = item.getItemId();
         switch (id) {
             case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -147,6 +162,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
 
         if (outParaFragment != null) transaction.hide(outParaFragment);
         if (inParaFragment != null) transaction.hide(inParaFragment);
+        if (logFragment != null) transaction.hide(logFragment);
+        if (performanceFragment != null) transaction.hide(performanceFragment);
 
         if (functionName.equals(getResources().getString(R.string.function_out_para))) {
             if (outParaFragment == null) {
@@ -162,7 +179,41 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             } else {
                 transaction.show(inParaFragment);
             }
+        } else if (functionName.equals(R.string.function_log)) {
+            if (logFragment == null) {
+                logFragment = new LogFragment();
+                transaction.add(R.id.main_container, logFragment, "LogFragment");
+            } else {
+                transaction.show(logFragment);
+            }
+        } else if (functionName.equals(R.string.function_performance)) {
+            if (performanceFragment == null) {
+                performanceFragment = new PerformanceFragment();
+                transaction.add(R.id.main_container, logFragment, "PerformanceFragment");
+            } else {
+                transaction.show(performanceFragment);
+            }
         }
         transaction.commitAllowingStateLoss();
+        mDrawerLayout.closeDrawer(mDrawerView);
+    }
+
+    public static int OVERLAY_PERMISSION_REQ_CODE = 1234;
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestDrawOverLays() {
+        if (!Settings.canDrawOverlays(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
+            startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+            }
+        }
     }
 }

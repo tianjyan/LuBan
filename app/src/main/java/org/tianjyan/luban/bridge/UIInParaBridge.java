@@ -8,6 +8,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.InParaDataAdapter;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.event.RegisterInParaEvent;
+import org.tianjyan.luban.event.SetInParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.IClient;
 
@@ -34,6 +35,14 @@ public class UIInParaBridge {
         if (!inParas.contains(event.getInPara())) {
             inParas.add(event.getInPara());
             inParaDataAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSetInPara(SetInParaEvent event) {
+        if (inParas.contains(event.getInPara())) {
+            int position = inParas.indexOf(event.getInPara());
+            inParaDataAdapter.notifyItemChanged(position);
         }
     }
 

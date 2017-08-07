@@ -7,9 +7,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
+import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
+import org.tianjyan.luban.event.RemoveFloatingOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.IClient;
@@ -23,6 +27,7 @@ import java.util.Vector;
 
 public class UIOutParaBridge {
     private boolean isRunning;
+    private int floatingItemCount = 0;
     private static UIOutParaBridge INSTANCE = new UIOutParaBridge();
     public static UIOutParaBridge getInstance() {
         return INSTANCE;
@@ -64,6 +69,10 @@ public class UIOutParaBridge {
             outParaDataAdapter.notifyItemChanged(position);
             EventBus.getDefault().post(
                     new OutParaHistoryUpdateEvent(event.getOutPara(), event.getValue()));
+            if (event.getOutPara().getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
+                EventBus.getDefault().post(
+                        new FloatingOutParaValueUpdateEvent(event.getOutPara(), event.getValue()));
+            }
         }
     }
 
@@ -94,12 +103,40 @@ public class UIOutParaBridge {
         historyBridge.clearHistories();
     }
 
+    public void saveHistories() {
+        historyBridge.saveHistories();
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
 
     public void setRunning(boolean running) {
         isRunning = running;
+    }
+
+    public void moveParaFromFloatingToNormal(OutPara outPara) {
+        int position = getNormalDividePosition();
+        outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);
+        outParas.remove(outPara);
+        outParas.add(position, outPara);
+        floatingItemCount--;
+        outParaDataAdapter.notifyDataSetChanged();
+        EventBus.getDefault().post(new RemoveFloatingOutParaEvent(outPara));
+    }
+
+    public void moveParaFromNormalToFloating(OutPara outPara) {
+        int position = getNormalDividePosition();
+        outPara.setDisplayProperty(AidlEntry.DISPLAY_FLOATING);
+        outParas.remove(outPara);
+        outParas.add(position, outPara);
+        floatingItemCount++;
+        outParaDataAdapter.notifyDataSetChanged();
+        EventBus.getDefault().post(new AddFloatingOutParaEvent(outPara));
+    }
+
+    public int getFloatingItemCount() {
+        return floatingItemCount;
     }
 
     private void initParamList() {
@@ -122,6 +159,10 @@ public class UIOutParaBridge {
         for (OutPara para: sources) {
             if (para.getDisplayProperty() == type) {
                 outParas.add(para);
+                if (type == AidlEntry.DISPLAY_FLOATING) {
+                    EventBus.getDefault().post(new AddFloatingOutParaEvent(para));
+                    floatingItemCount++;
+                }
                 historyBridge.addOutPara(para);
             }
         }
@@ -140,8 +181,10 @@ public class UIOutParaBridge {
 
         int normalAreaPosition = getNormalDividePosition();
 
-        if (normalAreaPosition < 4) {
+        if (normalAreaPosition <= Config.MAX_FLOATING_COUNT) {
+            floatingItemCount++;
             outParas.add(normalAreaPosition, outPara);
+            EventBus.getDefault().post(new AddFloatingOutParaEvent(outPara));
         } else {
             outPara.setDisplayProperty(AidlEntry.DISPLAY_NORMAL);
             addParaToNormalArea(outPara);
@@ -169,7 +212,7 @@ public class UIOutParaBridge {
         return tempOutParas;
     }
 
-    private int getDividePosition(String title) {
+    private int getDividePosition(String title)  {
         int pos = 0;
         for (int i = 0; i < outParas.size(); i++) {
             if (outParas.get(i).getKey() == title) {

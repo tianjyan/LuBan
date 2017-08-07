@@ -6,6 +6,7 @@
     <color name="white">#FFFFFF</color>
 
     <color name="app_background">#F8F8F8</color>
+    <color name="splash_text_color">#7C7F89</color>
 
     <color name="navigation_menu_bg">#333333</color>
     <color name="navigation_menu_title_color">#7C7F89</color>
@@ -17,16 +18,19 @@
     <color name="action_item_disable">#DDDADFE5</color>
     <color name="action_item_title">#7C7F89</color>
     <color name="action_item_line">#DDDADFE5</color>
+    <color name="action_item_dark_red">#C9302C</color>
+    <color name="action_item_green">#449d44</color>
 
     <color name="para_line_color">#DDDADFE5</color>
     <color name="para_pkg_color">#7C7F89</color>
     <color name="para_title_color">#F65EA5</color>
     <color name="para_content_color">#228B22</color>
 
-
-    <color name="text_color">#7C7F89</color>
-    <color name="name_color">#F65EA5</color>
-
     <color name="item_function_bg_pressed">#7050B3FA</color>
     <color name="item_group_bg_pressed">#555555</color>
+    
+    <color name="floating_detail_background">#DD202020</color>
+    <color name="floating_text_color">#F8F8F8</color>
+
+    <color name="about_link">@color/colorPrimary</color>
 </resources>

@@ -71,16 +71,12 @@ public class OutParaDataAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         int type;
         OutPara outPara = list.get(position);
-        switch (outPara.getKey()) {
-            case Const.Floating_Area_Title:
-            case Const.Normal_Area_Title:
-                type = Const.Type_Title;
-                break;
-            default:
-                type = Const.Type_Item;
-                break;
+        if (outPara.getKey() == Const.Floating_Area_Title
+            || outPara.getKey() == Const.Normal_Area_Title) {
+            type = Const.Type_Title;
+        } else {
+            type = Const.Type_Item;
         }
-
         return type;
     }
 

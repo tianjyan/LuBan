@@ -19,15 +19,15 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/action_delete_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/ic_delete"
                 android:drawablePadding="@dimen/action_item_drawable_padding"
-                android:drawableStart="@drawable/ic_delete"
                 android:gravity="center_vertical"
                 android:text="@string/delete"
-                android:textColor="@color/action_item_title"
+                android:textColor="@color/action_item_dark_red"
                 android:textSize="@dimen/action_item_text_size" />
         </RelativeLayout>
 
@@ -47,12 +47,12 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/action_save_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/ic_save"
                 android:drawablePadding="@dimen/action_item_drawable_padding"
-                android:drawableStart="@drawable/ic_save"
                 android:gravity="center_vertical"
                 android:text="@string/save"
                 android:textColor="@color/action_item_title"
@@ -75,15 +75,15 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/action_start_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/ic_play"
                 android:drawablePadding="@dimen/action_item_drawable_padding"
-                android:drawableStart="@drawable/ic_play"
                 android:gravity="center_vertical"
                 android:text="@string/start"
-                android:textColor="@color/action_item_title"
+                android:textColor="@color/action_item_green"
                 android:textSize="@dimen/action_item_text_size" />
         </RelativeLayout>
 

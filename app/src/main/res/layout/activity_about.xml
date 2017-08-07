@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/author"
+        android:layout_width="@dimen/about_author_size"
+        android:layout_height="@dimen/about_author_size"
+        android:layout_marginTop="@dimen/about_author_margin_top"
+        android:src="@drawable/author"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/author_homepage"
+        android:layout_marginTop="@dimen/about_margin"
+        android:layout_below="@id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/author_link"
+        android:textColor="@color/about_link"
+        android:layout_centerInParent="true"
+        android:clickable="true"/>
+    <TextView
+        android:id="@+id/project_site"
+        android:layout_marginTop="@dimen/about_margin"
+        android:layout_below="@id/author_homepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/project_link"
+        android:textColor="@color/about_link"
+        android:layout_centerInParent="true"
+        android:clickable="true"/>
+</RelativeLayout>
