@@ -1,8 +1,10 @@
 package org.tianjyan.luban;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Looper;
 
 import com.facebook.stetho.Stetho;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class LBApp extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static boolean isAppRunning = false;
     private static Context mContext;
+    private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
     private FloatingView floatingView;
@@ -53,6 +56,53 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         final String key = getSetting(SettingKey.KEY, "");
         floatingView = new FloatingView(LBApp.getContext());
         floatingView.showLogo();
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+                if (sessionDepth == 0) {
+                    floatingView.hideDetail();
+                    floatingView.hideLogo();
+                }
+                sessionDepth++;
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+                if (sessionDepth > 0) {
+                    sessionDepth--;
+                }
+
+                if (sessionDepth == 0) {
+                    floatingView.showLogo();
+                }
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
     }
 
     private  void loadSettings() {
