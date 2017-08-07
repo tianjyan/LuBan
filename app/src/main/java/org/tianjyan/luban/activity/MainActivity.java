@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
     private MainMenuFragment mainMenuFragment;
     private OutParaFragment outParaFragment;
     private InParaFragment inParaFragment;
+    private LogFragment logFragment;
+    private PerformanceFragment performanceFragment;
 
     public static boolean isActive() {
         return active;
@@ -87,6 +89,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         int id = item.getItemId();
         switch (id) {
             case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -158,6 +162,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
 
         if (outParaFragment != null) transaction.hide(outParaFragment);
         if (inParaFragment != null) transaction.hide(inParaFragment);
+        if (logFragment != null) transaction.hide(logFragment);
+        if (performanceFragment != null) transaction.hide(performanceFragment);
 
         if (functionName.equals(getResources().getString(R.string.function_out_para))) {
             if (outParaFragment == null) {
@@ -172,6 +178,20 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
                 transaction.add(R.id.main_container, inParaFragment, "InParaFragment");
             } else {
                 transaction.show(inParaFragment);
+            }
+        } else if (functionName.equals(R.string.function_log)) {
+            if (logFragment == null) {
+                logFragment = new LogFragment();
+                transaction.add(R.id.main_container, logFragment, "LogFragment");
+            } else {
+                transaction.show(logFragment);
+            }
+        } else if (functionName.equals(R.string.function_performance)) {
+            if (performanceFragment == null) {
+                performanceFragment = new PerformanceFragment();
+                transaction.add(R.id.main_container, logFragment, "PerformanceFragment");
+            } else {
+                transaction.show(performanceFragment);
             }
         }
         transaction.commitAllowingStateLoss();

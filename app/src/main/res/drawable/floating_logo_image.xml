@@ -7,7 +7,7 @@
     </item>
     <item
         android:bottom="@dimen/floating_logo_image_padding"
-        android:drawable="@mipmap/ic_launcher"
+        android:drawable="@drawable/ic_launcher"
         android:left="@dimen/floating_logo_image_padding"
         android:right="@dimen/floating_logo_image_padding"
         android:top="@dimen/floating_logo_image_padding" />
