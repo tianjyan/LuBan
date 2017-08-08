@@ -15,7 +15,7 @@ import io.reactivex.Observable;
 
 import static android.content.Context.WIFI_SERVICE;
 
-public class DefaultClient extends AbsClient {
+class DefaultClient extends AbsClient {
     private static DefaultClient INSTANCE =
             new DefaultClient(LBApp.getContext().getString(R.string.client_default));
     public static DefaultClient getInstance() {
