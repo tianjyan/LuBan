@@ -1,6 +1,6 @@
 package org.tianjyan.luban.manager;
 
-class ConnectedClient extends AbsClient {
+public class ConnectedClient extends AbsClient {
     public ConnectedClient(String key) {
         super(key);
         inParaManager = new DefaultInParaManager(this);
