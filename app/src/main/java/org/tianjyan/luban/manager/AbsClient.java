@@ -5,7 +5,7 @@ import org.tianjyan.luban.aidl.OutPara;
 
 import java.util.List;
 
-public abstract class AbsClient implements IClient {
+abstract class AbsClient implements IClient {
     protected String packageName;
     protected IInParaManager inParaManager;
     protected IOutParaManager outParaManager;

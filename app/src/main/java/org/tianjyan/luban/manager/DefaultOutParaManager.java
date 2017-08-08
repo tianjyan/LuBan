@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultOutParaManager implements IOutParaManager {
+class DefaultOutParaManager implements IOutParaManager {
     protected IClient client;
     protected Map<String, OutPara> outParaMap = Collections.synchronizedMap(new LinkedHashMap<>());
 

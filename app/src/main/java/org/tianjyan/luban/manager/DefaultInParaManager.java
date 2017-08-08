@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultInParaManager implements IInParaManager {
+class DefaultInParaManager implements IInParaManager {
     protected IClient client;
     protected Map<String, InPara> inParaMap = Collections.synchronizedMap(new LinkedHashMap<>());
 
