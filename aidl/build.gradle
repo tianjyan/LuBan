@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.1"
@@ -9,6 +13,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
     }
     buildTypes {
         release {

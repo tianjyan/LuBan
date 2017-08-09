@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
 apply plugin: 'me.tatarka.retrolambda'
 
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
@@ -12,7 +16,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
