@@ -1,5 +1,8 @@
 package org.tianjyan.luban.manager;
 
+import org.greenrobot.eventbus.EventBus;
+import org.tianjyan.luban.aidl.Config;
+import org.tianjyan.luban.event.LogEvent;
 import org.tianjyan.luban.model.LogEntry;
 
 import java.util.ArrayList;
@@ -23,16 +26,17 @@ public class LogManager {
                    Thread.sleep(1000);
                    List<LogEntry> tempList = new ArrayList<>();
                    queue.drainTo(tempList);
-                   // TODO: 发送到UI
+                   EventBus.getDefault().post(new LogEvent(tempList));
                }
            } catch (InterruptedException e) {
                e.printStackTrace();
-           };
+           }
         });
         thread.start();
     }
 
     public void log(long tid, int level, String tag, String msg) {
+        if (level < Config.LOG_INFO || level > Config.LOG_ERROR) return;
         queue.offer(new LogEntry(tid, level, tag, msg));
     }
 }
