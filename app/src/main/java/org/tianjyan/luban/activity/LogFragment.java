@@ -2,6 +2,7 @@ package org.tianjyan.luban.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class LogFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_log, container, false);
         ButterKnife.bind(this, rootView);
         recyclerView.setAdapter(UILogBridge.getInstance().getLogDataAdapter(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return rootView;
     }
 }

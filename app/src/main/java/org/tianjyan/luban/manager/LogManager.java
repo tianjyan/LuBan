@@ -33,10 +33,11 @@ public class LogManager {
            }
         });
         thread.start();
+        flag = true;
     }
 
     public void log(long tid, int level, String tag, String msg) {
-        if (level < Config.LOG_INFO || level > Config.LOG_ERROR) return;
+        if (level < Config.LOG_DEBUG || level > Config.LOG_ERROR) return;
         queue.offer(new LogEntry(tid, level, tag, msg));
     }
 }

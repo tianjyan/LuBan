@@ -85,7 +85,7 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            logTV = (TextView) itemView.findViewById(R.id.log_rv);
+            logTV = (TextView) itemView.findViewById(R.id.log_tv);
         }
     }
 

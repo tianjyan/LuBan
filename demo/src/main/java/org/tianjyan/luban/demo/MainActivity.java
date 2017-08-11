@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void run() {
             LB.setOutPara("Test", String.valueOf(System.currentTimeMillis()));
+            LB.logD("Test", String.valueOf(System.currentTimeMillis()));
             refreshHandler.postDelayed(refreshRunnable, 1000);
         }
     };

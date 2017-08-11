@@ -42,6 +42,6 @@ public class UILogBridge {
         logEntries.addAll(event.getEntries());
         lock.writeLock().unlock();
         // TODO: filter
-        // logDataAdapter.notifyDataSetChanged();
+        logDataAdapter.notifyDataSetChanged();
     }
 }
