@@ -56,4 +56,16 @@ public class LogEntry {
         }
         return sLevel;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
 }

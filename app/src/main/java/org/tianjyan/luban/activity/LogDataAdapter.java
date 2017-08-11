@@ -9,21 +9,34 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import org.tianjyan.luban.R;
+import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.model.LogEntry;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
 
-public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemViewHolder>  {
+public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemViewHolder>  implements Filterable {
+    protected List<LogEntry> source;
+    protected ReadWriteLock lock;
     protected List<LogEntry> list;
     protected Context context;
     protected LayoutInflater inflate;
+    protected Filter filter;
+    protected String filterMsg;
+    protected int filterLevel;
+    protected String filterTag;
 
-    public LogDataAdapter(Context context, List<LogEntry> list) {
+    public LogDataAdapter(Context context, List<LogEntry> source, ReadWriteLock lock) {
         this.context = context;
-        this.list = list;
+        this.source = source;
+        this.lock = lock;
+        this.list = source;
         this.inflate = LayoutInflater.from(context);
     }
 
@@ -59,12 +72,63 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
         return list.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new SearchFilter();
+        }
+        return filter;
+    }
+
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView logTV;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             logTV = (TextView) itemView.findViewById(R.id.log_rv);
+        }
+    }
+
+    private boolean matchCondition(LogEntry logEntry, String tag, int level, String msg) {
+        if (logEntry.getTag() != null && logEntry.getTag().equals(tag)
+                && logEntry.getLevel() == level
+                && logEntry.getMsg() != null && logEntry.getMsg().contains(msg)) {
+            return true;
+        }
+        return false;
+    }
+
+    class SearchFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (filterLevel == Config.LOG_VERBOSE
+                    && (filterTag == null || filterTag.isEmpty())
+                    && (filterMsg == null || filterMsg.isEmpty())) {
+                lock.readLock().lock();
+                results.values = source;
+                results.count = source.size();
+                lock.readLock().unlock();
+            } else {
+                lock.readLock().lock();
+                List<LogEntry> dataSet = new ArrayList<>();
+                for (LogEntry logEntry : source) {
+                    if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
+                        dataSet.add(logEntry);
+                    }
+                }
+                results.values = dataSet;
+                results.count = dataSet.size();
+                lock.readLock().unlock();
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list = (List<LogEntry>) results.values;
+            notifyDataSetChanged();
         }
     }
 }
