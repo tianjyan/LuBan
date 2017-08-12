@@ -8,6 +8,9 @@ public class DateTimeUtils {
     private static SimpleDateFormat simpleTimeFormat =
             new SimpleDateFormat("HH:mm:ss.SSS", Locale.US);
 
+    private static SimpleDateFormat simpleLogDateTimeFormat =
+            new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
+
     private static SimpleDateFormat simpleDateTimeFormat =
             new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.US);
 
@@ -17,5 +20,9 @@ public class DateTimeUtils {
 
     public static String getDateTimeString() {
         return simpleDateTimeFormat.format(new Date());
+    }
+
+    public static String getLogDateTime() {
+        return simpleLogDateTimeFormat.format(new Date());
     }
 }

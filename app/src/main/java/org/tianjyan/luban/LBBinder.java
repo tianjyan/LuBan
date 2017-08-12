@@ -13,6 +13,7 @@ import org.tianjyan.luban.event.SetOutParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
 import org.tianjyan.luban.manager.ConnectedClient;
 import org.tianjyan.luban.manager.IClient;
+import org.tianjyan.luban.manager.LogManager;
 import org.tianjyan.luban.model.Const;
 
 
@@ -62,7 +63,7 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void log(long tid, int level, String tag, String msg) throws RemoteException {
-
+        LogManager.getInstance().log(tid, level, tag, msg);
     }
 
     @Override

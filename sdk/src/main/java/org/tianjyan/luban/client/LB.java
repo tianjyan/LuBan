@@ -46,10 +46,44 @@ public class LB {
     }
 
     public static void setOutPara(String paraName, String value) {
+        if (!enable) {
+            return;
+        }
         LBInternal.getInstance().setOutPara(paraName, value);
     }
 
     public static void getInPara(String paraName) {
+        if (!enable) {
+            return;
+        }
         LBInternal.getInstance().getInPara(paraName);
+    }
+
+    public static void logI(String tag, String msg) {
+        if (!enable) {
+            return;
+        }
+        LBInternal.getInstance().logI(tag, msg);
+    }
+
+    public static void logD(String tag, String msg) {
+        if (!enable) {
+            return;
+        }
+        LBInternal.getInstance().logD(tag, msg);
+    }
+
+    public static void logW(String tag, String msg) {
+        if (!enable) {
+            return;
+        }
+        LBInternal.getInstance().logW(tag, msg);
+    }
+
+   public static void logE(String tag, String msg) {
+        if (!enable) {
+            return;
+        }
+        LBInternal.getInstance().logE(tag, msg);
     }
 }

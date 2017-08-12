@@ -36,6 +36,7 @@ class LogTaskConsumer {
     void start() {
         flag = true;
         thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
     }
 
     void stop(final DataCacheController dataCacheController) {

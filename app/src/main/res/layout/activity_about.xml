@@ -29,4 +29,13 @@
         android:textColor="@color/about_link"
         android:layout_centerInParent="true"
         android:clickable="true"/>
+    <TextView
+        android:id="@+id/commit_id"
+        android:layout_marginTop="@dimen/about_margin"
+        android:layout_below="@id/project_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/about_link"
+        android:layout_centerInParent="true"
+        android:clickable="true"/>
 </RelativeLayout>

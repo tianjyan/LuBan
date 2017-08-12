@@ -27,6 +27,6 @@
     <string name="menu_move_to_floating">添加到悬浮窗</string>
     <string name="menu_move_out_floating">从悬浮窗移除</string>
 
-    <string name="author_link"><a href="https://youngytj.github.io/">Coded by youngytj</a></string>
-    <string name="project_link"><a href="https://github.com/youngytj/LuBan">项目主页</a></string>
+    <string name="author_link">Coded by youngytj</string>
+    <string name="project_link">项目主页</string>
 </resources>

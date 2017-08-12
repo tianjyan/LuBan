@@ -179,17 +179,17 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             } else {
                 transaction.show(inParaFragment);
             }
-        } else if (functionName.equals(R.string.function_log)) {
+        } else if (functionName.equals(getResources().getString(R.string.function_log))) {
             if (logFragment == null) {
                 logFragment = new LogFragment();
                 transaction.add(R.id.main_container, logFragment, "LogFragment");
             } else {
                 transaction.show(logFragment);
             }
-        } else if (functionName.equals(R.string.function_performance)) {
+        } else if (functionName.equals(getResources().getString(R.string.function_performance))) {
             if (performanceFragment == null) {
                 performanceFragment = new PerformanceFragment();
-                transaction.add(R.id.main_container, logFragment, "PerformanceFragment");
+                transaction.add(R.id.main_container, performanceFragment, "PerformanceFragment");
             } else {
                 transaction.show(performanceFragment);
             }

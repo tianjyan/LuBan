@@ -1,6 +1,23 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
 apply plugin: 'me.tatarka.retrolambda'
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def buildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    Calendar date = new GregorianCalendar();
+    date.set(Calendar.HOUR_OF_DAY, 0);
+    date.set(Calendar.MINUTE, 0);
+    date.set(Calendar.SECOND, 0);
+    date.set(Calendar.MILLISECOND, 0);
+    return df.format(date.getTime())
+}
 
 android {
     compileSdkVersion 25
@@ -12,6 +29,8 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "ENABLE_LEAK_CANARY", "false"
+        buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
+        buildConfigField "String", "BUILD_TIME", '"' + buildTime() + '"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
