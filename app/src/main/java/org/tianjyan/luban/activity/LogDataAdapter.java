@@ -28,9 +28,9 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     protected Context context;
     protected LayoutInflater inflate;
     protected Filter filter;
-    protected String filterMsg;
-    protected int filterLevel;
-    protected String filterTag;
+    protected String filterMsg = "";
+    protected int filterLevel = Config.LOG_VERBOSE;
+    protected String filterTag = Config.TAG;
 
     public LogDataAdapter(Context context, List<LogEntry> source, ReadWriteLock lock) {
         this.context = context;
@@ -80,6 +80,30 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
         return filter;
     }
 
+    public void onNewEntries(List<LogEntry> entries) {
+        for (LogEntry logEntry: entries) {
+            if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
+                list.add(logEntry);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setTag(String tag) {
+        filterTag = tag;
+        getFilter().filter(filterMsg);
+    }
+
+    public void setLevel(int level) {
+        filterLevel = level;
+        getFilter().filter(filterMsg);
+    }
+
+    public void setMsg(String msg) {
+        filterMsg = msg;
+        getFilter().filter(filterMsg);
+    }
+
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         TextView logTV;
 
@@ -90,9 +114,9 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     }
 
     private boolean matchCondition(LogEntry logEntry, String tag, int level, String msg) {
-        if (logEntry.getTag() != null && logEntry.getTag().equals(tag)
-                && logEntry.getLevel() == level
-                && logEntry.getMsg() != null && logEntry.getMsg().contains(msg)) {
+        if (level <= logEntry.getLevel()
+            && (Config.TAG.equals(tag) || logEntry.getTag().equals(tag))
+            && (msg.isEmpty() || logEntry.getMsg().contains(msg))) {
             return true;
         }
         return false;
@@ -103,9 +127,10 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
+            filterMsg = constraint.toString();
             if (filterLevel == Config.LOG_VERBOSE
-                    && (filterTag == null || filterTag.isEmpty())
-                    && (filterMsg == null || filterMsg.isEmpty())) {
+                    && filterTag == Config.TAG
+                    && filterMsg.isEmpty()) {
                 lock.readLock().lock();
                 results.values = source;
                 results.count = source.size();

@@ -55,7 +55,6 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         loadSettings();
         final String key = getSetting(SettingKey.KEY, "");
         floatingView = new FloatingView(LBApp.getContext());
-        floatingView.showLogo();
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override
