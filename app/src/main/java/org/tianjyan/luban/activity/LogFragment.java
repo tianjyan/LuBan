@@ -98,6 +98,7 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
         } else if (filterLevelBtn.isSelected()) {
             TextView tv = (TextView) v;
             filterLevelBtn.setText(tv.getText());
+            filterRecyclerView.setVisibility(View.GONE);
             UILogBridge.getInstance().setLevel(tv.getText().toString());
         }
     }

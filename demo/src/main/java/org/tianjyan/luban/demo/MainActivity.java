@@ -10,8 +10,6 @@ import org.tianjyan.luban.client.InParaManager;
 import org.tianjyan.luban.client.LB;
 import org.tianjyan.luban.client.OutParaManager;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public Handler refreshHandler = new Handler();
     private Runnable refreshRunnable = new Runnable() {
@@ -19,6 +17,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
             LB.setOutPara("Test", String.valueOf(System.currentTimeMillis()));
             LB.logD("Test", String.valueOf(System.currentTimeMillis()));
+            LB.logI("Test", String.valueOf(System.currentTimeMillis()));
+            LB.logW("Test", String.valueOf(System.currentTimeMillis()));
+            LB.logE("Test", String.valueOf(System.currentTimeMillis()));
+            LB.logD("NewOne", String.valueOf(System.currentTimeMillis()));
+            LB.logI("NewOne", String.valueOf(System.currentTimeMillis()));
+            LB.logW("NewOne", String.valueOf(System.currentTimeMillis()));
+            LB.logE("NewOne", String.valueOf(System.currentTimeMillis()));
+            refreshHandler.postDelayed(refreshRunnable, 1000);
             refreshHandler.postDelayed(refreshRunnable, 1000);
         }
     };
