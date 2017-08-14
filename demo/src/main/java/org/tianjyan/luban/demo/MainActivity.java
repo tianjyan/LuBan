@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             LB.logI("NewOne", String.valueOf(System.currentTimeMillis()));
             LB.logW("NewOne", String.valueOf(System.currentTimeMillis()));
             LB.logE("NewOne", String.valueOf(System.currentTimeMillis()));
-            refreshHandler.postDelayed(refreshRunnable, 1000);
-            refreshHandler.postDelayed(refreshRunnable, 1000);
+            refreshHandler.postDelayed(refreshRunnable, 3000);
         }
     };
 

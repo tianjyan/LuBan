@@ -9,13 +9,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.bridge.UILogBridge;
+import org.tianjyan.luban.view.DividerLine;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +25,8 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
     @BindView(R.id.log_rv) RecyclerView recyclerView;
     @BindView(R.id.filter_rv) RecyclerView filterRecyclerView;
     @BindView(R.id.filter_msg_et) EditText filterMsgET;
-    @BindView(R.id.filter_level_btn) Button filterLevelBtn;
-    @BindView(R.id.filter_tag_btn) Button filterTagBtn;
+    @BindView(R.id.filter_level_tv) TextView filterLevelTV;
+    @BindView(R.id.filter_tag_tv) TextView filterTagTV;
 
     LogFilterAdapter levelAdapter;
     LogFilterAdapter tagAdapter;
@@ -40,33 +40,37 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
         recyclerView.setAdapter(UILogBridge.getInstance().getLogDataAdapter(getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         filterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        filterLevelBtn.setText(Config.VERBOSE);
-        filterTagBtn.setText(Config.TAG);
+        DividerLine dividerLine = new DividerLine(DividerLine.VERTICAL);
+        dividerLine.setSize(1);
+        dividerLine.setColor(R.color.white);
+        filterRecyclerView.addItemDecoration(dividerLine);
+        filterLevelTV.setText(Config.VERBOSE);
+        filterTagTV.setText(Config.TAG);
         levelAdapter = new LogFilterAdapter(getActivity(), UILogBridge.getInstance().getLevels(), this);
         return rootView;
     }
 
-    @OnClick(R.id.filter_level_btn)
+    @OnClick(R.id.action_level)
     public void onLevelClick() {
-        filterTagBtn.setSelected(false);
-        if (filterLevelBtn.isSelected()) {
-            filterLevelBtn.setSelected(false);
+        filterTagTV.setSelected(false);
+        if (filterLevelTV.isSelected()) {
+            filterLevelTV.setSelected(false);
             filterRecyclerView.setVisibility(View.GONE);
         } else {
-            filterLevelBtn.setSelected(true);
+            filterLevelTV.setSelected(true);
             filterRecyclerView.setVisibility(View.VISIBLE);
             filterRecyclerView.setAdapter(levelAdapter);
         }
     }
 
-    @OnClick(R.id.filter_tag_btn)
+    @OnClick(R.id.action_tag)
     public void onTagClick() {
-        filterLevelBtn.setSelected(false);
-        if (filterTagBtn.isSelected()) {
-            filterTagBtn.setSelected(false);
+        filterLevelTV.setSelected(false);
+        if (filterTagTV.isSelected()) {
+            filterTagTV.setSelected(false);
             filterRecyclerView.setVisibility(View.GONE);
         } else {
-            filterTagBtn.setSelected(true);
+            filterTagTV.setSelected(true);
             filterRecyclerView.setVisibility(View.VISIBLE);
             tagAdapter = new LogFilterAdapter(getActivity(), UILogBridge.getInstance().getTags(), this);
             filterRecyclerView.setAdapter(tagAdapter);
@@ -90,15 +94,17 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (filterTagBtn.isSelected()) {
+        if (filterTagTV.isSelected()) {
             TextView tv = (TextView) v;
-            filterTagBtn.setText(tv.getText());
+            filterTagTV.setText(tv.getText());
             filterRecyclerView.setVisibility(View.GONE);
+            filterTagTV.setSelected(false);
             UILogBridge.getInstance().setTag(tv.getText().toString());
-        } else if (filterLevelBtn.isSelected()) {
+        } else if (filterLevelTV.isSelected()) {
             TextView tv = (TextView) v;
-            filterLevelBtn.setText(tv.getText());
+            filterLevelTV.setText(tv.getText());
             filterRecyclerView.setVisibility(View.GONE);
+            filterLevelTV.setSelected(false);
             UILogBridge.getInstance().setLevel(tv.getText().toString());
         }
     }

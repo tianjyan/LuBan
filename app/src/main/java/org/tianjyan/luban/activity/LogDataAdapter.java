@@ -1,7 +1,6 @@
 package org.tianjyan.luban.activity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -55,13 +54,13 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
         int pidEnd = displayMsg.indexOf(")", pidStart + 1);
 
         SpannableString spannableString = new SpannableString(logEntry.getDisplayMsg());
-        spannableString.setSpan(new ForegroundColorSpan(Color.argb(0xff, 0x9f, 0x9f, 0x9e)),
+        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_time)),
                 0, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.argb(0xff, 0xcb, 0x74, 0x18)),
+        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_level)),
                 20, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.argb(0xff, 0xcb, 0x74, 0x18)),
+        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_tag)),
                 tagStart, tagEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.argb(0xff, 0xcb, 0x74, 0x18)),
+        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_pid)),
                 pidStart, pidEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         holder.logTV.setText(spannableString);

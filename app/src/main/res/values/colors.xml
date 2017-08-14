@@ -33,4 +33,11 @@
     <color name="floating_text_color">#F8F8F8</color>
 
     <color name="about_link">@color/colorPrimary</color>
+
+    <color name="log_time">#FF9F9F9E</color>
+    <color name="log_level">#FFCB7418</color>
+    <color name="log_tag">#FFCB7418</color>
+    <color name="log_pid">#FFCB7418</color>
+    <color name="log_msg">#449d44</color>
+    <color name="log_filter">#DD202020</color>
 </resources>
