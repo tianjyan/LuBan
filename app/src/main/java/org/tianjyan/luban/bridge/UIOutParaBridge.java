@@ -5,11 +5,13 @@ import android.content.Context;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.tianjyan.luban.LBApp;
 import org.tianjyan.luban.activity.OutParaDataAdapter;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.event.ClientDisconnectEvent;
 import org.tianjyan.luban.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.event.OutParaHistoryUpdateEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
@@ -26,7 +28,6 @@ import java.util.List;
 import java.util.Vector;
 
 public class UIOutParaBridge {
-    private boolean isRunning;
     private int floatingItemCount = 0;
     private static UIOutParaBridge INSTANCE = new UIOutParaBridge();
     public static UIOutParaBridge getInstance() {
@@ -62,7 +63,7 @@ public class UIOutParaBridge {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSetOutPara(SetOutParaEvent event) {
-        if (!isRunning) return;
+        if (!LBApp.isGathering()) return;
         int position = outParas.indexOf(event.getOutPara());
         if (position > -1) {
             historyBridge.addHistory(event.getOutPara(), event.getValue());
@@ -74,6 +75,19 @@ public class UIOutParaBridge {
                         new FloatingOutParaValueUpdateEvent(event.getOutPara(), event.getValue()));
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onClientDisconnect(ClientDisconnectEvent event) {
+        outParas.removeIf(outPara -> {
+            UIOutParaHistoryBridge.getInstance().removeHistories(outPara);
+            if (outPara.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
+                floatingItemCount--;
+            }
+            return outPara.getClient() != null
+                   && outPara.getClient().equals(event.getPkgName());
+        });
+        outParaDataAdapter.notifyDataSetChanged();
     }
 
     public OutParaDataAdapter getOutParaDataAdapter(Context context) {
@@ -105,14 +119,6 @@ public class UIOutParaBridge {
 
     public void saveHistories() {
         historyBridge.saveHistories();
-    }
-
-    public boolean isRunning() {
-        return isRunning;
-    }
-
-    public void setRunning(boolean running) {
-        isRunning = running;
     }
 
     public void moveParaFromFloatingToNormal(OutPara outPara) {
@@ -166,11 +172,6 @@ public class UIOutParaBridge {
                 historyBridge.addOutPara(para);
             }
         }
-//        sources.stream().forEach(para -> {
-//            if (para.getDisplayProperty() == type) {
-//                outParas.add(para);
-//            }
-//        });
     }
 
     private void addParaToFloatingArea(OutPara outPara) {

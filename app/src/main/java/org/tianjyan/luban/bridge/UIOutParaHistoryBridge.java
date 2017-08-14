@@ -56,4 +56,8 @@ class UIOutParaHistoryBridge {
             }
         }
     }
+
+    void removeHistories(OutPara outPara) {
+        histories.remove(outPara);
+    }
 }

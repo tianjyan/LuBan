@@ -40,4 +40,11 @@
     <color name="log_pid">#FFCB7418</color>
     <color name="log_msg">#449d44</color>
     <color name="log_filter">#DD202020</color>
+
+    <color name="log_verbose">#BBBBBB</color>
+    <color name="log_debug">#0070BB</color>
+    <color name="log_info">#48BB31</color>
+    <color name="log_warning">#BBBB23</color>
+    <color name="log_error">#FF0006</color>
+    <color name="log_assert">#8F0005</color>
 </resources>

@@ -2,9 +2,6 @@ package org.tianjyan.luban.activity;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,23 +44,30 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         LogEntry logEntry = list.get(position);
-        String displayMsg = logEntry.getDisplayMsg();
-        int tagStart = displayMsg.indexOf("/") + 1;
-        int tagEnd = displayMsg.indexOf("(", tagStart + 1);
-        int pidStart = tagEnd + 1;
-        int pidEnd = displayMsg.indexOf(")", pidStart + 1);
+        holder.logTV.setText(logEntry.getDisplayMsg());
+        int resId;
+        switch (logEntry.getLevel()) {
+            case Config.LOG_VERBOSE:
+                resId = R.color.log_verbose;
+                break;
+            case Config.LOG_DEBUG:
+                resId = R.color.log_debug;
+                break;
+            case Config.LOG_INFO:
+                resId = R.color.log_info;
+                break;
+            case Config.LOG_WARNING:
+                resId = R.color.log_warning;
+                break;
+            case Config.LOG_ERROR:
+                resId = R.color.log_error;
+                break;
+            default:
+                resId = R.color.log_assert;
 
-        SpannableString spannableString = new SpannableString(logEntry.getDisplayMsg());
-        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_time)),
-                0, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_level)),
-                20, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_tag)),
-                tagStart, tagEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.log_pid)),
-                pidStart, pidEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
 
-        holder.logTV.setText(spannableString);
+        holder.logTV.setTextColor(context.getResources().getColor(resId));
     }
 
     @Override

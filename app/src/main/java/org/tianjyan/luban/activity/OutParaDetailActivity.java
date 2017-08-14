@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.tianjyan.luban.LBApp;
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.Config;
@@ -47,13 +48,12 @@ public class OutParaDetailActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        //actionBar.setTitle(String.format("%s -- %s", pkgName, paraName));
         actionBar.setTitle(paraName);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!UIOutParaBridge.getInstance().isRunning()) {
+        if (!LBApp.isGathering()) {
             if (outPara.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING ||
                     UIOutParaBridge.getInstance().getFloatingItemCount() < Config.MAX_FLOATING_COUNT) {
                 getMenuInflater().inflate(R.menu.para_detail, menu);

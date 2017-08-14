@@ -7,6 +7,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.activity.InParaDataAdapter;
 import org.tianjyan.luban.aidl.InPara;
+import org.tianjyan.luban.event.ClientDisconnectEvent;
 import org.tianjyan.luban.event.RegisterInParaEvent;
 import org.tianjyan.luban.event.SetInParaEvent;
 import org.tianjyan.luban.manager.ClientManager;
@@ -44,6 +45,12 @@ public class UIInParaBridge {
             int position = inParas.indexOf(event.getInPara());
             inParaDataAdapter.notifyItemChanged(position);
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onClientDisconnect(ClientDisconnectEvent event) {
+        inParas.removeIf(inPara -> inPara.getClient().equals(event.getPkgName()));
+        inParaDataAdapter.notifyDataSetChanged();
     }
 
     public InParaDataAdapter getInParaDataAdapter(Context context) {

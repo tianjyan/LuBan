@@ -7,6 +7,7 @@ import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
+import org.tianjyan.luban.event.ClientDisconnectEvent;
 import org.tianjyan.luban.event.RegisterInParaEvent;
 import org.tianjyan.luban.event.RegisterOutParaEvent;
 import org.tianjyan.luban.event.SetOutParaEvent;
@@ -53,6 +54,8 @@ public class LBBinder extends IService.Stub {
             IClient client = ClientManager.getInstance().getClient(getCallingUid());
             if (client != null) {
                 client.clear();
+                ClientManager.getInstance().removeClient(getCallingPid());
+                EventBus.getDefault().post(new ClientDisconnectEvent(client.getPackageName()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,6 +110,7 @@ public class LBBinder extends IService.Stub {
 
     @Override
     public void setOutPara(String key, String value) throws RemoteException {
+        if (!LBApp.isGathering()) return;
         IClient client = ClientManager.getInstance().getClient(getCallingUid());
         if (client == null) return;
         client.setOutPara(key, value);
