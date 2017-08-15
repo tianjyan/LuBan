@@ -26,7 +26,9 @@ public class LogManager {
                    Thread.sleep(1000);
                    List<LogEntry> tempList = new ArrayList<>();
                    queue.drainTo(tempList);
-                   EventBus.getDefault().post(new LogEvent(tempList));
+                   if (tempList.size() > 0) {
+                       EventBus.getDefault().post(new LogEvent(tempList));
+                   }
                }
            } catch (InterruptedException e) {
                e.printStackTrace();

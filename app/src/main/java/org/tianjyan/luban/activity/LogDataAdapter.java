@@ -84,9 +84,11 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     }
 
     public void onNewEntries(List<LogEntry> entries) {
-        for (LogEntry logEntry: entries) {
-            if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
-                list.add(logEntry);
+        if (list != source) {
+            for (LogEntry logEntry: entries) {
+                if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
+                    list.add(logEntry);
+                }
             }
         }
         notifyDataSetChanged();
