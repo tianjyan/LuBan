@@ -29,7 +29,7 @@ public class LBService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) return START_STICKY_COMPATIBILITY;
         Notification notification = NotificationHelper.genNotification(
-                getApplicationContext(), R.drawable.ic_launcher,
+                getApplicationContext(), R.drawable.ic_launcher_white,
                 "LuBan", "Running", MainActivity.class, true, false, 0);
         startForeground(10, notification);
         return super.onStartCommand(intent, flags, startId);

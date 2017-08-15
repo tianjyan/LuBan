@@ -24,6 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.event.ClientDisconnectEvent;
 import org.tianjyan.luban.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.event.RemoveFloatingOutParaEvent;
 
@@ -295,6 +296,12 @@ public class FloatingView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFloatingOutParaValueUpdate(FloatingOutParaValueUpdateEvent event) {
+        floatingAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onClientDisconnect(ClientDisconnectEvent event) {
+        floatingParas.removeIf(outPara -> outPara.getClient().equals(event.getPkgName()));
         floatingAdapter.notifyDataSetChanged();
     }
 

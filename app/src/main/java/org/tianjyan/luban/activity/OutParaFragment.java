@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.tianjyan.luban.LBApp;
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.bridge.UIOutParaBridge;
 
@@ -39,7 +40,7 @@ public class OutParaFragment extends Fragment {
         OutParaDataAdapter adapter = UIOutParaBridge.getInstance().getOutParaDataAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        setToolState(UIOutParaBridge.getInstance().isRunning());
+        setToolState(LBApp.isGathering());
         return rootView;
     }
 
@@ -59,8 +60,8 @@ public class OutParaFragment extends Fragment {
 
     @OnClick(R.id.action_start)
     public void start() {
-        UIOutParaBridge.getInstance().setRunning(!UIOutParaBridge.getInstance().isRunning());
-        setToolState(UIOutParaBridge.getInstance().isRunning());
+        LBApp.setIsGathering(!LBApp.isGathering());
+        setToolState(LBApp.isGathering());
     }
 
     @Override

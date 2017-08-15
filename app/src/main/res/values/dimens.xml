@@ -40,4 +40,6 @@
     <dimen name="about_author_size">96dp</dimen>
     <dimen name="about_author_margin_top">96dp</dimen>
     <dimen name="about_margin">12dp</dimen>
+
+    <dimen name="log_filter_item_height">48dp</dimen>
 </resources>

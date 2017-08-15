@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class LBApp extends Application implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static boolean isAppRunning = false;
+    private static boolean isGathering = false;
     private static Context mContext;
     private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
@@ -33,6 +34,14 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
 
     public static boolean isAppRunning() {
         return isAppRunning;
+    }
+
+    public static boolean isGathering() {
+        return isGathering;
+    }
+
+    public static void setIsGathering(boolean isGathering) {
+        LBApp.isGathering = isGathering;
     }
 
     public static void exit() {
@@ -55,7 +64,6 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         loadSettings();
         final String key = getSetting(SettingKey.KEY, "");
         floatingView = new FloatingView(LBApp.getContext());
-        floatingView.showLogo();
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override
