@@ -22,6 +22,7 @@ import org.tianjyan.luban.model.OnFunctionSelected;
 import org.tianjyan.luban.model.SettingKey;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -95,7 +96,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             case R.id.setting:
                 Intent settingIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingIntent);
-                break;
+                throw new NullPointerException("123");
+                //break;
             default:
                 break;
         }

@@ -11,41 +11,20 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileUtils {
-
-    public final static String RootFolder = "LuBan";
     public final static String OutParaFolder = "OutPara";
     public final static long WriteBuffer = 8192;
 
-    public static boolean isNullOrEmpty(String value) {
-        if (value == null || value.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isExternalStorageExist() {
-        return android.os.Environment.getExternalStorageState().
-                equals(android.os.Environment.MEDIA_MOUNTED);
-    }
-
-    public static String getExternalStoragePath() {
-        return Environment.getExternalStorageDirectory().getAbsolutePath();
-    }
-
     public static void saveOutParaHistory(OutPara outPara, List<ParaHistory> histories) {
-        if (!isExternalStorageExist()) return;
-
         if (outPara == null
-                || isNullOrEmpty(outPara.getClient())
-                || isNullOrEmpty(outPara.getKey())
+                || Utils.isNullOrEmpty(outPara.getClient())
+                || Utils.isNullOrEmpty(outPara.getKey())
                 || histories == null) {
             throw new IllegalArgumentException();
         }
-
-        String folderName = String.format("/%s/%s/%s/%s",
-                getExternalStoragePath(), RootFolder, OutParaFolder, outPara.getClient());
+        String folderName = String.format("/%s/%s/%s",
+                Utils.getCacheDir(), OutParaFolder, outPara.getClient());
         String fileName = String.format("%s_%s.csv",
-                DateTimeUtils.getDateTimeString(), outPara.getKey());
+                Utils.getFileTime(), outPara.getKey());
 
         File folder = new File(folderName);
         folder.mkdirs();

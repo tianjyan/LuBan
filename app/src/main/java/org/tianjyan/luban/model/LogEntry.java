@@ -1,7 +1,7 @@
 package org.tianjyan.luban.model;
 
 import org.tianjyan.luban.aidl.Config;
-import org.tianjyan.luban.utils.DateTimeUtils;
+import org.tianjyan.luban.utils.Utils;
 
 public class LogEntry {
     private long pid;
@@ -17,7 +17,7 @@ public class LogEntry {
         this.msg = msg;
 
         String sLevel = getLevel(level);
-        String time = DateTimeUtils.getLogDateTime();
+        String time = Utils.getDisplayTime();
         StringBuffer sb = new StringBuffer();
         sb.append(time);
         sb.append(": ");
