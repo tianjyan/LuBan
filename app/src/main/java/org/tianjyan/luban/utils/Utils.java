@@ -1,5 +1,9 @@
 package org.tianjyan.luban.utils;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 
 import org.tianjyan.luban.LBApp;
@@ -14,6 +18,30 @@ public class Utils {
     private static final Format DateTimeFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
     private static final Format DateTimeFormat2 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
     public static final String FILE_SEP = System.getProperty("file.separator");
+
+    public static Notification genNotification(Context c, int iconResId, String titleText,
+                                               String contentText, Class<?> cls, boolean ongoing,
+                                               boolean autoCancel, int notify_way) {
+
+        Intent intent = null;
+        if (cls != null) intent = new Intent(c, cls);
+
+        final PendingIntent pi = PendingIntent.getActivity(c, 0, intent, 0);
+
+        Notification.Builder builder = new Notification.Builder(c)
+                .setContentTitle(titleText)
+                .setContentText(contentText)
+                .setContentIntent(pi)
+                .setSmallIcon(iconResId)
+                .setWhen(System.currentTimeMillis())
+                .setOngoing(ongoing)
+                .setAutoCancel(autoCancel)
+                .setDefaults(notify_way);
+
+        Notification notification = builder.build();
+
+        return notification;
+    }
 
     public static boolean isNullOrEmpty(final String value) {
         if (value == null || value.isEmpty()) {
@@ -42,6 +70,6 @@ public class Utils {
     }
 
     public static String getFileTime() {
-        return DateTimeFormat.format(new Date(System.currentTimeMillis()));
+        return DateTimeFormat2.format(new Date(System.currentTimeMillis()));
     }
 }

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import org.tianjyan.luban.activity.MainActivity;
-import org.tianjyan.luban.utils.NotificationHelper;
+import org.tianjyan.luban.utils.Utils;
 
 public class LBService extends Service {
     private final IBinder binder = new LBBinder();
@@ -28,7 +28,7 @@ public class LBService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) return START_STICKY_COMPATIBILITY;
-        Notification notification = NotificationHelper.genNotification(
+        Notification notification = Utils.genNotification(
                 getApplicationContext(), R.drawable.ic_launcher_white,
                 "LuBan", "Running", MainActivity.class, true, false, 0);
         startForeground(10, notification);

@@ -96,8 +96,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             case R.id.setting:
                 Intent settingIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingIntent);
-                throw new NullPointerException("123");
-                //break;
+                break;
             default:
                 break;
         }
