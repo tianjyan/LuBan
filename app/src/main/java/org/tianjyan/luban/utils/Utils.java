@@ -18,6 +18,7 @@ public class Utils {
     private static final Format DateTimeFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
     private static final Format DateTimeFormat2 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
     public static final String FILE_SEP = System.getProperty("file.separator");
+    public static final String LINE_SEP = System.getProperty("line.separator");
 
     public static Notification genNotification(Context c, int iconResId, String titleText,
                                                String contentText, Class<?> cls, boolean ongoing,

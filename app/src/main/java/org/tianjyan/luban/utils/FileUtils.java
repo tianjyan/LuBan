@@ -1,7 +1,5 @@
 package org.tianjyan.luban.utils;
 
-import android.os.Environment;
-
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.model.ParaHistory;
 
@@ -21,17 +19,12 @@ public class FileUtils {
                 || histories == null) {
             throw new IllegalArgumentException();
         }
-        String folderName = String.format("/%s/%s/%s",
-                Utils.getCacheDir(), OutParaFolder, outPara.getClient());
-        String fileName = String.format("%s_%s.csv",
-                Utils.getFileTime(), outPara.getKey());
 
-        File folder = new File(folderName);
-        folder.mkdirs();
-        File file = new File(folder, fileName);
+        File file = new File(getSaveOutParaFolder(outPara.getClient()),
+                getSaveOutParaFileName(outPara.getKey()));
         if (file.exists()) return;
 
-        FileWriter fileWriter = null;
+        FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(file, true);
             StringBuffer sb = new StringBuffer();
@@ -43,7 +36,7 @@ public class FileUtils {
                 sb.append(history.getDisplayTime());
                 sb.append(",");
                 sb.append(history.getValue());
-                sb.append("\r\n");
+                sb.append(Utils.LINE_SEP);
             }
 
             if (sb.length() > 0) {
@@ -53,5 +46,18 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static File getSaveOutParaFolder(String outParaFolder) {
+        String folderPath = Utils.getCacheDir() + Utils.FILE_SEP + OutParaFolder + Utils.FILE_SEP + outParaFolder;
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        return folder;
+    }
+
+    private static String getSaveOutParaFileName(String outParaName) {
+        return Utils.getFileTime() + "_" + outParaName + ".csv";
     }
 }
