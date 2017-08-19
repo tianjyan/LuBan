@@ -26,4 +26,6 @@ public class Config {
     public final static int MAX_LOG_SUPPORT = 1000;
     public final static int MAX_IN_PARA_SUPPORT = 5;
     public final static int MAX_FLOATING_COUNT = 3;
+    public final static int MAX_LOG_FILE_SIZE = 2 * 1024 * 1024;
+    public final static int MAX_LOG_FILES = 5;
 }
