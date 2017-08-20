@@ -34,7 +34,7 @@
             android:name=".activity.OutParaDetailActivity" />
         <activity
             android:name=".activity.InParaDetailActivity" />
-        <activitygi
+        <activity
             android:name=".activity.AboutActivity" />
         <activity
             android:name=".activity.SettingActivity" />
