@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">LuBan</string>
     <string name="info">Coded by youngytj</string>
     <string name="client_default">默认</string>
@@ -30,4 +30,8 @@
 
     <string name="author_link">Coded by youngytj</string>
     <string name="project_link">项目主页</string>
+
+    <string name="auto_save_log">自动保存日志</string>
+
+    <string name="pref_auto_save_log"><xliff:g>Auto_Save_Log</xliff:g></string>
 </resources>

@@ -37,7 +37,7 @@ public final class CrashUtils {
 
     static {
         try {
-            PackageInfo pi = LBApp.getContext().getPackageManager().getPackageInfo( LBApp.getContext().getPackageName(), 0);
+            PackageInfo pi = LBApp.getContext().getPackageManager().getPackageInfo(LBApp.getContext().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -47,10 +47,10 @@ public final class CrashUtils {
         }
 
         CRASH_HEAD = "\n************* Crash Log Head ****************" +
-                "\nDevice Manufacturer: " + Build.MANUFACTURER +// 设备厂商
-                "\nDevice Model       : " + Build.MODEL +// 设备型号
-                "\nAndroid Version    : " + Build.VERSION.RELEASE +// 系统版本
-                "\nAndroid SDK        : " + Build.VERSION.SDK_INT +// SDK版本
+                "\nDevice Manufacturer: " + Build.MANUFACTURER + // 设备厂商
+                "\nDevice Model       : " + Build.MODEL + // 设备型号
+                "\nAndroid Version    : " + Build.VERSION.RELEASE + // 系统版本
+                "\nAndroid SDK        : " + Build.VERSION.SDK_INT + // SDK版本
                 "\nApp VersionName    : " + versionName +
                 "\nApp VersionCode    : " + versionCode +
                 "\nApp CommitId       : " + BuildConfig.GIT_COMMIT_SHA +

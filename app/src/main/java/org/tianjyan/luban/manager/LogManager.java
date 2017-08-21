@@ -1,9 +1,11 @@
 package org.tianjyan.luban.manager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.tianjyan.luban.LBApp;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.event.LogEvent;
 import org.tianjyan.luban.model.LogEntry;
+import org.tianjyan.luban.model.SettingKey;
 import org.tianjyan.luban.utils.Utils;
 
 import java.io.File;
@@ -29,6 +31,8 @@ public class LogManager {
     }
 
     public LogManager() {
+        boolean allowAutoSave = ((LBApp) LBApp.getContext()).getSetting(SettingKey.AUTO_SAVE_LOG, "true") == "true"
+                ? true : false;
         thread = new Thread(() -> {
            try {
                FileWriter writer = new FileWriter(getCurrentLogFile());
@@ -40,11 +44,13 @@ public class LogManager {
                    if (tempList.size() > 0) {
                        EventBus.getDefault().post(new LogEvent(tempList));
                    }
-                   currentFileSize += saveLogs(writer, tempList);
-                   if (currentFileSize > Config.MAX_LOG_FILE_SIZE) {
-                       writer.close();
-                       currentFileSize = 0;
-                       writer = new FileWriter(getCurrentLogFile());
+                   if (allowAutoSave) {
+                       currentFileSize += saveLogs(writer, tempList);
+                       if (currentFileSize > Config.MAX_LOG_FILE_SIZE) {
+                           writer.close();
+                           currentFileSize = 0;
+                           writer = new FileWriter(getCurrentLogFile());
+                       }
                    }
                }
            } catch (InterruptedException e) {

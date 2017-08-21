@@ -63,7 +63,6 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         }
         mContext = getApplicationContext();
         loadSettings();
-        final String key = getSetting(SettingKey.KEY, "");
         floatingView = new FloatingView(LBApp.getContext());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
