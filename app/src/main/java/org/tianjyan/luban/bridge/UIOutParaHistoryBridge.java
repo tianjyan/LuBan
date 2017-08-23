@@ -1,5 +1,6 @@
 package org.tianjyan.luban.bridge;
 
+import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.model.ParaHistory;
 import org.tianjyan.luban.utils.FileUtils;
@@ -10,6 +11,7 @@ import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 class UIOutParaHistoryBridge {
+    private int totalHistoriesCount = 0;
     private ConcurrentHashMap<OutPara, Vector<ParaHistory>> histories = new ConcurrentHashMap<>();
 
     private static UIOutParaHistoryBridge INSTANCE = new UIOutParaHistoryBridge();
@@ -18,6 +20,10 @@ class UIOutParaHistoryBridge {
     }
 
     void addHistory(OutPara para, String value) {
+        if (totalHistoriesCount >= Config.MAX_HISTORIES_SUPPORT) {
+            return;
+        }
+
         Vector<ParaHistory> paraHistories = histories.get(para);
 
         if (paraHistories == null) {
@@ -44,6 +50,7 @@ class UIOutParaHistoryBridge {
             for (Vector<ParaHistory> h : histories.values()) {
                 h.clear();
             }
+            totalHistoriesCount = 0;
         }
     }
 

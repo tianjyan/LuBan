@@ -36,6 +36,8 @@
             android:name=".activity.InParaDetailActivity" />
         <activity
             android:name=".activity.AboutActivity" />
+        <activity
+            android:name=".activity.SettingActivity" />
 
         <service
             android:name=".LBService"

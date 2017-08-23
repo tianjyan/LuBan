@@ -89,8 +89,12 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         int id = item.getItemId();
         switch (id) {
             case R.id.about:
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
+                break;
+            case R.id.setting:
+                Intent settingIntent = new Intent(this, SettingActivity.class);
+                startActivity(settingIntent);
                 break;
             default:
                 break;

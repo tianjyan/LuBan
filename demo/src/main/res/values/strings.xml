@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">demo</string>
-    <string name="connect">连接LBService</string>
-    <string name="disconnect">断开LBService</string>
-    <string name="set_out">传输数据</string>
-</resources>

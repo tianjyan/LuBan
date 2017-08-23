@@ -9,13 +9,10 @@ import org.tianjyan.luban.activity.LogDataAdapter;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.event.LogEvent;
 import org.tianjyan.luban.model.LogEntry;
+import org.tianjyan.luban.model.RemoveRangeArrayList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -26,8 +23,8 @@ public class UILogBridge {
     }
 
     private ReadWriteLock lock = new ReentrantReadWriteLock(false);
-    private List<LogEntry> logEntries = Collections.synchronizedList(new ArrayList<>());
-    private Map<String, Integer> tagMap = new ConcurrentHashMap<>();
+    private RemoveRangeArrayList<LogEntry> logEntries = new RemoveRangeArrayList<>();
+    private List<String> tags = new ArrayList<>();
     private List<String> levels;
     private LogDataAdapter logDataAdapter;
 
@@ -46,13 +43,12 @@ public class UILogBridge {
     public void onLogEvent(LogEvent event) {
         lock.writeLock().lock();
         logEntries.addAll(event.getEntries());
-        for (LogEntry log : event.getEntries()) {
-            Integer count = tagMap.get(log.getTag());
-            if (count == null) {
-                count = 1;
-                tagMap.put(log.getTag(), count);
-            } else {
-                count++;
+        if (logEntries.size() > Config.MAX_LOG_SUPPORT) {
+            logEntries.remove(0, logEntries.size() - Config.MAX_LOG_SUPPORT);
+        }
+        for (LogEntry logEntry : event.getEntries()) {
+            if (!tags.contains(logEntry.getTag())) {
+                tags.add(logEntry.getTag());
             }
         }
         lock.writeLock().unlock();
@@ -60,7 +56,6 @@ public class UILogBridge {
     }
 
     public List<String> getTags() {
-        Set<String> tags = tagMap.keySet();
         List<String> allTags = new ArrayList<>();
         allTags.add(Config.TAG);
         allTags.addAll(tags);

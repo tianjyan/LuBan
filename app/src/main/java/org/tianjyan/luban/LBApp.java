@@ -12,6 +12,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import org.tianjyan.luban.model.OnSettingChangeListener;
 import org.tianjyan.luban.model.SettingKey;
+import org.tianjyan.luban.utils.CrashUtils;
 import org.tianjyan.luban.view.FloatingView;
 
 import java.util.ArrayList;
@@ -62,7 +63,6 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
         }
         mContext = getApplicationContext();
         loadSettings();
-        final String key = getSetting(SettingKey.KEY, "");
         floatingView = new FloatingView(LBApp.getContext());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
@@ -111,6 +111,7 @@ public class LBApp extends Application implements SharedPreferences.OnSharedPref
 
             }
         });
+        CrashUtils.init();
     }
 
     private  void loadSettings() {

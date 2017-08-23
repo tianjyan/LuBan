@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.tianjyan.luban.R;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.model.LogEntry;
+import org.tianjyan.luban.model.RemoveRangeArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemViewHolder>  implements Filterable {
     protected List<LogEntry> source;
     protected ReadWriteLock lock;
-    protected List<LogEntry> list;
+    protected RemoveRangeArrayList<LogEntry> list;
     protected Context context;
     protected LayoutInflater inflate;
     protected Filter filter;
@@ -28,7 +29,7 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     protected int filterLevel = Config.LOG_VERBOSE;
     protected String filterTag = Config.TAG;
 
-    public LogDataAdapter(Context context, List<LogEntry> source, ReadWriteLock lock) {
+    public LogDataAdapter(Context context, RemoveRangeArrayList<LogEntry> source, ReadWriteLock lock) {
         this.context = context;
         this.source = source;
         this.lock = lock;
@@ -84,9 +85,14 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
     }
 
     public void onNewEntries(List<LogEntry> entries) {
-        for (LogEntry logEntry: entries) {
-            if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
-                list.add(logEntry);
+        if (list != source) {
+            for (LogEntry logEntry: entries) {
+                if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
+                    list.add(logEntry);
+                }
+            }
+            if (list.size() > Config.MAX_LOG_SUPPORT) {
+                list.remove(0, list.size() - Config.MAX_LOG_SUPPORT);
             }
         }
         notifyDataSetChanged();
@@ -140,7 +146,7 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
                 lock.readLock().unlock();
             } else {
                 lock.readLock().lock();
-                List<LogEntry> dataSet = new ArrayList<>();
+                List<LogEntry> dataSet = new RemoveRangeArrayList<>();
                 for (LogEntry logEntry : source) {
                     if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
                         dataSet.add(logEntry);
@@ -155,7 +161,7 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            list = (List<LogEntry>) results.values;
+            list = (RemoveRangeArrayList<LogEntry>) results.values;
             notifyDataSetChanged();
         }
     }

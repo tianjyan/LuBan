@@ -1,6 +1,6 @@
 package org.tianjyan.luban.model;
 
-import org.tianjyan.luban.utils.DateTimeUtils;
+import org.tianjyan.luban.utils.Utils;
 
 public class ParaHistory {
     private long time;
@@ -10,7 +10,7 @@ public class ParaHistory {
     public ParaHistory(long time, String value) {
         this.time = time;
         this.value = value;
-        this.displayTime = DateTimeUtils.getSystemTime(time);
+        this.displayTime = Utils.getDisplayTime(time);
     }
 
     public long getTime() {
