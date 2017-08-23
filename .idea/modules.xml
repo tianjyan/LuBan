@@ -3,12 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LuBan.iml" filepath="$PROJECT_DIR$/LuBan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LuBan.iml" filepath="$PROJECT_DIR$/LuBan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.aidl/luban.aidl.iml" filepath="$PROJECT_DIR$/luban.aidl/luban.aidl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/luban.aidl/luban.aidl.iml" filepath="$PROJECT_DIR$/luban.aidl/luban.aidl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.host/luban.host.iml" filepath="$PROJECT_DIR$/luban.host/luban.host.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" filepath="$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.theme/luban.infrastructure.theme.iml" filepath="$PROJECT_DIR$/luban.infrastructure.theme/luban.infrastructure.theme.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" filepath="$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" />
-      <module fileurl="file://$PROJECT_DIR$/luban.sdk/luban.sdk.iml" filepath="$PROJECT_DIR$/luban.sdk/luban.sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sdk/luban.sdk.iml" filepath="$PROJECT_DIR$/luban.sdk/luban.sdk.iml" />
     </modules>
   </component>
