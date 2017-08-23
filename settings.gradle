@@ -1,1 +1,1 @@
-include ':app', ':demo', ':sdk', ':aidl'
+include ':app', ':luban.aidl', ':luban.sdk', ':luban.sampleclient'

@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LuBan.iml" filepath="$PROJECT_DIR$/LuBan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aidl/aidl.iml" filepath="$PROJECT_DIR$/aidl/aidl.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.aidl/luban.aidl.iml" filepath="$PROJECT_DIR$/luban.aidl/luban.aidl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" filepath="$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.sdk/luban.sdk.iml" filepath="$PROJECT_DIR$/luban.sdk/luban.sdk.iml" />
     </modules>
   </component>
 </project>
