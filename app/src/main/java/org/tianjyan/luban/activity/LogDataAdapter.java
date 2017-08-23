@@ -146,7 +146,7 @@ public class LogDataAdapter extends RecyclerView.Adapter<LogDataAdapter.ItemView
                 lock.readLock().unlock();
             } else {
                 lock.readLock().lock();
-                List<LogEntry> dataSet = new ArrayList<>();
+                List<LogEntry> dataSet = new RemoveRangeArrayList<>();
                 for (LogEntry logEntry : source) {
                     if (matchCondition(logEntry, filterTag, filterLevel, filterMsg)) {
                         dataSet.add(logEntry);
