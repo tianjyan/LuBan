@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_image_size">96dp</dimen>
+    <dimen name="splash_text_margin">25dp</dimen>
+    <dimen name="navigation_drawer_width">180dp</dimen>
+    <dimen name="navigation_menu_title_margin">8dp</dimen>
+    <dimen name="navigation_menu_title_height">38dp</dimen>
+    <dimen name="navigation_menu_title_text_size">14sp</dimen>
+    <dimen name="navigation_menu_title_padding_bottom">6dp</dimen>
+    <dimen name="navigation_menu_title_line_margin">8dp</dimen>
+    <dimen name="navigation_menu_list_view_margin">8dp</dimen>
+    <dimen name="navigation_menu_item_padding">10dp</dimen>
+    <dimen name="navigation_menu_item_height">48dp</dimen>
+    <dimen name="navigation_menu_item_text_size">17sp</dimen>
+    <dimen name="navigation_menu_exit_height">38dp</dimen>
+    <dimen name="navigation_menu_exit_margin">8dp</dimen>
+    <dimen name="navigation_menu_exit_text_size">16sp</dimen>
+    <dimen name="navigation_menu_exit_drawable_padding">8dp</dimen>
+    <dimen name="navigation_menu_line">1dp</dimen>
+</resources>

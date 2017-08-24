@@ -3,4 +3,5 @@
     <color name="colorPrimary">#50B3FA</color>
     <color name="colorPrimaryDark">#50B3FA</color>
     <color name="colorAccent">#50B3FA</color>
+    <color name="app_background">#F8F8F8</color>
 </resources>

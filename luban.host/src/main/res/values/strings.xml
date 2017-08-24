@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">luban.host</string>
+    <string name="app_name">LuBan</string>
+    <string name="info">Coded by youngytj</string>
 </resources>

@@ -48,6 +48,11 @@ dependencies {
     compile project(':luban.aidl')
     compile project(':luban.infrastructure.abs')
     compile project(':luban.infrastructure.theme')
+    compile project(':luban.plugin.op')
+    compile project(':luban.plugin.ip')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    compile 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 }
 
 task styleCheck(type: Checkstyle) {
