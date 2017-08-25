@@ -22,6 +22,9 @@ import org.tianjyan.luban.host.model.OnFunctionSelected;
 import org.tianjyan.luban.host.model.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.IPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,10 +35,7 @@ import dagger.android.AndroidInjection;
 public class MainActivity extends BaseActivity implements OnFunctionSelected {
     private static boolean active = false;
     private static int OVERLAY_PERMISSION_REQ_CODE = 1234;
-
-    public static boolean isActive() {
-        return active;
-    }
+    private MainMenuFragment mainMenuFragment;
 
     @BindView(R.id.main_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.main_navigation_drawer) View mDrawerView;
@@ -50,6 +50,8 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         active = true;
+        initDrawer();
+        initFragment();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestDrawOverLays();
@@ -87,12 +89,12 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         int id = item.getItemId();
         switch (id) {
             case R.id.about:
-//                Intent aboutIntent = new Intent(this, AboutActivity.class);
-//                startActivity(aboutIntent);
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
                 break;
             case R.id.setting:
-//                Intent settingIntent = new Intent(this, SettingActivity.class);
-//                startActivity(settingIntent);
+                Intent settingIntent = new Intent(this, SettingActivity.class);
+                startActivity(settingIntent);
                 break;
             default:
                 break;
@@ -106,6 +108,10 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
             startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
         }
+    }
+
+    public static boolean isActive() {
+        return active;
     }
 
     private void initDrawer() {
@@ -150,12 +156,57 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         if (mainMenuFragment == null) {
             mainMenuFragment = new MainMenuFragment();
             mainMenuFragment.setOnFunctionSelected(this);
+            List<String> functions = new ArrayList<>();
+            functions.add(outPlugin.getPluginName());
+            functions.add(inPlugin.getPluginName());
             mainMenuFragment.setDataSource(functions);
         }
-
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_navigation_drawer, mainMenuFragment, "MainMenuFragment");
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onFunctionSelected(String functionName) {
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//
+//        if (outParaFragment != null) transaction.hide(outParaFragment);
+//        if (inParaFragment != null) transaction.hide(inParaFragment);
+//        if (logFragment != null) transaction.hide(logFragment);
+//        if (performanceFragment != null) transaction.hide(performanceFragment);
+//
+//        if (functionName.equals(getResources().getString(R.string.function_out_para))) {
+//            if (outParaFragment == null) {
+//                outParaFragment = new OutParaFragment();
+//                transaction.add(R.id.main_container, outParaFragment, "OutParaFragment");
+//            } else {
+//                transaction.show(outParaFragment);
+//            }
+//        } else if (functionName.equals(getResources().getString(R.string.function_in_para))) {
+//            if (inParaFragment == null) {
+//                inParaFragment = new InParaFragment();
+//                transaction.add(R.id.main_container, inParaFragment, "InParaFragment");
+//            } else {
+//                transaction.show(inParaFragment);
+//            }
+//        } else if (functionName.equals(getResources().getString(R.string.function_log))) {
+//            if (logFragment == null) {
+//                logFragment = new LogFragment();
+//                transaction.add(R.id.main_container, logFragment, "LogFragment");
+//            } else {
+//                transaction.show(logFragment);
+//            }
+//        } else if (functionName.equals(getResources().getString(R.string.function_performance))) {
+//            if (performanceFragment == null) {
+//                performanceFragment = new PerformanceFragment();
+//                transaction.add(R.id.main_container, performanceFragment, "PerformanceFragment");
+//            } else {
+//                transaction.show(performanceFragment);
+//            }
+//        }
+//        transaction.commitAllowingStateLoss();
+        mDrawerLayout.closeDrawer(mDrawerView);
     }
 }

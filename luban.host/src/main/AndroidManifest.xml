@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.tianjyan.luban.host">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application android:name=".LBApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -16,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.AboutActivity" />
     </application>
 
 </manifest>

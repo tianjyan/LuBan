@@ -19,13 +19,5 @@ android {
 }
 
 dependencies {
-    def daggerVersion = '2.11'
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile project(':luban.infrastructure.abs')
-    compile project(':luban.resource')
-    compile "com.google.dagger:dagger:$daggerVersion"
-    compile "com.google.dagger:dagger-android:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-
 }

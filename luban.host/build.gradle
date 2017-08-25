@@ -49,7 +49,7 @@ dependencies {
 
     compile project(':luban.aidl')
     compile project(':luban.infrastructure.abs')
-    compile project(':luban.infrastructure.theme')
+    compile project(':luban.resource')
     compile project(':luban.plugin.op')
     compile project(':luban.plugin.ip')
 

@@ -7,9 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/luban.aidl/luban.aidl.iml" filepath="$PROJECT_DIR$/luban.aidl/luban.aidl.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.host/luban.host.iml" filepath="$PROJECT_DIR$/luban.host/luban.host.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" filepath="$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/luban.Infrastructure.theme/luban.infrastructure.theme.iml" filepath="$PROJECT_DIR$/luban.Infrastructure.theme/luban.infrastructure.theme.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" filepath="$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.op/luban.plugin.op.iml" filepath="$PROJECT_DIR$/luban.plugin.op/luban.plugin.op.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.resource/luban.resource.iml" filepath="$PROJECT_DIR$/luban.resource/luban.resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" filepath="$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sdk/luban.sdk.iml" filepath="$PROJECT_DIR$/luban.sdk/luban.sdk.iml" />
     </modules>

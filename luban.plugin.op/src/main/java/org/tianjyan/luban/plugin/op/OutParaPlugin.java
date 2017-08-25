@@ -7,7 +7,7 @@ import org.tianjyan.luban.infrastructure.abs.IPlugin;
 public class OutParaPlugin implements IPlugin {
     @Override
     public String getPluginName() {
-        return null;
+        return "出参监视";
     }
 
     @Override

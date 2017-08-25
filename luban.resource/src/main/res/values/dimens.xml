@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="splash_image_size">96dp</dimen>
     <dimen name="splash_text_margin">25dp</dimen>
     <dimen name="navigation_drawer_width">180dp</dimen>
@@ -17,11 +18,28 @@
     <dimen name="navigation_menu_exit_text_size">16sp</dimen>
     <dimen name="navigation_menu_exit_drawable_padding">8dp</dimen>
     <dimen name="navigation_menu_line">1dp</dimen>
+    <dimen name="action_item_height">48dp</dimen>
+    <dimen name="action_item_text_size">14sp</dimen>
+    <dimen name="action_item_drawable_padding">4dp</dimen>
+    <dimen name="action_item_line">0.7dp</dimen>
+    <dimen name="action_item_margin">6dp</dimen>
+    <dimen name="para_layout_height">42dp</dimen>
+    <dimen name="para_pkg_margin">6dp</dimen>
+    <dimen name="para_pkg_size">12sp</dimen>
+    <dimen name="para_line">1dp</dimen>
     <dimen name="para_item_margin">8dp</dimen>
     <dimen name="para_item_title_size">15sp</dimen>
+    <dimen name="para_padding">8dp</dimen>
+    <dimen name="para_title_height">32dp</dimen>
 
     <dimen name="floating_logo_elevation">5dp</dimen>
     <dimen name="floating_logo_size">48dp</dimen>
     <dimen name="floating_logo_image_padding">12dp</dimen>
     <dimen name="floating_detail_width">320dp</dimen>
+
+    <dimen name="about_author_size">96dp</dimen>
+    <dimen name="about_author_margin_top">96dp</dimen>
+    <dimen name="about_margin">12dp</dimen>
+
+    <dimen name="log_filter_item_height">48dp</dimen>
 </resources>
