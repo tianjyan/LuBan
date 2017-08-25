@@ -45,14 +45,24 @@ android {
 }
 
 dependencies {
+    def daggerVersion = '2.11'
+
     compile project(':luban.aidl')
     compile project(':luban.infrastructure.abs')
     compile project(':luban.infrastructure.theme')
     compile project(':luban.plugin.op')
     compile project(':luban.plugin.ip')
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-    compile 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+
+    compile 'com.jakewharton:butterknife:8.7.0'
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.dagger:dagger-android:$daggerVersion"
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
 
 task styleCheck(type: Checkstyle) {

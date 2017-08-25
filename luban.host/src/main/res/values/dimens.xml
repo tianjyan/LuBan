@@ -17,4 +17,11 @@
     <dimen name="navigation_menu_exit_text_size">16sp</dimen>
     <dimen name="navigation_menu_exit_drawable_padding">8dp</dimen>
     <dimen name="navigation_menu_line">1dp</dimen>
+    <dimen name="para_item_margin">8dp</dimen>
+    <dimen name="para_item_title_size">15sp</dimen>
+
+    <dimen name="floating_logo_elevation">5dp</dimen>
+    <dimen name="floating_logo_size">48dp</dimen>
+    <dimen name="floating_logo_image_padding">12dp</dimen>
+    <dimen name="floating_detail_width">320dp</dimen>
 </resources>

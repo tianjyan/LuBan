@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="splash_text_color">#7C7F89</color>
+
+    <color name="para_line_color">#DDDADFE5</color>
+
+    <color name="floating_detail_background">#DD202020</color>
+    <color name="floating_text_color">#F8F8F8</color>
 </resources>

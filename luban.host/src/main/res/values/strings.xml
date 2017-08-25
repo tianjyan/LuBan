@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">LuBan</string>
     <string name="info">Coded by youngytj</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="about">关于</string>
+    <string name="setting">设置</string>
+
+    <string name="main_thread_error">方法只能在主线程调用!</string>
+
+    <string name="para_floating_title">显示在悬浮窗的监视参数(最多三个)</string>
+    <string name="para_normal_title">其他监视参数</string>
 </resources>
