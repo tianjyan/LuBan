@@ -1,0 +1,79 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+apply plugin: 'me.tatarka.retrolambda'
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def buildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    Calendar date = new GregorianCalendar();
+    date.set(Calendar.HOUR_OF_DAY, 0);
+    date.set(Calendar.MINUTE, 0);
+    date.set(Calendar.SECOND, 0);
+    date.set(Calendar.MILLISECOND, 0);
+    return df.format(date.getTime())
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "org.tianjyan.luban.host"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "boolean", "ENABLE_LEAK_CANARY", "false"
+        buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
+        buildConfigField "String", "BUILD_TIME", '"' + buildTime() + '"'
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def daggerVersion = '2.11'
+
+    compile project(':luban.aidl')
+    compile project(':luban.infrastructure.abs')
+    compile project(':luban.infrastructure.common')
+    compile project(':luban.plugin.op')
+    compile project(':luban.plugin.ip')
+    compile project(':luban.plugin.log')
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+
+    compile 'com.jakewharton:butterknife:8.7.0'
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.dagger:dagger-android:$daggerVersion"
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile project(path: ':luban.infrastructure.common')
+    compile project(path: ':luban.infrastructure.common')
+    compile project(path: ':luban.infrastructure.client')
+}
+
+task styleCheck(type: Checkstyle) {
+    configFile new File(rootDir, "config/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**', '**/mobeta/**'
+
+    classpath = files()
+}
