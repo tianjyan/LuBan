@@ -21,4 +21,6 @@ android {
 dependencies {
     compile project(path: ':luban.aidl')
     compile project(path: ':luban.infrastructure.abs')
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
 }

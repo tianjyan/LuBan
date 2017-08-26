@@ -20,7 +20,8 @@ import android.view.View;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
-import org.tianjyan.luban.host.model.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.IPlugin;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
     private ActionBarDrawerToggle mDrawerToggle;
     @Inject @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin;
     @Inject @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin;
+    @Inject @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin;
     @Inject DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
@@ -66,10 +68,13 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
 
         menuItems.put(outPlugin.getPluginName(), null);
         menuItems.put(inPlugin.getPluginName(), null);
+        menuItems.put(logPlugin.getPluginName(), null);
         pluginItems.put(outPlugin.getPluginName(), outPlugin);
         pluginItems.put(inPlugin.getPluginName(), inPlugin);
+        pluginItems.put(logPlugin.getPluginName(), logPlugin);
         menu.add(outPlugin.getPluginName());
         menu.add(inPlugin.getPluginName());
+        menu.add(logPlugin.getPluginName());
 
         initDrawer();
         initFragment();

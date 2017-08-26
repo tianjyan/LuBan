@@ -11,7 +11,7 @@ import android.widget.ListView;
 import org.tianjyan.luban.host.LBApp;
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
-import org.tianjyan.luban.host.model.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.SettingKey;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Looper;
 
 import org.tianjyan.luban.host.model.OnSettingChangeListener;
-import org.tianjyan.luban.host.model.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.host.view.FloatingView;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.common.Common;
@@ -128,6 +128,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
         mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
     public String getSetting(SettingKey key, String defaultValue) {
         return mSharedPreferences.getString(key.name(), defaultValue);
     }

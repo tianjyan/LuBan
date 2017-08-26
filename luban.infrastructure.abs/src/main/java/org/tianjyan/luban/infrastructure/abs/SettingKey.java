@@ -1,4 +1,4 @@
-package org.tianjyan.luban.host.model;
+package org.tianjyan.luban.infrastructure.abs;
 
 public enum SettingKey {
     LAST_SHOW_ITEM,

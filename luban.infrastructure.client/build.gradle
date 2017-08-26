@@ -30,7 +30,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     compile project(path: ':luban.infrastructure.abs')
-    compile project(path: ':luban.resource')
     compile project(path: ':luban.infrastructure.common')
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'

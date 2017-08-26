@@ -4,4 +4,5 @@ import android.content.Context;
 
 public interface ILBApp {
     Context getContext();
+    String getSetting(SettingKey key, String defaultValue);
 }

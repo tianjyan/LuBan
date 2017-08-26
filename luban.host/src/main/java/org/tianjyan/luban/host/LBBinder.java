@@ -11,6 +11,7 @@ import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
+import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.common.event.ClientDisconnectEvent;
 
@@ -19,14 +20,17 @@ public class LBBinder extends IService.Stub  {
     private final IClientManager clientManager;
     private final IOutParaPlugin outParaPlugin;
     private final IInParaPlugin inParaPlugin;
+    private final ILogPlugin logPlugin;
 
-    public LBBinder(ILBApp app,IClientManager clientManager,
+    public LBBinder(ILBApp app, IClientManager clientManager,
                     IOutParaPlugin outParaPlugin,
-                    IInParaPlugin inParaPlugin) {
+                    IInParaPlugin inParaPlugin,
+                    ILogPlugin logPlugin) {
         this.app = app;
         this.clientManager = clientManager;
         this.outParaPlugin = outParaPlugin;
         this.inParaPlugin = inParaPlugin;
+        this.logPlugin = logPlugin;
     }
 
     @Override
@@ -75,7 +79,7 @@ public class LBBinder extends IService.Stub  {
 
     @Override
     public void log(long tid, int level, String tag, String msg) throws RemoteException {
-
+        logPlugin.log(tid, level, tag, msg);
     }
 
     @Override

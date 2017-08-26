@@ -49,9 +49,10 @@ dependencies {
 
     compile project(':luban.aidl')
     compile project(':luban.infrastructure.abs')
-    compile project(':luban.resource')
+    compile project(':luban.infrastructure.common')
     compile project(':luban.plugin.op')
     compile project(':luban.plugin.ip')
+    compile project(':luban.plugin.log')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
