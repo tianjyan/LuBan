@@ -8,10 +8,14 @@ import android.os.IBinder;
 import org.tianjyan.luban.host.activity.MainActivity;
 import org.tianjyan.luban.infrastructure.common.utils.Utils;
 
-public class LBService extends Service {
-    private final IBinder binder = new LBBinder();
+import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+
+public class LBService extends Service {
+    @Inject IBinder binder;
     public void onCreate() {
+        AndroidInjection.inject(this);
         super.onCreate();
     }
 

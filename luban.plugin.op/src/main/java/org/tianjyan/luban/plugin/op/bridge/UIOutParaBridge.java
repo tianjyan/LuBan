@@ -66,7 +66,7 @@ public class UIOutParaBridge {
                         default:
                             break;
                     }
-                    outParaDataAdapter.notifyDataSetChanged();
+                    notifyChanged();
         });
     }
 
@@ -83,7 +83,7 @@ public class UIOutParaBridge {
                     int position = outParas.indexOf(val);
                     if (position > -1) {
                         historyBridge.addHistory(val, value);
-                        outParaDataAdapter.notifyItemChanged(position);
+                        notifyItemChanged(position);
                         EventBus.getDefault().post(
                                 new OutParaHistoryUpdateEvent(val, value));
                         if (val.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
@@ -106,7 +106,7 @@ public class UIOutParaBridge {
                         return outPara.getClient() != null
                                 && outPara.getClient().equals(pkgName);
                     });
-                    outParaDataAdapter.notifyDataSetChanged();
+                    notifyChanged();
                 });
     }
 
@@ -147,7 +147,7 @@ public class UIOutParaBridge {
         outParas.remove(outPara);
         outParas.add(position, outPara);
         floatingItemCount--;
-        outParaDataAdapter.notifyDataSetChanged();
+        notifyChanged();
         EventBus.getDefault().post(new RemoveFloatingOutParaEvent(outPara));
     }
 
@@ -157,7 +157,7 @@ public class UIOutParaBridge {
         outParas.remove(outPara);
         outParas.add(position, outPara);
         floatingItemCount++;
-        outParaDataAdapter.notifyDataSetChanged();
+        notifyChanged();
         EventBus.getDefault().post(new AddFloatingOutParaEvent(outPara));
     }
 
@@ -242,5 +242,17 @@ public class UIOutParaBridge {
             }
         }
         return pos;
+    }
+
+    private void notifyChanged() {
+        if (outParaDataAdapter != null) {
+            outParaDataAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void notifyItemChanged(int position) {
+        if (outParaDataAdapter != null) {
+            outParaDataAdapter.notifyItemChanged(position);
+        }
     }
 }

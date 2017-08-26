@@ -34,6 +34,14 @@ class ClientManager implements IClientManager{
     }
 
     @Override
+    public synchronized void addClient(int pid, String pkgName) {
+        if (!clientMap.containsKey(pid)) {
+            clientMap.put(pid, new ConnectedClient(pkgName));
+        }
+    }
+
+
+    @Override
     public synchronized  void removeClient(int pid) {
         if (clientMap.containsKey(pid)) {
             IClient client = clientMap.remove(pid);

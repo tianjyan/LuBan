@@ -21,6 +21,7 @@ import android.view.View;
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
 import org.tianjyan.luban.host.model.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.IPlugin;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
     @BindView(R.id.main_navigation_drawer) View mDrawerView;
     private ActionBarDrawerToggle mDrawerToggle;
     @Inject @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin;
-    @Inject @Named(AliasName.IN_PARA_PLUGIN) IPlugin inPlugin;
+    @Inject @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin;
     @Inject DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override

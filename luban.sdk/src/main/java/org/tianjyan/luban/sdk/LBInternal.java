@@ -11,7 +11,7 @@ import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 
 class LBInternal {
-    static final String LB_PACKAGE_NAME = "org.tianjyan.luban";
+    static final String LB_PACKAGE_NAME = "org.tianjyan.luban.host";
     static final String ACTION = "org.tianjyan.luban.service";
 
     private IService service;

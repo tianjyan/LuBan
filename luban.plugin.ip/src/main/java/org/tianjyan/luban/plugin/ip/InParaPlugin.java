@@ -3,14 +3,19 @@ package org.tianjyan.luban.plugin.ip;
 import android.app.Application;
 import android.app.Fragment;
 
+import org.tianjyan.luban.aidl.InPara;
+import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IPlugin;
+import org.tianjyan.luban.plugin.ip.activity.InParaFragment;
+import org.tianjyan.luban.plugin.ip.bridge.UIInParaBridge;
 
-public class InParaPlugin implements IPlugin {
+public class InParaPlugin implements IInParaPlugin {
     private final ILBApp app;
+    private final UIInParaBridge inParaBridge;
 
-    public InParaPlugin(ILBApp app) {
+    public InParaPlugin(ILBApp app, UIInParaBridge inParaBridge) {
         this.app = app;
+        this.inParaBridge = inParaBridge;
     }
 
     @Override
@@ -20,11 +25,21 @@ public class InParaPlugin implements IPlugin {
 
     @Override
     public Fragment getPluginFragment() {
-        return new Fragment();
+        return new InParaFragment();
     }
 
     @Override
     public ILBApp getApp() {
         return app;
+    }
+
+    @Override
+    public void registerInPara(InPara inPara) {
+        inParaBridge.registerInPara(inPara);
+    }
+
+    @Override
+    public void clientDisconnect(String pkgName) {
+        inParaBridge.clientDisConnect(pkgName);
     }
 }

@@ -2,6 +2,7 @@ package org.tianjyan.luban.host;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,17 +24,18 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import dagger.android.HasServiceInjector;
 
-public class LBApp extends Application implements ILBApp, HasActivityInjector, SharedPreferences.OnSharedPreferenceChangeListener {
+public class LBApp extends Application implements ILBApp, HasActivityInjector, HasServiceInjector, SharedPreferences.OnSharedPreferenceChangeListener {
     private static boolean isAppRunning = false;
     private static Context mContext;
     private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
     private FloatingView floatingView;
-    private AndroidInjector androidInjector;
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
+    @Inject DispatchingAndroidInjector<Service> serviceInjector;
 
     public static void setAppRunning(boolean isRunning) {
         isAppRunning = isRunning;
@@ -50,8 +52,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, S
     @Override
     public void onCreate() {
         super.onCreate();
-        androidInjector = DaggerLBComponent.builder().create(this);
-        androidInjector.inject(this);
+        DaggerLBComponent.builder().create(this).inject(this);
         mContext = getApplicationContext();
         loadSettings();
         Common.init(this);
@@ -109,6 +110,12 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, S
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return activityInjector;
+    }
+
+
+    @Override
+    public AndroidInjector<Service> serviceInjector() {
+        return serviceInjector;
     }
 
     @Override
@@ -171,10 +178,5 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, S
                 onSettingChangeListener.onSettingChange(settingKey);
             }
         }
-    }
-
-    @Override
-    public void inject(Object object) {
-        androidInjector.inject(object);
     }
 }

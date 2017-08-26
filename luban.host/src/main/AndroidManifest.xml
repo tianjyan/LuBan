@@ -21,6 +21,15 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.AboutActivity" />
+        <service
+            android:name=".LBService"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="org.tianjyan.luban.service"
+                    android:exported="true" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -26,19 +26,22 @@ android {
 
 dependencies {
     def daggerVersion = '2.11'
+
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+
+    compile project(path: ':luban.aidl')
+    compile project(path: ':luban.infrastructure.common')
+    compile project(path: ':luban.infrastructure.abs')
+    compile project(path: ':luban.resource')
+
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile project(':luban.infrastructure.abs')
-    compile project(':luban.resource')
-    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile "com.google.dagger:dagger:$daggerVersion"
     compile "com.google.dagger:dagger-android:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-    compile project(path: ':luban.aidl')
-    compile project(path: ':luban.infrastructure.common')
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.jakewharton:butterknife:8.7.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
