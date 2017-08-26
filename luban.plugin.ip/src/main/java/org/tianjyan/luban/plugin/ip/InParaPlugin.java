@@ -20,7 +20,7 @@ public class InParaPlugin implements IInParaPlugin {
 
     @Override
     public String getPluginName() {
-        return ((Application)app).getString(R.string.function_in_para);
+        return ((Application) app).getString(R.string.function_in_para);
     }
 
     @Override

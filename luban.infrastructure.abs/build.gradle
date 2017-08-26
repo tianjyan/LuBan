@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 25
@@ -21,4 +22,13 @@ android {
 dependencies {
     compile 'javax.inject:javax.inject:1'
     compile project(path: ':luban.aidl')
+}
+
+task styleCheck(type: Checkstyle) {
+    configFile new File(rootDir, "config/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**', '**/mobeta/**'
+
+    classpath = files()
 }

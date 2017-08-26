@@ -5,14 +5,9 @@ import android.app.Fragment;
 
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IPlugin;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.op.activity.OutParaFragment;
 import org.tianjyan.luban.plugin.op.bridge.UIOutParaBridge;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import dagger.Lazy;
 
@@ -30,7 +25,7 @@ public class OutParaPlugin implements IOutParaPlugin {
 
     @Override
     public String getPluginName() {
-        return ((Application)app).getString(R.string.function_out_para);
+        return ((Application) app).getString(R.string.function_out_para);
     }
 
     @Override

@@ -3,7 +3,6 @@ package org.tianjyan.luban.plugin.ip;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;

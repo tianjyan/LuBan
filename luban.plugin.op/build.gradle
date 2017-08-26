@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'checkstyle'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
@@ -44,4 +45,13 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.7.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+}
+
+task styleCheck(type: Checkstyle) {
+    configFile new File(rootDir, "config/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**', '**/mobeta/**'
+
+    classpath = files()
 }

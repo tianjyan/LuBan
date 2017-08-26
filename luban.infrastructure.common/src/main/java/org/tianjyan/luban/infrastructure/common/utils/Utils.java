@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.common.Common;
 
 import java.io.File;

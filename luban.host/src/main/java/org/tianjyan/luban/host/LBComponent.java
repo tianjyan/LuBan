@@ -20,5 +20,7 @@ import dagger.android.AndroidInjector;
 })
 interface LBComponent extends AndroidInjector<LBApp> {
     @Component.Builder
-    abstract class Builder extends AndroidInjector.Builder<LBApp> {}
+    abstract class Builder extends AndroidInjector.Builder<LBApp> {
+
+    }
 }

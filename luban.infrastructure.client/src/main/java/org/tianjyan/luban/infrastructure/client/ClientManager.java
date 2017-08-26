@@ -2,17 +2,12 @@ package org.tianjyan.luban.infrastructure.client;
 
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-class ClientManager implements IClientManager{
+class ClientManager implements IClientManager {
     IClient defaultClient;
     public ClientManager(IClient defaultClient) {
         this.defaultClient = defaultClient;
