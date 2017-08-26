@@ -5,4 +5,5 @@ import android.app.Fragment;
 public interface IPlugin {
     String getPluginName();
     Fragment getPluginFragment();
+    ILBApp getApp();
 }

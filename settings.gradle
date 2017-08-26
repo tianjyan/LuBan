@@ -1,1 +1,1 @@
-include ':app', ':luban.aidl', ':luban.sdk', ':luban.sampleclient', ':luban.infrastructure.abs', ':luban.host', ':luban.plugin.op', ':luban.plugin.ip', ':luban.resource'
+include ':app', ':luban.aidl', ':luban.sdk', ':luban.sampleclient', ':luban.infrastructure.abs', ':luban.host', ':luban.plugin.op', ':luban.plugin.ip', ':luban.resource', ':luban.infrastructure.common', ':luban.infrastructure.client'

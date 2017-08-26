@@ -1,7 +1,7 @@
 package org.tianjyan.luban.host.model;
 
 import org.tianjyan.luban.aidl.Config;
-import org.tianjyan.luban.host.utils.Utils;
+import org.tianjyan.luban.infrastructure.common.utils.Utils;
 
 public class LogEntry {
     private long pid;

@@ -1,2 +1,6 @@
-<manifest package="org.tianjyan.luban.plugin.op">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.tianjyan.luban.plugin.op">
+    <application>
+        <activity android:name=".activity.OutParaDetailActivity" />
+    </application>
 </manifest>

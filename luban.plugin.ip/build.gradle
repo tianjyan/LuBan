@@ -28,4 +28,5 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
 
+    compile project(path: ':luban.infrastructure.common')
 }

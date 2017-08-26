@@ -1,6 +1,7 @@
 package org.tianjyan.luban.host.activity;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -20,10 +21,14 @@ import android.view.View;
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
 import org.tianjyan.luban.host.model.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.IPlugin;
+import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,17 +36,24 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 
-public class MainActivity extends BaseActivity implements OnFunctionSelected {
+public class MainActivity extends BaseActivity implements OnFunctionSelected, HasFragmentInjector {
     private static boolean active = false;
     private static int OVERLAY_PERMISSION_REQ_CODE = 1234;
     private MainMenuFragment mainMenuFragment;
+    private Map<String, Fragment> menuItems = new HashMap<>();
+    private Map<String, IPlugin> pluginItems = new HashMap<>();
+    private List<String> menu = new ArrayList<>();
 
     @BindView(R.id.main_layout) DrawerLayout mDrawerLayout;
     @BindView(R.id.main_navigation_drawer) View mDrawerView;
     private ActionBarDrawerToggle mDrawerToggle;
-    @Inject @Named("OutParaPlugin") IPlugin outPlugin;
-    @Inject @Named("InParaPlugin") IPlugin inPlugin;
+    @Inject @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin;
+    @Inject @Named(AliasName.IN_PARA_PLUGIN) IPlugin inPlugin;
+    @Inject DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,14 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         active = true;
+
+        menuItems.put(outPlugin.getPluginName(), null);
+        menuItems.put(inPlugin.getPluginName(), null);
+        pluginItems.put(outPlugin.getPluginName(), outPlugin);
+        pluginItems.put(inPlugin.getPluginName(), inPlugin);
+        menu.add(outPlugin.getPluginName());
+        menu.add(inPlugin.getPluginName());
+
         initDrawer();
         initFragment();
 
@@ -156,10 +176,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
         if (mainMenuFragment == null) {
             mainMenuFragment = new MainMenuFragment();
             mainMenuFragment.setOnFunctionSelected(this);
-            List<String> functions = new ArrayList<>();
-            functions.add(outPlugin.getPluginName());
-            functions.add(inPlugin.getPluginName());
-            mainMenuFragment.setDataSource(functions);
+            mainMenuFragment.setDataSource(menu);
         }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -169,44 +186,28 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected {
 
     @Override
     public void onFunctionSelected(String functionName) {
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//
-//        if (outParaFragment != null) transaction.hide(outParaFragment);
-//        if (inParaFragment != null) transaction.hide(inParaFragment);
-//        if (logFragment != null) transaction.hide(logFragment);
-//        if (performanceFragment != null) transaction.hide(performanceFragment);
-//
-//        if (functionName.equals(getResources().getString(R.string.function_out_para))) {
-//            if (outParaFragment == null) {
-//                outParaFragment = new OutParaFragment();
-//                transaction.add(R.id.main_container, outParaFragment, "OutParaFragment");
-//            } else {
-//                transaction.show(outParaFragment);
-//            }
-//        } else if (functionName.equals(getResources().getString(R.string.function_in_para))) {
-//            if (inParaFragment == null) {
-//                inParaFragment = new InParaFragment();
-//                transaction.add(R.id.main_container, inParaFragment, "InParaFragment");
-//            } else {
-//                transaction.show(inParaFragment);
-//            }
-//        } else if (functionName.equals(getResources().getString(R.string.function_log))) {
-//            if (logFragment == null) {
-//                logFragment = new LogFragment();
-//                transaction.add(R.id.main_container, logFragment, "LogFragment");
-//            } else {
-//                transaction.show(logFragment);
-//            }
-//        } else if (functionName.equals(getResources().getString(R.string.function_performance))) {
-//            if (performanceFragment == null) {
-//                performanceFragment = new PerformanceFragment();
-//                transaction.add(R.id.main_container, performanceFragment, "PerformanceFragment");
-//            } else {
-//                transaction.show(performanceFragment);
-//            }
-//        }
-//        transaction.commitAllowingStateLoss();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        for (Fragment fragment : menuItems.values()) {
+            if (fragment != null) transaction.hide(fragment);
+        }
+
+        Fragment fragment = menuItems.get(functionName);
+        if (fragment == null) {
+            IPlugin plugin = pluginItems.get(functionName);
+            fragment = plugin.getPluginFragment();
+            menuItems.put(plugin.getPluginName(), fragment);
+            transaction.add(R.id.main_container, fragment, fragment.getClass().getSimpleName());
+        } else {
+            transaction.show(fragment);
+        }
+
+        transaction.commitAllowingStateLoss();
         mDrawerLayout.closeDrawer(mDrawerView);
+    }
+
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return fragmentInjector;
     }
 }

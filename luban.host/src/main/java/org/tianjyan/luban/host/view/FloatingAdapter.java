@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.host.R;
-import org.tianjyan.luban.host.model.Const;
 
 import java.util.List;
 
 public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemViewHolder> {
+    private final String Floating_Area_Title;
+    private final String Normal_Area_Title;
+    static final int Type_Title = 0;
+    static final int Type_Item = 1;
     protected List<OutPara> list;
     protected Context context;
     protected LayoutInflater inflate;
@@ -22,6 +25,9 @@ public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemVi
         this.context = context;
         this.list = list;
         this.inflate = LayoutInflater.from(context);
+        Floating_Area_Title = context.getString(org.tianjyan.luban.plugin.op.R.string.para_floating_title);
+        Normal_Area_Title = context.getString(org.tianjyan.luban.plugin.op.R.string.para_normal_title);
+
     }
 
     @Override
@@ -45,11 +51,11 @@ public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemVi
     public int getItemViewType(int position) {
         int type;
         OutPara outPara = list.get(position);
-        if (outPara.getKey() == Const.Floating_Area_Title
-                || outPara.getKey() == Const.Normal_Area_Title) {
-            type = Const.Type_Title;
+        if (outPara.getKey() == Floating_Area_Title
+                || outPara.getKey() == Normal_Area_Title) {
+            type = Type_Title;
         } else {
-            type = Const.Type_Item;
+            type = Type_Item;
         }
         return type;
     }

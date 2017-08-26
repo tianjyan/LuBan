@@ -23,10 +23,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.host.R;
-import org.tianjyan.luban.host.event.AddFloatingOutParaEvent;
-import org.tianjyan.luban.host.event.ClientDisconnectEvent;
-import org.tianjyan.luban.host.event.FloatingOutParaValueUpdateEvent;
-import org.tianjyan.luban.host.event.RemoveFloatingOutParaEvent;
+import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.infrastructure.common.event.ClientDisconnectEvent;
+import org.tianjyan.luban.infrastructure.common.event.FloatingOutParaValueUpdateEvent;
+import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;

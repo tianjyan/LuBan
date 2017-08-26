@@ -10,6 +10,8 @@ import android.os.Looper;
 import org.tianjyan.luban.host.model.OnSettingChangeListener;
 import org.tianjyan.luban.host.model.SettingKey;
 import org.tianjyan.luban.host.view.FloatingView;
+import org.tianjyan.luban.infrastructure.abs.ILBApp;
+import org.tianjyan.luban.infrastructure.common.Common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,14 +24,14 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
-public class LBApp extends Application implements HasActivityInjector, SharedPreferences.OnSharedPreferenceChangeListener {
+public class LBApp extends Application implements ILBApp, HasActivityInjector, SharedPreferences.OnSharedPreferenceChangeListener {
     private static boolean isAppRunning = false;
-    private static boolean isGathering = false;
     private static Context mContext;
     private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
     private FloatingView floatingView;
+    private AndroidInjector androidInjector;
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
 
@@ -41,14 +43,6 @@ public class LBApp extends Application implements HasActivityInjector, SharedPre
         return isAppRunning;
     }
 
-    public static boolean isGathering() {
-        return isGathering;
-    }
-
-    public static void setIsGathering(boolean isGathering) {
-        LBApp.isGathering = isGathering;
-    }
-
     public static void exit() {
         LBEntrance.close(mContext);
     }
@@ -56,10 +50,12 @@ public class LBApp extends Application implements HasActivityInjector, SharedPre
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerLBComponent.builder().create(this).inject(this);
+        androidInjector = DaggerLBComponent.builder().create(this);
+        androidInjector.inject(this);
         mContext = getApplicationContext();
         loadSettings();
-        floatingView = new FloatingView(LBApp.getContext());
+        Common.init(this);
+        floatingView = new FloatingView(this);
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override
@@ -115,7 +111,8 @@ public class LBApp extends Application implements HasActivityInjector, SharedPre
         return activityInjector;
     }
 
-    public static Context getContext() {
+    @Override
+    public Context getContext() {
         return mContext;
     }
 
@@ -174,5 +171,10 @@ public class LBApp extends Application implements HasActivityInjector, SharedPre
                 onSettingChangeListener.onSettingChange(settingKey);
             }
         }
+    }
+
+    @Override
+    public void inject(Object object) {
+        androidInjector.inject(object);
     }
 }

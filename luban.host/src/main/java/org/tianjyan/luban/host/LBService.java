@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import org.tianjyan.luban.host.activity.MainActivity;
-import org.tianjyan.luban.host.utils.Utils;
+import org.tianjyan.luban.infrastructure.common.utils.Utils;
 
 public class LBService extends Service {
     private final IBinder binder = new LBBinder();
