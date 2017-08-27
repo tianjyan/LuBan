@@ -12,7 +12,6 @@ import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
-import org.tianjyan.luban.infrastructure.common.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
 import org.tianjyan.luban.infrastructure.common.event.SetOutParaEvent;
 import org.tianjyan.luban.plugin.op.R;
@@ -86,10 +85,6 @@ public class UIOutParaBridge {
                         notifyItemChanged(position);
                         EventBus.getDefault().post(
                                 new OutParaHistoryUpdateEvent(val, value));
-                        if (val.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
-                            EventBus.getDefault().post(
-                                    new FloatingOutParaValueUpdateEvent(val, value));
-                        }
                     }
                 });
     }

@@ -4,6 +4,7 @@ import android.os.IBinder;
 
 import org.tianjyan.luban.host.activity.MainActivity;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
+import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
@@ -38,7 +39,8 @@ abstract class LBAppModule {
     public static IBinder provideBinder(ILBApp app, @Named(AliasName.CLIENT_MANAGER) IClientManager clientManager,
                                         @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin,
                                         @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin,
-                                        @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin) {
-        return new LBBinder(app, clientManager, outPlugin, inPlugin, logPlugin);
+                                        @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin,
+                                        @Named(AliasName.FLOATING_PLUGIN)IFloatingPlugin floatingPlugin) {
+        return new LBBinder(app, clientManager, outPlugin, inPlugin, logPlugin, floatingPlugin);
     }
 }

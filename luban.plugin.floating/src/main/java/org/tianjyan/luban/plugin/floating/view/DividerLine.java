@@ -1,4 +1,4 @@
-package org.tianjyan.luban.host.view;
+package org.tianjyan.luban.plugin.floating.view;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

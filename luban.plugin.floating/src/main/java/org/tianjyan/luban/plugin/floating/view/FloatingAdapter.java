@@ -1,4 +1,4 @@
-package org.tianjyan.luban.host.view;
+package org.tianjyan.luban.plugin.floating.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.host.R;
+import org.tianjyan.luban.plugin.floating.R;
 
 import java.util.List;
 
 public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemViewHolder> {
-    private final String Floating_Area_Title;
-    private final String Normal_Area_Title;
-    static final int Type_Title = 0;
-    static final int Type_Item = 1;
     protected List<OutPara> list;
     protected Context context;
     protected LayoutInflater inflate;
@@ -25,8 +21,6 @@ public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemVi
         this.context = context;
         this.list = list;
         this.inflate = LayoutInflater.from(context);
-        Floating_Area_Title = context.getString(org.tianjyan.luban.plugin.op.R.string.para_floating_title);
-        Normal_Area_Title = context.getString(org.tianjyan.luban.plugin.op.R.string.para_normal_title);
 
     }
 
@@ -45,19 +39,6 @@ public class FloatingAdapter extends RecyclerView.Adapter<FloatingAdapter.ItemVi
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        int type;
-        OutPara outPara = list.get(position);
-        if (outPara.getKey() == Floating_Area_Title
-                || outPara.getKey() == Normal_Area_Title) {
-            type = Type_Title;
-        } else {
-            type = Type_Item;
-        }
-        return type;
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {

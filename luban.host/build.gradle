@@ -50,9 +50,11 @@ dependencies {
     compile project(':luban.aidl')
     compile project(':luban.infrastructure.abs')
     compile project(':luban.infrastructure.common')
+    compile project(':luban.infrastructure.client')
     compile project(':luban.plugin.op')
     compile project(':luban.plugin.ip')
     compile project(':luban.plugin.log')
+    compile project(':luban.plugin.floating')
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
@@ -64,9 +66,7 @@ dependencies {
     compile "com.google.dagger:dagger:$daggerVersion"
     compile "com.google.dagger:dagger-android:$daggerVersion"
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile project(path: ':luban.infrastructure.common')
-    compile project(path: ':luban.infrastructure.common')
-    compile project(path: ':luban.infrastructure.client')
+
 }
 
 task styleCheck(type: Checkstyle) {

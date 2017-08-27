@@ -1,4 +1,4 @@
-package org.tianjyan.luban.host.view;
+package org.tianjyan.luban.plugin.floating.view;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -22,15 +22,16 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
-import org.tianjyan.luban.infrastructure.common.event.ClientDisconnectEvent;
-import org.tianjyan.luban.infrastructure.common.event.FloatingOutParaValueUpdateEvent;
 import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
+import org.tianjyan.luban.plugin.floating.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class FloatingView {
     private Handler handler;
@@ -294,15 +295,21 @@ public class FloatingView {
         floatingAdapter.notifyDataSetChanged();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onFloatingOutParaValueUpdate(FloatingOutParaValueUpdateEvent event) {
-        floatingAdapter.notifyDataSetChanged();
+    public void outParaValueUpdate(OutPara outPara, String value) {
+        Observable.just(outPara)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(val -> {
+                    floatingAdapter.notifyDataSetChanged();
+                });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onClientDisconnect(ClientDisconnectEvent event) {
-        floatingParas.removeIf(outPara -> outPara.getClient().equals(event.getPkgName()));
-        floatingAdapter.notifyDataSetChanged();
+    public void clientDisconnect(String pkgName) {
+        Observable.just(pkgName)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(val -> {
+                    floatingParas.removeIf(outPara -> outPara.getClient().equals(pkgName));
+                    floatingAdapter.notifyDataSetChanged();
+                });
     }
 
     private boolean permissionAllowed() {

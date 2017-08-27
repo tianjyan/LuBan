@@ -2,18 +2,18 @@ package org.tianjyan.luban.host;
 
 import android.os.RemoteException;
 
-import org.greenrobot.eventbus.EventBus;
+import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.aidl.IService;
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
+import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.common.event.ClientDisconnectEvent;
 
 public class LBBinder extends IService.Stub  {
     private final ILBApp app;
@@ -21,16 +21,19 @@ public class LBBinder extends IService.Stub  {
     private final IOutParaPlugin outParaPlugin;
     private final IInParaPlugin inParaPlugin;
     private final ILogPlugin logPlugin;
+    private final IFloatingPlugin floatingPlugin;
 
     public LBBinder(ILBApp app, IClientManager clientManager,
                     IOutParaPlugin outParaPlugin,
                     IInParaPlugin inParaPlugin,
-                    ILogPlugin logPlugin) {
+                    ILogPlugin logPlugin,
+                    IFloatingPlugin floatingPlugin) {
         this.app = app;
         this.clientManager = clientManager;
         this.outParaPlugin = outParaPlugin;
         this.inParaPlugin = inParaPlugin;
         this.logPlugin = logPlugin;
+        this.floatingPlugin = floatingPlugin;
     }
 
     @Override
@@ -67,8 +70,9 @@ public class LBBinder extends IService.Stub  {
             if (client != null) {
                 client.clear();
                 clientManager.removeClient(getCallingPid());
-                EventBus.getDefault().post(new ClientDisconnectEvent(client.getPackageName()));
                 outParaPlugin.clientDisconnect(pkgName);
+                inParaPlugin.clientDisconnect(pkgName);
+                floatingPlugin.clientDisconnect(pkgName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,5 +134,8 @@ public class LBBinder extends IService.Stub  {
         OutPara outPara = client.getOutPara(key);
         if (outPara == null) return;
         outParaPlugin.setOutPara(outPara, value);
+        if (outPara.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
+            floatingPlugin.outParaValueUpdate(outPara, value);
+        }
     }
 }
