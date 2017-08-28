@@ -19,6 +19,40 @@ allprojects {
     }
 }
 
+ext {
+    def daggerVersion = '2.11'
+    def butterknifeVersion = '8.7.0'
+    def eventbusVersion = '3.0.0'
+
+    libs = [
+            aidl: project(':luban.aidl'),
+            abs: project(':luban.infrastructure.abs'),
+            client: project(':luban.infrastructure.client'),
+            common: project(':luban.infrastructure.common'),
+            floating: project(':luban.plugin.floating'),
+            ip: project(':luban.plugin.ip'),
+            log: project(':luban.plugin.log'),
+            op: project(':luban.plugin.op'),
+
+            inject: 'javax.inject:javax.inject:1',
+            recyclerview:'com.android.support:recyclerview-v7:25.3.1',
+            appcompat: 'com.android.support:appcompat-v7:25.3.1',
+            supportV4: 'com.android.support:support-v4:25.3.1',
+
+
+            dagger: "com.google.dagger:dagger:$daggerVersion",
+            daggerandroid: "com.google.dagger:dagger-android:$daggerVersion",
+            daggercompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
+            daggerprocessor: "com.google.dagger:dagger-android-processor:$daggerVersion",
+            rxjava: 'io.reactivex.rxjava2:rxjava:2.1.0',
+            rxandroid: 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            butterknife: "com.jakewharton:butterknife:$butterknifeVersion",
+            butterknifecompiler: "com.jakewharton:butterknife-compiler:$butterknifeVersion",
+            eventbus: "org.greenrobot:eventbus:$eventbusVersion",
+    ]
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
