@@ -27,6 +27,11 @@ android {
 dependencies {
     compile libs.aidl
     compile libs.inject
+
+    compile libs.appcompat
+
+    compile libs.dagger
+    compile libs.daggerandroid
 }
 
 task styleCheck(type: Checkstyle) {

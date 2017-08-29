@@ -1,8 +1,5 @@
 package org.tianjyan.luban.plugin.ip.activity;
 
-
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.tianjyan.luban.infrastructure.abs.AbsFragment;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.ip.R2;
 import org.tianjyan.luban.plugin.ip.R;
@@ -21,9 +19,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
-public class InParaFragment extends Fragment {
+public class InParaFragment extends AbsFragment {
     @Inject @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge;
     @BindView(R2.id.para_rv) RecyclerView recyclerView;
 
@@ -36,11 +33,5 @@ public class InParaFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return rootView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        AndroidInjection.inject(this);
-        super.onAttach(activity);
     }
 }

@@ -1,7 +1,5 @@
 package org.tianjyan.luban.plugin.log.activity;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import org.tianjyan.luban.aidl.Config;
+import org.tianjyan.luban.infrastructure.abs.AbsFragment;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.log.R;
 import org.tianjyan.luban.plugin.log.R2;
@@ -25,9 +24,8 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.AndroidInjection;
 
-public class LogFragment extends Fragment implements TextWatcher, View.OnClickListener {
+public class LogFragment extends AbsFragment implements TextWatcher, View.OnClickListener {
     @Inject @Named(AliasName.LOG_BRIDGE) UILogBridge uiLogBridge;
     @BindView(R2.id.log_rv) RecyclerView recyclerView;
     @BindView(R2.id.filter_rv) RecyclerView filterRecyclerView;
@@ -55,12 +53,6 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
         filterTagTV.setText(Config.TAG);
         levelAdapter = new LogFilterAdapter(getActivity(), uiLogBridge.getLevels(), this);
         return rootView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        AndroidInjection.inject(this);
-        super.onAttach(activity);
     }
 
     @OnClick(R2.id.action_level)
