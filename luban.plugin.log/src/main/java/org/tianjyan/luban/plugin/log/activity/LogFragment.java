@@ -1,7 +1,7 @@
 package org.tianjyan.luban.plugin.log.activity;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,9 +58,9 @@ public class LogFragment extends Fragment implements TextWatcher, View.OnClickLi
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity activity) {
         AndroidInjection.inject(this);
-        super.onAttach(context);
+        super.onAttach(activity);
     }
 
     @OnClick(R2.id.action_level)

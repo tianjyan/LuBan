@@ -20,11 +20,19 @@ allprojects {
 }
 
 ext {
-    def daggerVersion = '2.11'
-    def butterknifeVersion = '8.7.0'
-    def eventbusVersion = '3.0.0'
+    versions = [
+            code: 1,
+            name: '1.0',
+            minSdk: 19,
+            targetSdk: 25,
+            buildTools: '26.0.1',
+            dagger: '2.11',
+            butterknife: '8.7.0',
+            eventbus: '3.0.0'
+    ]
 
     libs = [
+            sdk: project(':luban.sdk'),
             aidl: project(':luban.aidl'),
             abs: project(':luban.infrastructure.abs'),
             client: project(':luban.infrastructure.client'),
@@ -37,21 +45,20 @@ ext {
             inject: 'javax.inject:javax.inject:1',
             recyclerview:'com.android.support:recyclerview-v7:25.3.1',
             appcompat: 'com.android.support:appcompat-v7:25.3.1',
-            supportV4: 'com.android.support:support-v4:25.3.1',
+            supportv4: 'com.android.support:support-v4:25.3.1',
 
+            daggercompiler: "com.google.dagger:dagger-compiler:$versions.dagger",
+            daggerprocessor: "com.google.dagger:dagger-android-processor:$versions.dagger",
+            butterknifecompiler: "com.jakewharton:butterknife-compiler:$versions.butterknife",
 
-            dagger: "com.google.dagger:dagger:$daggerVersion",
-            daggerandroid: "com.google.dagger:dagger-android:$daggerVersion",
-            daggercompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
-            daggerprocessor: "com.google.dagger:dagger-android-processor:$daggerVersion",
+            dagger: "com.google.dagger:dagger:$versions.dagger",
+            daggerandroid: "com.google.dagger:dagger-android:$versions.dagger",
             rxjava: 'io.reactivex.rxjava2:rxjava:2.1.0',
             rxandroid: 'io.reactivex.rxjava2:rxandroid:2.0.1',
-            butterknife: "com.jakewharton:butterknife:$butterknifeVersion",
-            butterknifecompiler: "com.jakewharton:butterknife-compiler:$butterknifeVersion",
-            eventbus: "org.greenrobot:eventbus:$eventbusVersion",
+            butterknife: "com.jakewharton:butterknife:$versions.butterknife",
+            eventbus: "org.greenrobot:eventbus:$versions.eventbus",
     ]
 }
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

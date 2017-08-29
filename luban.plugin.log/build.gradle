@@ -1,17 +1,17 @@
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'checkstyle'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
@@ -27,25 +27,24 @@ android {
 
 
 dependencies {
-    def daggerVersion = '2.11'
+    compile libs.aidl
+    compile libs.abs
+    compile libs.common
 
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
+    annotationProcessor libs.butterknifecompiler
+    annotationProcessor libs.daggercompiler
+    annotationProcessor libs.daggerprocessor
 
-    compile project(path: ':luban.aidl')
-    compile project(path: ':luban.infrastructure.common')
-    compile project(path: ':luban.infrastructure.abs')
+    compile libs.appcompat
+    compile libs.supportv4
+    compile libs.recyclerview
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile "com.google.dagger:dagger:$daggerVersion"
-    compile "com.google.dagger:dagger-android:$daggerVersion"
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.jakewharton:butterknife:8.7.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile libs.butterknife
+    compile libs.dagger
+    compile libs.daggerandroid
+    compile libs.eventbus
+    compile libs.rxjava
+    compile libs.rxandroid
 }
 
 task styleCheck(type: Checkstyle) {

@@ -1,8 +1,8 @@
 package org.tianjyan.luban.plugin.ip.activity;
 
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,8 +39,8 @@ public class InParaFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity activity) {
         AndroidInjection.inject(this);
-        super.onAttach(context);
+        super.onAttach(activity);
     }
 }
