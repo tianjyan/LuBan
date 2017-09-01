@@ -1,7 +1,7 @@
 package org.tianjyan.luban.plugin.log;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.log.activity.LogFragment;

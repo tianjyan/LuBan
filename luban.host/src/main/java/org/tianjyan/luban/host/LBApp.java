@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Looper;
 
 import org.tianjyan.luban.host.model.OnSettingChangeListener;
-import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.common.Common;

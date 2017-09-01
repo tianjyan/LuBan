@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.tianjyan.luban.infrastructure.abs.AbsFragment;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.op.R;
 import org.tianjyan.luban.plugin.op.R2;

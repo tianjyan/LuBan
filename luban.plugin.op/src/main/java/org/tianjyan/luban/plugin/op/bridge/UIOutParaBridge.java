@@ -10,7 +10,7 @@ import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
 import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
 import org.tianjyan.luban.infrastructure.common.event.SetOutParaEvent;

@@ -1,6 +1,6 @@
 package org.tianjyan.luban.plugin.floating;
 
-import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 

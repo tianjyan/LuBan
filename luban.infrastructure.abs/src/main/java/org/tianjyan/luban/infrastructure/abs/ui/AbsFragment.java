@@ -1,4 +1,4 @@
-package org.tianjyan.luban.infrastructure.abs;
+package org.tianjyan.luban.infrastructure.abs.ui;
 
 import android.app.Activity;
 import android.app.Fragment;

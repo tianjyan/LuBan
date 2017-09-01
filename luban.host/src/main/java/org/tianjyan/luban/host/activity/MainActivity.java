@@ -20,11 +20,11 @@ import android.view.View;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
-import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.IPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 
 import java.util.ArrayList;

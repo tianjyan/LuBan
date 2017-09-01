@@ -3,7 +3,7 @@ package org.tianjyan.luban.plugin.log;
 import android.app.Fragment;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.plugin.log.activity.LogFragment;
 import org.tianjyan.luban.plugin.log.manager.LogManager;
 

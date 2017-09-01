@@ -4,11 +4,11 @@ import android.os.IBinder;
 
 import org.tianjyan.luban.host.activity.MainActivity;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
-import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 

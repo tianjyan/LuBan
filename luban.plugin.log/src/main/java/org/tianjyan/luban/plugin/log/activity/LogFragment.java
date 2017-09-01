@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import org.tianjyan.luban.aidl.Config;
-import org.tianjyan.luban.infrastructure.abs.AbsFragment;
+import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
 import org.tianjyan.luban.infrastructure.common.consts.AliasName;
 import org.tianjyan.luban.plugin.log.R;
 import org.tianjyan.luban.plugin.log.R2;

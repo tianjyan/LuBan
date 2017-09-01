@@ -5,7 +5,7 @@ import android.app.Fragment;
 
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.plugin.op.activity.OutParaFragment;
 import org.tianjyan.luban.plugin.op.bridge.UIOutParaBridge;
 

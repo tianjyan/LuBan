@@ -9,11 +9,11 @@ import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.IFloatingPlugin;
-import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 
 public class LBBinder extends IService.Stub  {
     private final ILBApp app;

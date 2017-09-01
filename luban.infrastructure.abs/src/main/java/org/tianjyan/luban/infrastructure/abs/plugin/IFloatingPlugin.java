@@ -1,4 +1,4 @@
-package org.tianjyan.luban.infrastructure.abs;
+package org.tianjyan.luban.infrastructure.abs.plugin;
 
 import org.tianjyan.luban.aidl.OutPara;
 
