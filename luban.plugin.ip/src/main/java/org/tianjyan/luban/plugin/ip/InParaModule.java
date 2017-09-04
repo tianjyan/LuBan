@@ -5,7 +5,7 @@ import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.consts.AliasName;
 import org.tianjyan.luban.plugin.ip.activity.InParaDetailActivity;
 import org.tianjyan.luban.plugin.ip.activity.InParaFragment;
 import org.tianjyan.luban.plugin.ip.bridge.UIInParaBridge;

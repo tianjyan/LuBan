@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.consts.AliasName;
 import org.tianjyan.luban.plugin.ip.R2;
 import org.tianjyan.luban.plugin.ip.R;
 import org.tianjyan.luban.plugin.ip.adapter.InParaDataAdapter;

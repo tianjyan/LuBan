@@ -3,7 +3,7 @@ package org.tianjyan.luban.infrastructure.client;
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.consts.AliasName;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

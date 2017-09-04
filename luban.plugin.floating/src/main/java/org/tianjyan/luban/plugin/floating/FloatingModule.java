@@ -2,7 +2,7 @@ package org.tianjyan.luban.plugin.floating;
 
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.consts.AliasName;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

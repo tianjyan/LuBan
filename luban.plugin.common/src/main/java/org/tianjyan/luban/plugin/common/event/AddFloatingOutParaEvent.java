@@ -1,4 +1,4 @@
-package org.tianjyan.luban.infrastructure.common.event;
+package org.tianjyan.luban.plugin.common.event;
 
 import org.tianjyan.luban.aidl.OutPara;
 

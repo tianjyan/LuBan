@@ -5,7 +5,7 @@ import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.consts.AliasName;
 import org.tianjyan.luban.plugin.op.activity.OutParaDetailActivity;
 import org.tianjyan.luban.plugin.op.activity.OutParaFragment;
 import org.tianjyan.luban.plugin.op.bridge.UIOutParaBridge;

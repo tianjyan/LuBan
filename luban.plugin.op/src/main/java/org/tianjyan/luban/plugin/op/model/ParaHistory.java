@@ -1,6 +1,6 @@
 package org.tianjyan.luban.plugin.op.model;
 
-import org.tianjyan.luban.infrastructure.common.utils.Utils;
+import org.tianjyan.luban.plugin.common.utils.Utils;
 
 public class ParaHistory {
     private long time;

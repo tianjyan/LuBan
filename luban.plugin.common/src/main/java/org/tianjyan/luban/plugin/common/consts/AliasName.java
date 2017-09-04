@@ -1,6 +1,7 @@
-package org.tianjyan.luban.infrastructure.common.consts;
+package org.tianjyan.luban.plugin.common.consts;
 
 public class AliasName {
+    public static final String COMMON = "COMMON";
     public static final String OUT_PARA_PLUGIN = "OutParaPlugin";
     public static final String IN_PARA_PLUGIN = "InParaPlugin";
     public static final String FLOATING_PLUGIN = "FloatingPlugin";

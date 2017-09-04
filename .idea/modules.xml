@@ -8,7 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/luban.host/luban.host.iml" filepath="$PROJECT_DIR$/luban.host/luban.host.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" filepath="$PROJECT_DIR$/luban.infrastructure.abs/luban.infrastructure.abs.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.client/luban.infrastructure.client.iml" filepath="$PROJECT_DIR$/luban.infrastructure.client/luban.infrastructure.client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/luban.infrastructure.common/luban.infrastructure.common.iml" filepath="$PROJECT_DIR$/luban.infrastructure.common/luban.infrastructure.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.plugin.common/luban.plugin.common.iml" filepath="$PROJECT_DIR$/luban.plugin.common/luban.plugin.common.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.floating/luban.plugin.floating.iml" filepath="$PROJECT_DIR$/luban.plugin.floating/luban.plugin.floating.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" filepath="$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.log/luban.plugin.log.iml" filepath="$PROJECT_DIR$/luban.plugin.log/luban.plugin.log.iml" />

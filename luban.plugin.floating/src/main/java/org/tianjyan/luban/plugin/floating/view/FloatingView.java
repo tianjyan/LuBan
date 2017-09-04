@@ -22,8 +22,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.tianjyan.luban.aidl.OutPara;
-import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
-import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
+import org.tianjyan.luban.plugin.common.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.plugin.common.event.RemoveFloatingOutParaEvent;
 import org.tianjyan.luban.plugin.floating.R;
 
 import java.util.ArrayList;
