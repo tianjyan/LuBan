@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 
+import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
+
 import org.tianjyan.luban.host.model.OnSettingChangeListener;
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
@@ -57,6 +60,15 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
     public void onCreate() {
         super.onCreate();
         DaggerLBComponent.builder().create(this).inject(this);
+        Stetho.initializeWithDefaults(this);
+        if (BuildConfig.ENABLE_LEAK_CANARY) {
+            if (LeakCanary.isInAnalyzerProcess(this)) {
+                // This process is dedicated to LeakCanary for heap analysis.
+                // You should not init your app in this process.
+                return;
+            }
+            LeakCanary.install(this);
+        }
         mContext = getApplicationContext();
         loadSettings();
         Utils.init(this);

@@ -38,6 +38,11 @@ android {
         }
     }
     buildTypes {
+        debugMemoryLeak {
+            initWith debug
+            buildConfigField "boolean", "ENABLE_LEAK_CANARY", "true"
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -69,6 +74,11 @@ dependencies {
     compile libs.dagger
     compile libs.daggerandroid
     compile libs.eventbus
+
+    compile libs.stetho
+    testCompile libs.leakcanarytest
+    debugCompile libs.leakcanarydebug
+    debugMemoryLeakCompile libs.leakcanarydebugMemoryLeak
 }
 
 task styleCheck(type: Checkstyle) {
