@@ -36,6 +36,7 @@ ext {
             aidl: project(':luban.aidl'),
             abs: project(':luban.infrastructure.abs'),
             client: project(':luban.infrastructure.client'),
+            crash: project(':luban.infrastructure.crash'),
             common: project(':luban.plugin.common'),
             floating: project(':luban.plugin.floating'),
             ip: project(':luban.plugin.ip'),
@@ -46,6 +47,7 @@ ext {
             recyclerview:'com.android.support:recyclerview-v7:25.3.1',
             appcompat: 'com.android.support:appcompat-v7:25.3.1',
             supportv4: 'com.android.support:support-v4:25.3.1',
+            annotations: 'com.android.support:support-annotations:25.3.1',
 
             daggercompiler: "com.google.dagger:dagger-compiler:$versions.dagger",
             daggerprocessor: "com.google.dagger:dagger-android-processor:$versions.dagger",

@@ -12,6 +12,7 @@ import org.tianjyan.luban.host.model.OnSettingChangeListener;
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
+import org.tianjyan.luban.infrastructure.crash.CrashHandler;
 import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.common.Utils;
 
@@ -59,6 +60,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
         mContext = getApplicationContext();
         loadSettings();
         Utils.init(this);
+        CrashHandler.init(Utils.getCacheDir());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override
@@ -106,7 +108,6 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
 
             }
         });
-        //TODO: Crash组件
     }
 
     @Override

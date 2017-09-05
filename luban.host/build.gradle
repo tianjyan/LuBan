@@ -49,8 +49,9 @@ dependencies {
     compile libs.aidl
     compile libs.abs
     compile libs.client
-    compile libs.common
+    compile libs.crash
 
+    compile libs.common
     compile libs.floating
     compile libs.ip
     compile libs.log
