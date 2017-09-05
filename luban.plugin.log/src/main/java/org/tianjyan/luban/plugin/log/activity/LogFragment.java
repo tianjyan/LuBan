@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.log.R;
 import org.tianjyan.luban.plugin.log.R2;
 import org.tianjyan.luban.plugin.log.adapter.LogFilterAdapter;

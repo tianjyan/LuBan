@@ -3,7 +3,7 @@ package org.tianjyan.luban.plugin.log.manager;
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
-import org.tianjyan.luban.plugin.common.utils.Utils;
+import org.tianjyan.luban.plugin.common.Utils;
 import org.tianjyan.luban.plugin.log.bridge.UILogBridge;
 import org.tianjyan.luban.plugin.log.model.LogEntry;
 

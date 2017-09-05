@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.op.R;
 import org.tianjyan.luban.plugin.op.R2;
 import org.tianjyan.luban.plugin.op.adapter.OutParaDataAdapter;

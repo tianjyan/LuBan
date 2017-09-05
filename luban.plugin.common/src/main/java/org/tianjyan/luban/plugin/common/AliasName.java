@@ -1,4 +1,4 @@
-package org.tianjyan.luban.plugin.common.consts;
+package org.tianjyan.luban.plugin.common;
 
 public class AliasName {
     public static final String COMMON = "COMMON";

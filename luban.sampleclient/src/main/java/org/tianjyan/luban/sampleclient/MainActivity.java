@@ -41,31 +41,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id) {
-            case R.id.connectBtn:
-                LB.connect(getApplicationContext(), new AbsLBParaLoader() {
-                    @Override
-                    public void loadInParas(InParaManager im) {
-                        im.register("Value1", "Default", "abc");
-                        im.register("Value2", "Default2", "bcd");
-                    }
+        if (id == R.id.connectBtn) {
+            LB.connect(getApplicationContext(), new AbsLBParaLoader() {
+                @Override
+                public void loadInParas(InParaManager im) {
+                    im.register("Value1", "Default", "abc");
+                    im.register("Value2", "Default2", "bcd");
+                }
 
-                    @Override
-                    public void loadOutParas(OutParaManager om) {
-                        om.register("Test");
-                        om.register("Test2");
-                        om.register("Test3");
-                    }
-                });
-                break;
-            case R.id.disconnectBtn:
-                LB.disconnect();
-                break;
-            case R.id.transportBtn:
-                LB.setOutPara("Test", "123");
-                break;
-            default:
-                break;
+                @Override
+                public void loadOutParas(OutParaManager om) {
+                    om.register("Test");
+                    om.register("Test2");
+                    om.register("Test3");
+                }
+            });
+        } else if (id == R.id.disconnectBtn) {
+            LB.disconnect();
+        } else if (id == R.id.transportBtn) {
+            LB.setOutPara("Test", "123");
         }
     }
 }

@@ -25,7 +25,7 @@ import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 
 import java.util.ArrayList;
 import java.util.HashMap;

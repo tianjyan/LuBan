@@ -1,6 +1,5 @@
 package org.tianjyan.luban.plugin.common;
 
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,25 +14,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Common {
+public class Utils {
     private static final Format DateTimeFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
     private static final Format DateTimeFormat2 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
     public static final String FILE_SEP = System.getProperty("file.separator");
     public static final String LINE_SEP = System.getProperty("line.separator");
+    private static ILBApp context;
 
-    private ILBApp app;
-
-    public Common(ILBApp app) {
-        this.app = app;
+    public static void init(ILBApp app) {
+        if (context == null) {
+            context = app;
+        }
     }
 
-    public String getString(int resId) {
-        return app.getContext().getString(resId);
-    }
-
-    public Notification genNotification(Context c, int iconResId, String titleText,
-                                               String contentText, Class<?> cls, boolean ongoing,
-                                               boolean autoCancel, int notify_way) {
+    public static Notification genNotification(Context c, int iconResId, String titleText,
+                                        String contentText, Class<?> cls, boolean ongoing,
+                                        boolean autoCancel, int notify_way) {
 
         Intent intent = null;
         if (cls != null) intent = new Intent(c, cls);
@@ -55,33 +51,37 @@ public class Common {
         return notification;
     }
 
-    public boolean isNullOrEmpty(final String value) {
+    public static boolean isNullOrEmpty(final String value) {
         if (value == null || value.isEmpty()) {
             return true;
         }
         return false;
     }
 
-    public File getCacheDir() {
-        File cacheDir;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && app.getContext().getExternalCacheDir() != null)
-            cacheDir = app.getContext().getExternalCacheDir();
-        else {
-            cacheDir = app.getContext().getCacheDir();
-        }
-        return cacheDir;
-    }
-
-    public String getDisplayTime() {
+    public static String getDisplayTime() {
         return DateTimeFormat.format(new Date(System.currentTimeMillis()));
     }
 
-    public String getDisplayTime(long time) {
+    public static String getDisplayTime(long time) {
         return DateTimeFormat.format(new Date(time));
     }
 
-    public String getFileTime() {
+    public static String getFileTime() {
         return DateTimeFormat2.format(new Date(System.currentTimeMillis()));
+    }
+
+    public static String getString(int resId) {
+        return context.getContext().getString(resId);
+    }
+
+    public static File getCacheDir()  {
+        File cacheDir;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                && context.getContext().getExternalCacheDir() != null)
+            cacheDir = context.getContext().getExternalCacheDir();
+        else {
+            cacheDir = context.getContext().getCacheDir();
+        }
+        return cacheDir;
     }
 }

@@ -10,7 +10,7 @@ import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -36,11 +36,11 @@ abstract class LBAppModule {
 
     @Provides
     @Singleton
-    public static IBinder provideBinder(ILBApp app, @Named(AliasName.CLIENT_MANAGER) IClientManager clientManager,
+    public static IBinder provideBinder(@Named(AliasName.CLIENT_MANAGER) IClientManager clientManager,
                                         @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin,
                                         @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin,
                                         @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin,
                                         @Named(AliasName.FLOATING_PLUGIN)IFloatingPlugin floatingPlugin) {
-        return new LBBinder(app, clientManager, outPlugin, inPlugin, logPlugin, floatingPlugin);
+        return new LBBinder(clientManager, outPlugin, inPlugin, logPlugin, floatingPlugin);
     }
 }

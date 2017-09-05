@@ -14,21 +14,20 @@ import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.plugin.common.Utils;
 
 public class LBBinder extends IService.Stub  {
-    private final ILBApp app;
     private final IClientManager clientManager;
     private final IOutParaPlugin outParaPlugin;
     private final IInParaPlugin inParaPlugin;
     private final ILogPlugin logPlugin;
     private final IFloatingPlugin floatingPlugin;
 
-    public LBBinder(ILBApp app, IClientManager clientManager,
+    public LBBinder(IClientManager clientManager,
                     IOutParaPlugin outParaPlugin,
                     IInParaPlugin inParaPlugin,
                     ILogPlugin logPlugin,
                     IFloatingPlugin floatingPlugin) {
-        this.app = app;
         this.clientManager = clientManager;
         this.outParaPlugin = outParaPlugin;
         this.inParaPlugin = inParaPlugin;
@@ -106,8 +105,8 @@ public class LBBinder extends IService.Stub  {
                 return;
             }
 
-            if (outPara.getKey() == app.getContext().getString(R.string.para_floating_title) ||
-                    outPara.getKey() == app.getContext().getString(R.string.para_normal_title)) {
+            if (outPara.getKey() == Utils.getString(R.string.para_floating_title) ||
+                    outPara.getKey() == Utils.getString(R.string.para_normal_title)) {
                 return;
             }
 

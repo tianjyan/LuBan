@@ -7,5 +7,4 @@ import org.tianjyan.luban.infrastructure.abs.ILBApp;
 public interface IPlugin {
     String getPluginName();
     Fragment getPluginFragment();
-    ILBApp getApp();
 }

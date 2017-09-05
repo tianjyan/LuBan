@@ -12,8 +12,8 @@ import org.tianjyan.luban.host.model.OnSettingChangeListener;
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.Common;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
+import org.tianjyan.luban.plugin.common.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +58,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
         DaggerLBComponent.builder().create(this).inject(this);
         mContext = getApplicationContext();
         loadSettings();
-        Common.init(this);
+        Utils.init(this);
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override

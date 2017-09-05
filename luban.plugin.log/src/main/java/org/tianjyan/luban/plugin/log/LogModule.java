@@ -3,7 +3,7 @@ package org.tianjyan.luban.plugin.log;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.log.activity.LogFragment;
 import org.tianjyan.luban.plugin.log.bridge.UILogBridge;
 import org.tianjyan.luban.plugin.log.manager.LogManager;
@@ -21,9 +21,8 @@ public abstract class LogModule {
     @Provides
     @Named(AliasName.LOG_PLUGIN)
     @Singleton
-    public static ILogPlugin provideILogPlugin(ILBApp app,
-                                               @Named(AliasName.LOG_MANAGER) Lazy<LogManager> logManagerLazy) {
-        return new LogPlugin(app, logManagerLazy);
+    public static ILogPlugin provideILogPlugin(@Named(AliasName.LOG_MANAGER) Lazy<LogManager> logManagerLazy) {
+        return new LogPlugin(logManagerLazy);
     }
 
     @Provides

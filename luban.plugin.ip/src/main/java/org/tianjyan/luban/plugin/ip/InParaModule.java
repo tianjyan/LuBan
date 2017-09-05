@@ -5,7 +5,7 @@ import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
 import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
-import org.tianjyan.luban.plugin.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.ip.activity.InParaDetailActivity;
 import org.tianjyan.luban.plugin.ip.activity.InParaFragment;
 import org.tianjyan.luban.plugin.ip.bridge.UIInParaBridge;
@@ -22,9 +22,8 @@ public abstract class InParaModule {
     @Provides
     @Named(AliasName.IN_PARA_PLUGIN)
     @Singleton
-    public static IInParaPlugin provideInParaPlugin(ILBApp app,
-                                                    @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge) {
-        return new InParaPlugin(app, inParaBridge);
+    public static IInParaPlugin provideInParaPlugin(@Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge) {
+        return new InParaPlugin(inParaBridge);
     }
 
     @Provides
