@@ -20,23 +20,29 @@ def buildTime() {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "org.tianjyan.luban.host"
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
         buildConfigField "boolean", "ENABLE_LEAK_CANARY", "false"
         buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
         buildConfigField "String", "BUILD_TIME", '"' + buildTime() + '"'
+        // vectorDrawables.useSupportLibrary = true
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
     }
     buildTypes {
+        debugMemoryLeak {
+            initWith debug
+            buildConfigField "boolean", "ENABLE_LEAK_CANARY", "true"
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -45,28 +51,34 @@ android {
 }
 
 dependencies {
-    def daggerVersion = '2.11'
+    compile libs.aidl
+    compile libs.abs
+    compile libs.client
+    compile libs.crash
 
-    compile project(':luban.aidl')
-    compile project(':luban.infrastructure.abs')
-    compile project(':luban.infrastructure.common')
-    compile project(':luban.plugin.op')
-    compile project(':luban.plugin.ip')
-    compile project(':luban.plugin.log')
+    compile libs.common
+    compile libs.floating
+    compile libs.ip
+    compile libs.log
+    compile libs.op
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    annotationProcessor libs.butterknifecompiler
+    annotationProcessor libs.daggercompiler
+    annotationProcessor libs.daggerprocessor
 
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile libs.appcompat
+    compile libs.supportv4
+    compile libs.recyclerview
 
-    compile 'com.jakewharton:butterknife:8.7.0'
-    compile "com.google.dagger:dagger:$daggerVersion"
-    compile "com.google.dagger:dagger-android:$daggerVersion"
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile project(path: ':luban.infrastructure.common')
-    compile project(path: ':luban.infrastructure.common')
-    compile project(path: ':luban.infrastructure.client')
+    compile libs.butterknife
+    compile libs.dagger
+    compile libs.daggerandroid
+    compile libs.eventbus
+
+    compile libs.stetho
+    testCompile libs.leakcanarytest
+    debugCompile libs.leakcanarydebug
+    debugMemoryLeakCompile libs.leakcanarydebugMemoryLeak
 }
 
 task styleCheck(type: Checkstyle) {

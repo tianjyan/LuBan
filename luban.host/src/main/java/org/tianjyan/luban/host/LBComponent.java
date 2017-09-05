@@ -1,6 +1,7 @@
 package org.tianjyan.luban.host;
 
 import org.tianjyan.luban.infrastructure.client.ClientModule;
+import org.tianjyan.luban.plugin.floating.FloatingModule;
 import org.tianjyan.luban.plugin.ip.InParaModule;
 import org.tianjyan.luban.plugin.log.LogModule;
 import org.tianjyan.luban.plugin.op.OutParaModule;
@@ -16,7 +17,8 @@ import dagger.android.AndroidInjector;
         ClientModule.class,
         OutParaModule.class,
         InParaModule.class,
-        LogModule.class
+        LogModule.class,
+        FloatingModule.class
 })
 interface LBComponent extends AndroidInjector<LBApp> {
     @Component.Builder

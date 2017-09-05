@@ -1,8 +1,7 @@
 package org.tianjyan.luban.plugin.op.activity;
 
 import android.Manifest;
-import android.app.Fragment;
-import android.content.Context;
+
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.op.R;
 import org.tianjyan.luban.plugin.op.R2;
 import org.tianjyan.luban.plugin.op.adapter.OutParaDataAdapter;
@@ -28,9 +28,8 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.AndroidInjection;
 
-public class OutParaFragment extends Fragment {
+public class OutParaFragment extends AbsFragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 0;
     @BindView(R2.id.para_rv) RecyclerView recyclerView;
     @BindView(R2.id.action_delete) View delete;
@@ -55,12 +54,6 @@ public class OutParaFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         setToolState(outParaPlugin.isGathering());
         return rootView;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
     }
 
     @OnClick(R2.id.action_delete)

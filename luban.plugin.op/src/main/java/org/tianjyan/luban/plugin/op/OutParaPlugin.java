@@ -5,7 +5,8 @@ import android.app.Fragment;
 
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.plugin.common.Utils;
 import org.tianjyan.luban.plugin.op.activity.OutParaFragment;
 import org.tianjyan.luban.plugin.op.bridge.UIOutParaBridge;
 
@@ -14,18 +15,15 @@ import dagger.Lazy;
 public class OutParaPlugin implements IOutParaPlugin {
     Lazy<UIOutParaBridge> outParaBridgeLazy;
     OutParaFragment outParaFragment;
-
-    private final ILBApp app;
     private boolean isGathering;
 
-    public OutParaPlugin(ILBApp app, Lazy<UIOutParaBridge> outParaBridgeLazy) {
-        this.app = app;
+    public OutParaPlugin(Lazy<UIOutParaBridge> outParaBridgeLazy) {
         this.outParaBridgeLazy = outParaBridgeLazy;
     }
 
     @Override
     public String getPluginName() {
-        return ((Application) app).getString(R.string.function_out_para);
+        return Utils.getString(R.string.function_out_para);
     }
 
     @Override
@@ -34,10 +32,6 @@ public class OutParaPlugin implements IOutParaPlugin {
             outParaFragment = new OutParaFragment();
         }
         return outParaFragment;
-    }
-
-    public ILBApp getApp() {
-        return app;
     }
 
     @Override

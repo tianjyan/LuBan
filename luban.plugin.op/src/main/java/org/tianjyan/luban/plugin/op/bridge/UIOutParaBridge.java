@@ -10,11 +10,11 @@ import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.common.event.AddFloatingOutParaEvent;
-import org.tianjyan.luban.infrastructure.common.event.FloatingOutParaValueUpdateEvent;
-import org.tianjyan.luban.infrastructure.common.event.RemoveFloatingOutParaEvent;
-import org.tianjyan.luban.infrastructure.common.event.SetOutParaEvent;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.plugin.common.Utils;
+import org.tianjyan.luban.plugin.common.event.AddFloatingOutParaEvent;
+import org.tianjyan.luban.plugin.common.event.RemoveFloatingOutParaEvent;
+import org.tianjyan.luban.plugin.common.event.SetOutParaEvent;
 import org.tianjyan.luban.plugin.op.R;
 import org.tianjyan.luban.plugin.op.adapter.OutParaDataAdapter;
 import org.tianjyan.luban.plugin.op.event.OutParaHistoryUpdateEvent;
@@ -41,13 +41,13 @@ public class UIOutParaBridge {
     private List<OutPara> outParas = Collections.synchronizedList(new ArrayList<>());
     private UIOutParaHistoryBridge historyBridge;
 
-    public UIOutParaBridge(ILBApp app, IClientManager clientManager, Lazy<IOutParaPlugin> outParaPluginLazy) {
+    public UIOutParaBridge(IClientManager clientManager, Lazy<IOutParaPlugin> outParaPluginLazy) {
         EventBus.getDefault().register(this);
         this.clientManager = clientManager;
         this.outParaPluginLazy = outParaPluginLazy;
         this.historyBridge = UIOutParaHistoryBridge.getInstance();
-        Floating_Area_Title = app.getContext().getString(R.string.para_floating_title);
-        Normal_Area_Title = app.getContext().getString(R.string.para_normal_title);
+        Floating_Area_Title = Utils.getString(R.string.para_floating_title);
+        Normal_Area_Title = Utils.getString(R.string.para_normal_title);
         initParamList();
     }
 
@@ -86,10 +86,6 @@ public class UIOutParaBridge {
                         notifyItemChanged(position);
                         EventBus.getDefault().post(
                                 new OutParaHistoryUpdateEvent(val, value));
-                        if (val.getDisplayProperty() == AidlEntry.DISPLAY_FLOATING) {
-                            EventBus.getDefault().post(
-                                    new FloatingOutParaValueUpdateEvent(val, value));
-                        }
                     }
                 });
     }

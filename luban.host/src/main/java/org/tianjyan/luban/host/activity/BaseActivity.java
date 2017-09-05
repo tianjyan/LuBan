@@ -1,11 +1,10 @@
 package org.tianjyan.luban.host.activity;
 
-import android.support.v7.app.AppCompatActivity;
-
 import org.tianjyan.luban.host.LBApp;
+import org.tianjyan.luban.infrastructure.abs.ui.AbsActivity;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AbsActivity {
     private LBApp getApp() {
         return (LBApp) getApplication();
     }

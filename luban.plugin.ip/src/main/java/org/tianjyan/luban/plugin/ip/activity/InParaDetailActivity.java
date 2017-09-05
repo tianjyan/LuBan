@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import org.tianjyan.luban.aidl.InPara;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.ip.R2;
 import org.tianjyan.luban.plugin.ip.R;
 import org.tianjyan.luban.plugin.ip.bridge.UIInParaBridge;

@@ -6,7 +6,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.tianjyan.luban.aidl.AidlEntry;
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.event.SetOutParaEvent;
+import org.tianjyan.luban.plugin.common.event.SetOutParaEvent;
 
 import java.util.concurrent.TimeUnit;
 

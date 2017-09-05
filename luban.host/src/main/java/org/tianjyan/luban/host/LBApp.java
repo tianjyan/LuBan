@@ -8,11 +8,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 
+import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
+
 import org.tianjyan.luban.host.model.OnSettingChangeListener;
+import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
-import org.tianjyan.luban.host.view.FloatingView;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
-import org.tianjyan.luban.infrastructure.common.Common;
+import org.tianjyan.luban.infrastructure.crash.CrashHandler;
+import org.tianjyan.luban.plugin.common.AliasName;
+import org.tianjyan.luban.plugin.common.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
+import dagger.Lazy;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
@@ -32,10 +39,10 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
     private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
-    private FloatingView floatingView;
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
     @Inject DispatchingAndroidInjector<Service> serviceInjector;
+    @Inject @Named(AliasName.FLOATING_PLUGIN) Lazy<IFloatingPlugin> floatingPluginLazy;
 
     public static void setAppRunning(boolean isRunning) {
         isAppRunning = isRunning;
@@ -53,10 +60,19 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
     public void onCreate() {
         super.onCreate();
         DaggerLBComponent.builder().create(this).inject(this);
+        Stetho.initializeWithDefaults(this);
+        if (BuildConfig.ENABLE_LEAK_CANARY) {
+            if (LeakCanary.isInAnalyzerProcess(this)) {
+                // This process is dedicated to LeakCanary for heap analysis.
+                // You should not init your app in this process.
+                return;
+            }
+            LeakCanary.install(this);
+        }
         mContext = getApplicationContext();
         loadSettings();
-        Common.init(this);
-        floatingView = new FloatingView(this);
+        Utils.init(this);
+        CrashHandler.init(Utils.getCacheDir());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
             @Override
@@ -67,8 +83,8 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
             @Override
             public void onActivityStarted(Activity activity) {
                 if (sessionDepth == 0) {
-                    floatingView.hideDetail();
-                    floatingView.hideLogo();
+                    floatingPluginLazy.get().hideDetail();
+                    floatingPluginLazy.get().hideLogo();
                 }
                 sessionDepth++;
             }
@@ -90,7 +106,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
                 }
 
                 if (sessionDepth == 0) {
-                    floatingView.showLogo();
+                    floatingPluginLazy.get().showLogo();
                 }
             }
 
@@ -104,7 +120,6 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
 
             }
         });
-        //TODO: Crash组件
     }
 
     @Override

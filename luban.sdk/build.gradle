@@ -3,19 +3,18 @@ apply plugin: 'checkstyle'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
-
     }
     buildTypes {
         release {
@@ -26,8 +25,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile project(':luban.aidl')
+    compile libs.aidl
 }
 
 task styleCheck(type: Checkstyle) {

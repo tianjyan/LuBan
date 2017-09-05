@@ -20,12 +20,12 @@ import android.view.View;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
-import org.tianjyan.luban.infrastructure.abs.ILogPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
-import org.tianjyan.luban.infrastructure.abs.IInParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.IPlugin;
-import org.tianjyan.luban.infrastructure.common.consts.AliasName;
+import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
+import org.tianjyan.luban.plugin.common.AliasName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ import dagger.android.HasFragmentInjector;
 
 public class MainActivity extends BaseActivity implements OnFunctionSelected, HasFragmentInjector {
     private static boolean active = false;
-    private static int OVERLAY_PERMISSION_REQ_CODE = 1234;
+    private static int OVERLAY_PERMISSION_REQ_CODE = 0x01;
     private MainMenuFragment mainMenuFragment;
     private Map<String, Fragment> menuItems = new HashMap<>();
     private Map<String, IPlugin> pluginItems = new HashMap<>();
@@ -66,16 +66,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
         ButterKnife.bind(this);
         active = true;
 
-        menuItems.put(outPlugin.getPluginName(), null);
-        menuItems.put(inPlugin.getPluginName(), null);
-        menuItems.put(logPlugin.getPluginName(), null);
-        pluginItems.put(outPlugin.getPluginName(), outPlugin);
-        pluginItems.put(inPlugin.getPluginName(), inPlugin);
-        pluginItems.put(logPlugin.getPluginName(), logPlugin);
-        menu.add(outPlugin.getPluginName());
-        menu.add(inPlugin.getPluginName());
-        menu.add(logPlugin.getPluginName());
-
+        initPlugin(outPlugin, inPlugin, logPlugin);
         initDrawer();
         initFragment();
 
@@ -138,6 +129,14 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
 
     public static boolean isActive() {
         return active;
+    }
+
+    private void initPlugin(IPlugin... plugins) {
+        for (IPlugin plugin : plugins) {
+            menuItems.put(plugin.getPluginName(), null);
+            pluginItems.put(plugin.getPluginName(), plugin);
+            menu.add(plugin.getPluginName());
+        }
     }
 
     private void initDrawer() {
