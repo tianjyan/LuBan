@@ -64,6 +64,7 @@ ext {
             rxandroid: 'io.reactivex.rxjava2:rxandroid:2.0.1',
             butterknife: "com.jakewharton:butterknife:$versions.butterknife",
             eventbus: "org.greenrobot:eventbus:$versions.eventbus",
+            logger: "com.orhanobut:logger:2.1.1"
     ]
 }
 
