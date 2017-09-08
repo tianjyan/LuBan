@@ -58,6 +58,24 @@ public final class Utils {
         return false;
     }
 
+    public static boolean equals(CharSequence a, CharSequence b) {
+        if (a == b) return true;
+        if (a != null && b != null) {
+            int length = a.length();
+            if (length == b.length()) {
+                if (a instanceof String && b instanceof String) {
+                    return a.equals(b);
+                } else {
+                    for (int i = 0; i < length; i++) {
+                        if (a.charAt(i) != b.charAt(i)) return false;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static String getDisplayTime() {
         return DateTimeFormat.format(new Date(System.currentTimeMillis()));
     }

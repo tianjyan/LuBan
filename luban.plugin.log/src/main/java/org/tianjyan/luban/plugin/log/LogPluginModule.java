@@ -17,7 +17,7 @@ import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 @Module
-public abstract class LogModule {
+public abstract class LogPluginModule {
     @Provides
     @Named(AliasName.LOG_PLUGIN)
     @Singleton

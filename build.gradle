@@ -37,6 +37,7 @@ ext {
             abs: project(':luban.infrastructure.abs'),
             client: project(':luban.infrastructure.client'),
             crash: project(':luban.infrastructure.crash'),
+            logging: project(':luban.infrastructure.log'),
             common: project(':luban.plugin.common'),
             floating: project(':luban.plugin.floating'),
             ip: project(':luban.plugin.ip'),
