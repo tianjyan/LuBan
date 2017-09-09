@@ -43,6 +43,7 @@ ext {
             ip: project(':luban.plugin.ip'),
             log: project(':luban.plugin.log'),
             op: project(':luban.plugin.op'),
+            logcat: project(':luban.plugin.logcat'),
 
             inject: 'javax.inject:javax.inject:1',
             recyclerview:'com.android.support:recyclerview-v7:25.3.1',

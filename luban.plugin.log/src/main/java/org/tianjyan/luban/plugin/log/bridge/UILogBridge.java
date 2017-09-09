@@ -44,7 +44,10 @@ public class UILogBridge {
                         }
                     }
                     lock.writeLock().unlock();
-                    logDataAdapter.onNewEntries(val);
+                    if (logDataAdapter != null) {
+                        logDataAdapter.onNewEntries(val);
+                    }
+
                 });
     }
 

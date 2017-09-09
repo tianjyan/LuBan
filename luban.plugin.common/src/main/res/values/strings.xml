@@ -18,6 +18,7 @@
     <string name="function_out_para">出参监视</string>
     <string name="function_in_para">入参设置</string>
     <string name="function_log">日志查看</string>
+    <string name="function_crash">崩溃查看</string>
     <string name="function_performance">耗时统计</string>
 
     <string name="main_thread_error">方法只能在主线程调用!</string>

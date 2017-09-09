@@ -10,6 +10,7 @@ public class AliasName {
     public static final String IN_PARA_BRIDGE = "InParaBridge";
     public static final String LOG_MANAGER = "LogManager";
     public static final String LOG_BRIDGE = "LogBridge";
+    public static final String LOGCAT_PLUGIN = "LogcatPlugin";
 
     // Infrastructure
     public static final String CLIENT_MANAGER = "DefaultClientManager";

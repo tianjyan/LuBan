@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.floating/luban.plugin.floating.iml" filepath="$PROJECT_DIR$/luban.plugin.floating/luban.plugin.floating.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" filepath="$PROJECT_DIR$/luban.plugin.ip/luban.plugin.ip.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.log/luban.plugin.log.iml" filepath="$PROJECT_DIR$/luban.plugin.log/luban.plugin.log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luban.plugin.logcat/luban.plugin.logcat.iml" filepath="$PROJECT_DIR$/luban.plugin.logcat/luban.plugin.logcat.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.plugin.op/luban.plugin.op.iml" filepath="$PROJECT_DIR$/luban.plugin.op/luban.plugin.op.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" filepath="$PROJECT_DIR$/luban.sampleclient/luban.sampleclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/luban.sdk/luban.sdk.iml" filepath="$PROJECT_DIR$/luban.sdk/luban.sdk.iml" />

@@ -62,6 +62,7 @@ dependencies {
     compile libs.ip
     compile libs.log
     compile libs.op
+    compile libs.logcat
 
     annotationProcessor libs.butterknifecompiler
     annotationProcessor libs.daggercompiler

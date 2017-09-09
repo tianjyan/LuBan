@@ -1,6 +1,7 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'checkstyle'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion versions.targetSdk
@@ -11,7 +12,6 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.code
         versionName versions.name
-        vectorDrawables.useSupportLibrary = true
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
@@ -25,9 +25,26 @@ android {
     }
 }
 
+
 dependencies {
-    compile libs.sdk
+    compile libs.aidl
+    compile libs.abs
+    compile libs.common
+
+    annotationProcessor libs.butterknifecompiler
+    annotationProcessor libs.daggercompiler
+    annotationProcessor libs.daggerprocessor
+
     compile libs.appcompat
+    compile libs.supportv4
+    compile libs.recyclerview
+
+    compile libs.butterknife
+    compile libs.dagger
+    compile libs.daggerandroid
+    compile libs.eventbus
+    compile libs.rxjava
+    compile libs.rxandroid
 }
 
 task styleCheck(type: Checkstyle) {
