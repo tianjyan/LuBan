@@ -1,10 +1,15 @@
 package org.tianjyan.luban.plugin.common;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Environment;
+import android.os.Vibrator;
+import android.support.v4.app.NotificationCompat;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 
@@ -49,6 +54,17 @@ public final class Utils {
         Notification notification = builder.build();
 
         return notification;
+    }
+
+    public static void showExceptionNotification(String exceptionContent) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context.getContext());
+        builder.setContentTitle("Exception").setContentText(exceptionContent).setSmallIcon(R.drawable.ic_launcher);
+        Notification notification = builder.build();
+
+        NotificationManager notificationManager = (NotificationManager) context.getContext().
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify("Luban", 1, notification);
+        vibrate();
     }
 
     public static boolean isNullOrEmpty(final String value) {
@@ -101,5 +117,10 @@ public final class Utils {
             cacheDir = context.getContext().getCacheDir();
         }
         return cacheDir;
+    }
+
+    public static void vibrate() {
+        Vibrator v=(Vibrator) context.getContext().getSystemService(context.getContext().VIBRATOR_SERVICE);
+        v.vibrate(100);
     }
 }

@@ -110,6 +110,7 @@ public class FCService extends Service {
                 break;
             }
         }
+        Utils.showExceptionNotification(sb.toString());
     }
 
     private void gatherNativeException(String line, BufferedReader reader) {

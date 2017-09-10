@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.connectBtn).setOnClickListener(this);
         findViewById(R.id.disconnectBtn).setOnClickListener(this);
-        findViewById(R.id.transportBtn).setOnClickListener(this);
+        findViewById(R.id.crashBtn).setOnClickListener(this);
         refreshHandler.post(refreshRunnable);
     }
 
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         } else if (id == R.id.disconnectBtn) {
             LB.disconnect();
-        } else if (id == R.id.transportBtn) {
-            LB.setOutPara("Test", "123");
+        } else if (id == R.id.crashBtn) {
+            int i = 0/0;
         }
     }
 }

@@ -18,9 +18,9 @@
         android:text="@string/disconnect"/>
 
     <Button
-        android:id="@+id/transportBtn"
+        android:id="@+id/crashBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/set_out"/>
+        android:text="@string/crash_test"/>
 
 </LinearLayout>
