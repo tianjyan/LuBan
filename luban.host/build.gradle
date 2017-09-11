@@ -55,7 +55,7 @@ dependencies {
     compile libs.abs
     compile libs.client
     compile libs.crash
-    //compile libs.loging
+    compile libs.loging
 
     compile libs.common
     compile libs.floating

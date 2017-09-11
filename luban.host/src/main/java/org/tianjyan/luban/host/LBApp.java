@@ -43,7 +43,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
     @Inject DispatchingAndroidInjector<Service> serviceInjector;
-    //@Inject @Named(AliasName.LOG) ILog Logger;
+    @Inject @Named(AliasName.LOG) ILog Logger;
     @Inject @Named(AliasName.FLOATING_PLUGIN) Lazy<IFloatingPlugin> floatingPluginLazy;
 
     public static void setAppRunning(boolean isRunning) {
@@ -74,7 +74,7 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
         mContext = getApplicationContext();
         loadSettings();
         Utils.init(this);
-        //Logger.init(this);
+        Logger.init(this);
         CrashHandler.init(Utils.getCacheDir());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
 
