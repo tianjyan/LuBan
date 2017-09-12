@@ -2,6 +2,7 @@
     package="org.tianjyan.luban.plugin.logcat">
     <uses-permission android:name="android.permission.READ_LOGS" />
     <application>
+        <activity android:name=".activity.CrashDetailActivity" />
         <service android:name=".FCService"/>
     </application>
 </manifest>

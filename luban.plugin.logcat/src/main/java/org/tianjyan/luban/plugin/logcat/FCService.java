@@ -1,11 +1,17 @@
 package org.tianjyan.luban.plugin.logcat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 
 import org.tianjyan.luban.plugin.common.Utils;
+import org.tianjyan.luban.plugin.logcat.activity.CrashDetailActivity;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -17,6 +23,7 @@ public class FCService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
     }
 
@@ -32,6 +39,8 @@ public class FCService extends Service {
         flag = true;
         new Thread(() -> {
             Process process = null;
+            // Remember run `adb shell pm grant org.tianjyan.luban.host android.permission.READ_LOGS`
+            // to grant permission
             try {
                 process = Runtime.getRuntime().exec("logcat -v tag\n");
             } catch (IOException e) {
@@ -110,7 +119,7 @@ public class FCService extends Service {
                 break;
             }
         }
-        Utils.showExceptionNotification(sb.toString());
+        showExceptionNotification(sb.toString());
     }
 
     private void gatherNativeException(String line, BufferedReader reader) {
@@ -123,6 +132,7 @@ public class FCService extends Service {
                 break;
             }
         }
+        showExceptionNotification(sb.toString());
     }
 
     private String readLine(BufferedReader reader) {
@@ -132,5 +142,23 @@ public class FCService extends Service {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void showExceptionNotification(String exceptionContent) {
+        Intent intent = new Intent(this, CrashDetailActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setContentTitle("Exception")
+                .setSmallIcon(org.tianjyan.luban.plugin.common.R.drawable.ic_error)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(exceptionContent))
+                .setFullScreenIntent(pendingIntent, true);
+        Notification notification = builder.build();
+
+        NotificationManager notificationManager = (NotificationManager) this.
+                getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify("Luban", 1, notification);
+        Utils.vibrate();
     }
 }
