@@ -18,9 +18,15 @@
         android:text="@string/disconnect"/>
 
     <Button
-        android:id="@+id/crashBtn"
+        android:id="@+id/jvmCrashBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/crash_test"/>
+        android:text="@string/jvm_crash_test"/>
+
+    <Button
+        android:id="@+id/ndkCrashBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ndk_crash_test"/>
 
 </LinearLayout>

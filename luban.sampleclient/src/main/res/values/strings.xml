@@ -2,5 +2,6 @@
     <string name="app_name">LB Sample App</string>
     <string name="connect">连接LBService</string>
     <string name="disconnect">断开LBService</string>
-    <string name="crash_test">崩溃测试</string>
+    <string name="jvm_crash_test">崩溃测试-jvm</string>
+    <string name="ndk_crash_test">崩溃测试-ndk</string>
 </resources>

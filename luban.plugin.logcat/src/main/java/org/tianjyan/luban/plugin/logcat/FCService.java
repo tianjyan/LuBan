@@ -110,29 +110,37 @@ public class FCService extends Service {
     }
 
     private void gatherRuntimeException(String line, BufferedReader reader) {
-        StringBuffer sb = new StringBuffer(line);
+        StringBuffer sb = new StringBuffer(line.substring(18));
+        String packageName = null;
         while ((line = readLine(reader)) != null) {
             if (line.contains(("E/AndroidRuntime:"))) {
+                if (line.contains("Process: ")) {
+                    packageName = line.substring(27, line.indexOf(", PID:"));
+                }
                 sb.append("\n");
-                sb.append(line);
+                sb.append(line.substring(18));
             } else {
                 break;
             }
         }
-        showExceptionNotification(sb.toString());
+        showExceptionNotification(packageName, sb.toString());
     }
 
     private void gatherNativeException(String line, BufferedReader reader) {
-        StringBuffer sb = new StringBuffer(line);
+        StringBuffer sb = new StringBuffer(line.substring(12));
+        String packageName = null;
         while ((line = readLine(reader)) != null) {
             if (line.contains(("DEBUG   :"))) {
+                if (line.contains(">>> ") && line.contains(" <<<")) {
+                    packageName = line.substring(line.indexOf(">>> ") + 4, line.indexOf(" <<<"));
+                }
                 sb.append("\n");
-                sb.append(line);
+                sb.append(line.substring(12));
             } else {
                 break;
             }
         }
-        showExceptionNotification(sb.toString());
+        showExceptionNotification(packageName, sb.toString());
     }
 
     private String readLine(BufferedReader reader) {
@@ -144,13 +152,16 @@ public class FCService extends Service {
         }
     }
 
-    public void showExceptionNotification(String exceptionContent) {
+    public void showExceptionNotification(String packName, String exceptionContent) {
         Intent intent = new Intent(this, CrashDetailActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("packageName", packName);
+        intent.putExtra("content", exceptionContent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setContentTitle("Exception")
+        builder.setContentTitle(packName)
+                .setContentIntent(pendingIntent)
                 .setSmallIcon(org.tianjyan.luban.plugin.common.R.drawable.ic_error)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(exceptionContent))
                 .setFullScreenIntent(pendingIntent, true);
