@@ -2,7 +2,7 @@ package org.tianjyan.luban.plugin.logcat;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
-import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogcatPlugin;
 import org.tianjyan.luban.plugin.common.AliasName;
 import org.tianjyan.luban.plugin.logcat.activity.CrashDetailActivity;
 
@@ -18,7 +18,7 @@ public abstract class LogcatModule {
     @Provides
     @Named(AliasName.LOGCAT_PLUGIN)
     @Singleton
-    public static IPlugin provideIPlugin(ILBApp app) {
+    public static ILogcatPlugin provideIPlugin(ILBApp app) {
         return new LogcatPlugin(app);
     }
 

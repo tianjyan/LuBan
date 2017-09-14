@@ -3,7 +3,9 @@ package org.tianjyan.luban.host;
 import android.os.IBinder;
 
 import org.tianjyan.luban.host.activity.MainActivity;
+import org.tianjyan.luban.host.activity.MainMenuFragment;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
+import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
@@ -30,6 +32,10 @@ abstract class LBAppModule {
     @PreActivity
     @ContributesAndroidInjector
     abstract MainActivity mainActivityInjector();
+
+    @PreFragment
+    @ContributesAndroidInjector
+    abstract MainMenuFragment mainMenuFragmentInjector();
 
     @ContributesAndroidInjector
     abstract LBService serviceInjector();
