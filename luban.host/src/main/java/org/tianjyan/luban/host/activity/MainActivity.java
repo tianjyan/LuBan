@@ -23,6 +23,7 @@ import org.tianjyan.luban.host.model.OnFunctionSelected;
 import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
 import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogcatPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
 import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
 import org.tianjyan.luban.plugin.common.AliasName;
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
     @Inject @Named(AliasName.OUT_PARA_PLUGIN) IOutParaPlugin outPlugin;
     @Inject @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin;
     @Inject @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin;
+    @Inject @Named(AliasName.LOGCAT_PLUGIN) ILogcatPlugin logcatPlugin;
     @Inject DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
@@ -66,7 +68,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
         ButterKnife.bind(this);
         active = true;
 
-        initPlugin(outPlugin, inPlugin, logPlugin);
+        initPlugin(outPlugin, inPlugin, logPlugin, logcatPlugin);
         initDrawer();
         initFragment();
 

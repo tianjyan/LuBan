@@ -55,12 +55,14 @@ dependencies {
     compile libs.abs
     compile libs.client
     compile libs.crash
+    compile libs.loging
 
     compile libs.common
     compile libs.floating
     compile libs.ip
     compile libs.log
     compile libs.op
+    compile libs.logcat
 
     annotationProcessor libs.butterknifecompiler
     annotationProcessor libs.daggercompiler

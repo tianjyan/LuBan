@@ -11,6 +11,12 @@ import org.tianjyan.luban.sdk.LB;
 import org.tianjyan.luban.sdk.OutParaManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static native void stackOverFlow();
+
+    static {
+        System.loadLibrary("native-lib");
+    }
+
     public Handler refreshHandler = new Handler();
     private Runnable refreshRunnable = new Runnable() {
         @Override
@@ -34,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.connectBtn).setOnClickListener(this);
         findViewById(R.id.disconnectBtn).setOnClickListener(this);
-        findViewById(R.id.transportBtn).setOnClickListener(this);
+        findViewById(R.id.jvmCrashBtn).setOnClickListener(this);
+        findViewById(R.id.ndkCrashBtn).setOnClickListener(this);
         refreshHandler.post(refreshRunnable);
     }
 
@@ -58,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         } else if (id == R.id.disconnectBtn) {
             LB.disconnect();
-        } else if (id == R.id.transportBtn) {
-            LB.setOutPara("Test", "123");
+        } else if (id == R.id.jvmCrashBtn) {
+            int i = 0 / 0;
+        } else if (id == R.id.ndkCrashBtn) {
+            stackOverFlow();
         }
     }
 }

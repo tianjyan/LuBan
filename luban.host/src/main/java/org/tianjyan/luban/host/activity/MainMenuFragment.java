@@ -12,15 +12,25 @@ import org.tianjyan.luban.host.LBApp;
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
+import org.tianjyan.luban.infrastructure.abs.plugin.ILogcatPlugin;
+import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
+import org.tianjyan.luban.plugin.common.AliasName;
 
 import java.util.List;
 
-public class MainMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.Lazy;
+
+public class MainMenuFragment extends AbsFragment implements AdapterView.OnItemClickListener {
     View exitView;
     ListView listView;
     MainMenuFragmentAdapter adapter;
     OnFunctionSelected onFunctionSelected;
     List<String> functions;
+    @Inject
+    @Named(AliasName.LOGCAT_PLUGIN) Lazy<ILogcatPlugin> logcatPluginLazy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,7 @@ public class MainMenuFragment extends Fragment implements AdapterView.OnItemClic
         exitView = rootView.findViewById(R.id.exit_view);
         listView = (ListView) rootView.findViewById(R.id.function_lv);
         exitView.setOnClickListener(v -> {
+            logcatPluginLazy.get().stopService();
             LBApp.exit();
         });
         listView.setAdapter(adapter);

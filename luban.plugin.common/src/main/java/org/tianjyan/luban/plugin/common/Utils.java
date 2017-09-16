@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.os.Vibrator;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 
@@ -58,6 +59,24 @@ public final class Utils {
         return false;
     }
 
+    public static boolean equals(CharSequence a, CharSequence b) {
+        if (a == b) return true;
+        if (a != null && b != null) {
+            int length = a.length();
+            if (length == b.length()) {
+                if (a instanceof String && b instanceof String) {
+                    return a.equals(b);
+                } else {
+                    for (int i = 0; i < length; i++) {
+                        if (a.charAt(i) != b.charAt(i)) return false;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static String getDisplayTime() {
         return DateTimeFormat.format(new Date(System.currentTimeMillis()));
     }
@@ -83,5 +102,10 @@ public final class Utils {
             cacheDir = context.getContext().getCacheDir();
         }
         return cacheDir;
+    }
+
+    public static void vibrate() {
+        Vibrator v=(Vibrator) context.getContext().getSystemService(context.getContext().VIBRATOR_SERVICE);
+        v.vibrate(100);
     }
 }
