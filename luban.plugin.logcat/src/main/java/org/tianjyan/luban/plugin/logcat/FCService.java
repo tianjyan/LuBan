@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 
 public class FCService extends Service {
     private boolean flag;
+    private int notificationId;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -174,7 +175,7 @@ public class FCService extends Service {
 
         NotificationManager notificationManager = (NotificationManager) this.
                 getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify("Luban", 1, notification);
+        notificationManager.notify("Luban", notificationId++, notification);
         Utils.vibrate();
     }
 }
