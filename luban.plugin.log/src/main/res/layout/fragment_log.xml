@@ -74,17 +74,17 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/log_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/filter"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@+id/filter"></androidx.recyclerview.widget.RecyclerView>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filter_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/filter"
         android:background="@color/log_filter"
-        android:visibility="gone"></android.support.v7.widget.RecyclerView>
+        android:visibility="gone"></androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

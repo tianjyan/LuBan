@@ -1,13 +1,14 @@
 package org.tianjyan.luban.plugin.ip.activity;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.tianjyan.luban.aidl.InPara;
 import org.tianjyan.luban.plugin.common.AliasName;

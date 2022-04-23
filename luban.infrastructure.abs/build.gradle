@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'checkstyle'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion versions.targetSdk
@@ -25,13 +24,13 @@ android {
 }
 
 dependencies {
-    compile libs.aidl
-    compile libs.inject
+    implementation libs.aidl
+    implementation libs.inject
 
-    compile libs.appcompat
+    implementation libs.appcompat
 
-    compile libs.dagger
-    compile libs.daggerandroid
+    implementation libs.dagger
+    implementation libs.daggerandroid
 }
 
 task styleCheck(type: Checkstyle) {

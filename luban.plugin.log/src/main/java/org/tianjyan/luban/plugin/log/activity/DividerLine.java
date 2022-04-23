@@ -2,9 +2,10 @@ package org.tianjyan.luban.plugin.log.activity;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DividerLine extends RecyclerView.ItemDecoration {
     public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;

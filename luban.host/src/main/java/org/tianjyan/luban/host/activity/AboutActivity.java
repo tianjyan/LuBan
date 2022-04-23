@@ -3,9 +3,10 @@ package org.tianjyan.luban.host.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
 
 import org.tianjyan.luban.host.BuildConfig;
 import org.tianjyan.luban.host.R;

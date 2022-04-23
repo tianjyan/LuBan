@@ -2,6 +2,7 @@
     package="org.tianjyan.luban.host">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application android:name=".LBApp"
         android:allowBackup="true"
@@ -12,7 +13,8 @@
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/FullScreenTheme">
+            android:theme="@style/FullScreenTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,6 +25,7 @@
         <activity android:name=".activity.AboutActivity" />
         <service
             android:name=".LBService"
+            android:foregroundServiceType="dataSync"
             android:exported="true">
             <intent-filter>
                 <action

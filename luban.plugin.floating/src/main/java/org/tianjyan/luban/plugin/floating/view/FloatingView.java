@@ -7,8 +7,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +15,9 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -133,7 +134,7 @@ public class FloatingView {
                     | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
                     | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                     | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-            logoLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+            logoLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY ;
             logoLayoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             logoLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
             logoLayoutParams.height = (int) context.getResources().getDimension(R.dimen.floating_logo_size);
@@ -246,7 +247,7 @@ public class FloatingView {
                     | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
                     | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                     | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-            detailLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+            detailLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
             detailLayoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             detailLayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
             detailLayoutParams.gravity = Gravity.CENTER;

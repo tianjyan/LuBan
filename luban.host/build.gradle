@@ -2,7 +2,6 @@ import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
-apply plugin: 'me.tatarka.retrolambda'
 
 def gitSha() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
@@ -38,11 +37,6 @@ android {
         }
     }
     buildTypes {
-        debugMemoryLeak {
-            initWith debug
-            buildConfigField "boolean", "ENABLE_LEAK_CANARY", "true"
-        }
-
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -51,36 +45,38 @@ android {
 }
 
 dependencies {
-    compile libs.aidl
-    compile libs.abs
-    compile libs.client
-    compile libs.crash
-    compile libs.loging
+    implementation libs.aidl
+    implementation libs.abs
+    implementation libs.client
+    implementation libs.crash
+    implementation libs.loging
 
-    compile libs.common
-    compile libs.floating
-    compile libs.ip
-    compile libs.log
-    compile libs.op
-    compile libs.logcat
+    implementation libs.common
+    implementation libs.floating
+    implementation libs.ip
+    implementation libs.log
+    implementation libs.op
+    implementation libs.logcat
 
     annotationProcessor libs.butterknifecompiler
+    implementation libs.dagger
     annotationProcessor libs.daggercompiler
+    implementation libs.daggerandroid
+    implementation libs.daggersupport
     annotationProcessor libs.daggerprocessor
 
-    compile libs.appcompat
-    compile libs.supportv4
-    compile libs.recyclerview
+    implementation libs.appcompat
+    implementation libs.supportv4
+    implementation libs.recyclerview
 
-    compile libs.butterknife
-    compile libs.dagger
-    compile libs.daggerandroid
-    compile libs.eventbus
+    implementation libs.butterknife
+    implementation libs.eventbus
 
-    compile libs.stetho
-    testCompile libs.leakcanarytest
-    debugCompile libs.leakcanarydebug
-    debugMemoryLeakCompile libs.leakcanarydebugMemoryLeak
+    implementation libs.stetho
+    debugImplementation libs.leakcanary
+
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    annotationProcessor("javax.annotation:javax.annotation-api:1.3.2")
 }
 
 task styleCheck(type: Checkstyle) {

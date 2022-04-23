@@ -1,6 +1,6 @@
 package org.tianjyan.luban.infrastructure.abs.ui;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class AbsActivity extends AppCompatActivity {
 //    static {

@@ -1,11 +1,12 @@
 package org.tianjyan.luban.plugin.ip.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
 import org.tianjyan.luban.plugin.common.AliasName;
@@ -22,7 +23,8 @@ import butterknife.ButterKnife;
 
 public class InParaFragment extends AbsFragment {
     @Inject @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge;
-    @BindView(R2.id.para_rv) RecyclerView recyclerView;
+    @BindView(R2.id.para_rv)
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

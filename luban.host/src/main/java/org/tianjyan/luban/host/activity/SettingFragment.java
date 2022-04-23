@@ -3,7 +3,8 @@ package org.tianjyan.luban.host.activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;

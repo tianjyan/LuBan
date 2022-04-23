@@ -1,8 +1,6 @@
 package org.tianjyan.luban.plugin.log.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
 import org.tianjyan.luban.plugin.common.AliasName;
@@ -27,7 +29,8 @@ import butterknife.OnClick;
 
 public class LogFragment extends AbsFragment implements TextWatcher, View.OnClickListener {
     @Inject @Named(AliasName.LOG_BRIDGE) UILogBridge uiLogBridge;
-    @BindView(R2.id.log_rv) RecyclerView recyclerView;
+    @BindView(R2.id.log_rv)
+    RecyclerView recyclerView;
     @BindView(R2.id.filter_rv) RecyclerView filterRecyclerView;
     @BindView(R2.id.filter_msg_et) EditText filterMsgET;
     @BindView(R2.id.filter_level_tv) TextView filterLevelTV;

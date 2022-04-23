@@ -1,12 +1,13 @@
 package org.tianjyan.luban.plugin.op.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,7 +38,8 @@ public class OutParaDetailActivity extends AppCompatActivity {
     UIOutParaBridge outParaBridge;
     @Inject @Named(AliasName.OUT_PARA_PLUGIN)
     IOutParaPlugin outParaPlugin;
-    @BindView(R2.id.para_rv) RecyclerView recyclerView;
+    @BindView(R2.id.para_rv)
+    RecyclerView recyclerView;
     OutPara outPara;
     OutParaDetailAdapter adapter;
 

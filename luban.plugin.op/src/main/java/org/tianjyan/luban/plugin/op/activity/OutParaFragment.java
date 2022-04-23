@@ -4,15 +4,16 @@ import android.Manifest;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tianjyan.luban.infrastructure.abs.ui.AbsFragment;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
@@ -31,7 +32,8 @@ import butterknife.OnClick;
 
 public class OutParaFragment extends AbsFragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 0;
-    @BindView(R2.id.para_rv) RecyclerView recyclerView;
+    @BindView(R2.id.para_rv)
+    RecyclerView recyclerView;
     @BindView(R2.id.action_delete) View delete;
     @BindView(R2.id.action_save) View save;
     @BindView(R2.id.action_start) View start;

@@ -1,11 +1,16 @@
 package org.tianjyan.luban.plugin.common;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Vibrator;
+
+import androidx.core.app.NotificationCompat;
 
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 
@@ -29,16 +34,25 @@ public final class Utils {
     }
 
     public static Notification genNotification(Context c, int iconResId, String titleText,
-                                        String contentText, Class<?> cls, boolean ongoing,
-                                        boolean autoCancel, int notify_way) {
+                                               String contentText, Class<?> cls, boolean ongoing,
+                                               boolean autoCancel, int notify_way) {
 
         Intent intent = null;
         if (cls != null) intent = new Intent(c, cls);
 
-        final PendingIntent pi = PendingIntent.getActivity(c, 0, intent, 0);
+        final PendingIntent pi = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        Notification.Builder builder = new Notification.Builder(c)
-                .setContentTitle(titleText)
+        Notification.Builder builder;
+        NotificationManager manager = (NotificationManager)context.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("1", "2", NotificationManager.IMPORTANCE_LOW);
+            manager.createNotificationChannel(channel);
+            builder = new Notification.Builder(context.getContext(), "1");
+        } else {
+            builder = new Notification.Builder(context.getContext());
+        }
+
+        builder.setContentTitle(titleText)
                 .setContentText(contentText)
                 .setContentIntent(pi)
                 .setSmallIcon(iconResId)
