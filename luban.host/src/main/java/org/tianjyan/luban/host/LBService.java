@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import org.tianjyan.luban.host.activity.MainActivity;
-import org.tianjyan.luban.plugin.common.Utils;
+import org.tianjyan.luban.host.plugin.common.Utils;
 
 import javax.inject.Inject;
 

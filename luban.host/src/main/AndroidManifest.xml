@@ -3,6 +3,10 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application android:name=".LBApp"
         android:allowBackup="true"
@@ -23,6 +27,10 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".plugin.ip.activity.InParaDetailActivity" />
+        <activity android:name=".plugin.logcat.activity.CrashDetailActivity" />
+        <activity android:name=".plugin.op.activity.OutParaDetailActivity" />
+        <service android:name=".plugin.logcat.FCService"/>
         <service
             android:name=".LBService"
             android:foregroundServiceType="dataSync"

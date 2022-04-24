@@ -1,0 +1,82 @@
+package org.tianjyan.luban.host.plugin.ip.activity;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import androidx.annotation.IdRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.tianjyan.luban.aidl.InPara;
+import org.tianjyan.luban.host.R;
+import org.tianjyan.luban.host.plugin.common.AliasName;
+import org.tianjyan.luban.host.plugin.ip.bridge.UIInParaBridge;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+public class InParaDetailActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+    @Inject @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge;
+    private InPara inPara;
+    private String currentCheckedValue;
+    @BindView(R.id.radioGroup) RadioGroup radioGroup;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_in_para_detail);
+        ButterKnife.bind(this);
+        String paraName = getIntent().getStringExtra("paraName");
+        String pkgName = getIntent().getStringExtra("pkgName");
+        inPara = inParaBridge.getInPara(paraName, pkgName);
+
+        for (String value : inPara.getValues()) {
+            RadioButton radioButton = new RadioButton(this);
+            radioButton.setText(value);
+            radioGroup.addView(radioButton);
+            radioGroup.setOnCheckedChangeListener(this);
+            if (value.equals(inPara.getSelectedValue())) {
+                radioGroup.check(radioButton.getId());
+            }
+        }
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(paraName);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.para_save, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        } else if (id == R.id.action_done) {
+            if (!inPara.getSelectedValue().equals(currentCheckedValue)) {
+                inPara.setSelectedValue(currentCheckedValue);
+                inParaBridge.setInPara(inPara);
+            }
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        RadioButton radioButton = (RadioButton) group.findViewById(checkedId);
+        currentCheckedValue = radioButton.getText().toString();
+    }
+}

@@ -1,8 +1,8 @@
 package org.tianjyan.luban.host.activity;
 
 import org.tianjyan.luban.host.LBApp;
-import org.tianjyan.luban.infrastructure.abs.ui.AbsActivity;
-import org.tianjyan.luban.infrastructure.abs.SettingKey;
+import org.tianjyan.luban.host.infrastructure.abs.SettingKey;
+import org.tianjyan.luban.host.infrastructure.abs.ui.AbsActivity;
 
 public class BaseActivity extends AbsActivity {
     private LBApp getApp() {

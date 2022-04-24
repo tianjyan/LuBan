@@ -31,7 +31,6 @@ android {
         buildConfigField "boolean", "ENABLE_LEAK_CANARY", "false"
         buildConfigField "String", "GIT_COMMIT_SHA", '"' + gitSha() + '"'
         buildConfigField "String", "BUILD_TIME", '"' + buildTime() + '"'
-        // vectorDrawables.useSupportLibrary = true
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
@@ -50,17 +49,6 @@ dependencies {
     annotationProcessor "com.google.dagger:hilt-android-compiler:$versions.hilt"
 
     implementation libs.aidl
-    implementation libs.abs
-    implementation libs.client
-    implementation libs.crash
-    implementation libs.loging
-
-    implementation libs.common
-    implementation libs.floating
-    implementation libs.ip
-    implementation libs.log
-    implementation libs.op
-    implementation libs.logcat
 
     annotationProcessor libs.butterknifecompiler
 
@@ -70,12 +58,14 @@ dependencies {
 
     implementation libs.butterknife
     implementation libs.eventbus
+    implementation libs.rxjava
+    implementation libs.rxandroid
+
+    implementation libs.annotations
 
     implementation libs.stetho
     debugImplementation libs.leakcanary
-
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    annotationProcessor("javax.annotation:javax.annotation-api:1.3.2")
+    implementation libs.logger
 }
 
 task styleCheck(type: Checkstyle) {

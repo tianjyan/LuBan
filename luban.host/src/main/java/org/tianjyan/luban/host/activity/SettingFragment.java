@@ -7,7 +7,7 @@ import android.preference.SwitchPreference;
 import androidx.annotation.Nullable;
 
 import org.tianjyan.luban.host.R;
-import org.tianjyan.luban.infrastructure.abs.SettingKey;
+import org.tianjyan.luban.host.infrastructure.abs.SettingKey;
 
 public class SettingFragment extends PreferenceFragment {
     @Override

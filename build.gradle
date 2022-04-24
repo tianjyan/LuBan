@@ -16,16 +16,6 @@ buildscript {
         libs = [
                 sdk                      : project(':luban.sdk'),
                 aidl                     : project(':luban.aidl'),
-                abs                      : project(':luban.infrastructure.abs'),
-                client                   : project(':luban.infrastructure.client'),
-                crash                    : project(':luban.infrastructure.crash'),
-                loging                   : project(':luban.infrastructure.log'),
-                common                   : project(':luban.plugin.common'),
-                floating                 : project(':luban.plugin.floating'),
-                ip                       : project(':luban.plugin.ip'),
-                log                      : project(':luban.plugin.log'),
-                op                       : project(':luban.plugin.op'),
-                logcat                   : project(':luban.plugin.logcat'),
 
                 inject                   : 'javax.inject:javax.inject:1',
                 recyclerview             : 'androidx.recyclerview:recyclerview:1.2.1',

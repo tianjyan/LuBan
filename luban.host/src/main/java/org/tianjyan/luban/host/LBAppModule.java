@@ -2,12 +2,12 @@ package org.tianjyan.luban.host;
 
 import android.os.IBinder;
 
-import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
-import org.tianjyan.luban.plugin.common.AliasName;
+import org.tianjyan.luban.host.infrastructure.abs.IClientManager;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IFloatingPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IInParaPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.ILogPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.host.plugin.common.AliasName;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

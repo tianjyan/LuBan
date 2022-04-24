@@ -21,13 +21,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
-import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
-import org.tianjyan.luban.infrastructure.abs.SettingKey;
-import org.tianjyan.luban.infrastructure.abs.plugin.IInParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.ILogcatPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.plugin.IPlugin;
-import org.tianjyan.luban.plugin.common.AliasName;
+import org.tianjyan.luban.host.infrastructure.abs.SettingKey;
+import org.tianjyan.luban.host.plugin.common.AliasName;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IOutParaPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.IInParaPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.ILogPlugin;
+import org.tianjyan.luban.host.infrastructure.abs.plugin.ILogcatPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
