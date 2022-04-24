@@ -1,6 +1,5 @@
 package org.tianjyan.luban.host.activity;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import dagger.Lazy;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainMenuFragment extends AbsFragment implements AdapterView.OnItemClickListener {
     View exitView;
     ListView listView;

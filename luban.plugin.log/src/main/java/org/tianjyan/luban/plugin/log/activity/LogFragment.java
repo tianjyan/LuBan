@@ -26,7 +26,9 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class LogFragment extends AbsFragment implements TextWatcher, View.OnClickListener {
     @Inject @Named(AliasName.LOG_BRIDGE) UILogBridge uiLogBridge;
     @BindView(R2.id.log_rv)

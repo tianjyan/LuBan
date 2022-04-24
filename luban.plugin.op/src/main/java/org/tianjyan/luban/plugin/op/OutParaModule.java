@@ -1,13 +1,8 @@
 package org.tianjyan.luban.plugin.op;
 
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.IOutParaPlugin;
-import org.tianjyan.luban.infrastructure.abs.inject.PreActivity;
-import org.tianjyan.luban.infrastructure.abs.inject.PreFragment;
 import org.tianjyan.luban.plugin.common.AliasName;
-import org.tianjyan.luban.plugin.op.activity.OutParaDetailActivity;
-import org.tianjyan.luban.plugin.op.activity.OutParaFragment;
 import org.tianjyan.luban.plugin.op.bridge.UIOutParaBridge;
 
 import javax.inject.Named;
@@ -16,10 +11,12 @@ import javax.inject.Singleton;
 import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
-import dagger.android.ContributesAndroidInjector;
+import dagger.hilt.InstallIn;
+import dagger.hilt.components.SingletonComponent;
 
 @Module
-public abstract class OutParaModule {
+@InstallIn(SingletonComponent.class)
+public class OutParaModule {
     @Provides
     @Named(AliasName.OUT_PARA_PLUGIN)
     @Singleton
@@ -34,12 +31,4 @@ public abstract class OutParaModule {
                                                        @Named(AliasName.OUT_PARA_PLUGIN) Lazy<IOutParaPlugin> outParaPluginLazy) {
         return new UIOutParaBridge(clientManager, outParaPluginLazy);
     }
-
-    @PreActivity
-    @ContributesAndroidInjector
-    abstract OutParaDetailActivity outParaDetailActivityInjector();
-
-    @PreFragment
-    @ContributesAndroidInjector
-    abstract OutParaFragment outParaFragmentInjector();
 }

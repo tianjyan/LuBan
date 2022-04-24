@@ -1,5 +1,6 @@
 package org.tianjyan.luban.infrastructure.client;
 
+import android.content.Context;
 import android.net.wifi.WifiManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -18,9 +19,9 @@ class DefaultClient extends AbsClient {
 
     private WifiManager wifiManager;
 
-    public DefaultClient(ILBApp app) {
-        super(app.getContext().getString(R.string.client_default));
-        wifiManager = (WifiManager) app.getContext()
+    public DefaultClient(Context context) {
+        super(context.getString(R.string.client_default));
+        wifiManager = (WifiManager) context
                 .getApplicationContext()
                 .getSystemService(WIFI_SERVICE);
 

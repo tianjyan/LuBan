@@ -13,7 +13,6 @@ import org.tianjyan.luban.plugin.logcat.R2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
 public class CrashDetailActivity extends AbsActivity{
     @BindView(R2.id.crashDetail)
@@ -21,7 +20,6 @@ public class CrashDetailActivity extends AbsActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_detail);
         ButterKnife.bind(this);

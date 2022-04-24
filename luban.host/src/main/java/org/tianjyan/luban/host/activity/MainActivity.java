@@ -1,9 +1,6 @@
 package org.tianjyan.luban.host.activity;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -18,6 +15,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.model.OnFunctionSelected;
@@ -39,12 +39,10 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasFragmentInjector;
+import dagger.hilt.android.AndroidEntryPoint;
 
-public class MainActivity extends BaseActivity implements OnFunctionSelected, HasFragmentInjector {
+@AndroidEntryPoint
+public class MainActivity extends BaseActivity implements OnFunctionSelected {
     private static boolean active = false;
     private static int OVERLAY_PERMISSION_REQ_CODE = 0x01;
     private MainMenuFragment mainMenuFragment;
@@ -60,11 +58,9 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
     @Inject @Named(AliasName.IN_PARA_PLUGIN) IInParaPlugin inPlugin;
     @Inject @Named(AliasName.LOG_PLUGIN) ILogPlugin logPlugin;
     @Inject @Named(AliasName.LOGCAT_PLUGIN) ILogcatPlugin logcatPlugin;
-    @Inject DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -179,7 +175,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
     }
 
     private void initFragment()  {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         mainMenuFragment = (MainMenuFragment) fragmentManager.findFragmentByTag("MainMenuFragment");
         if (mainMenuFragment == null) {
@@ -195,7 +191,7 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
 
     @Override
     public void onFunctionSelected(String functionName) {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         for (Fragment fragment : menuItems.values()) {
             if (fragment != null) transaction.hide(fragment);
@@ -213,10 +209,5 @@ public class MainActivity extends BaseActivity implements OnFunctionSelected, Ha
 
         transaction.commitAllowingStateLoss();
         mDrawerLayout.closeDrawer(mDrawerView);
-    }
-
-    @Override
-    public AndroidInjector<Fragment> fragmentInjector() {
-        return fragmentInjector;
     }
 }

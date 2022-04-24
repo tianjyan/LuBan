@@ -1,5 +1,7 @@
 package org.tianjyan.luban.plugin.floating;
 
+import android.content.Context;
+
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.plugin.IFloatingPlugin;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
@@ -8,8 +10,8 @@ import org.tianjyan.luban.plugin.floating.view.FloatingView;
 public class FloatingPlugin implements IFloatingPlugin {
     private final FloatingView floatingView;
 
-    public FloatingPlugin(ILBApp app) {
-        floatingView = new FloatingView(app.getContext());
+    public FloatingPlugin(Context context) {
+        floatingView = new FloatingView(context);
     }
 
     @Override

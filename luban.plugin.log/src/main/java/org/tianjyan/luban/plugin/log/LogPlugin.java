@@ -1,8 +1,7 @@
 package org.tianjyan.luban.plugin.log;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.plugin.ILogPlugin;
 import org.tianjyan.luban.plugin.common.Utils;
 import org.tianjyan.luban.plugin.log.activity.LogFragment;

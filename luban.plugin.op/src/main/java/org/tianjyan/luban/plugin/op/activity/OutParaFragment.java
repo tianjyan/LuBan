@@ -29,7 +29,9 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class OutParaFragment extends AbsFragment {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 0;
     @BindView(R2.id.para_rv)

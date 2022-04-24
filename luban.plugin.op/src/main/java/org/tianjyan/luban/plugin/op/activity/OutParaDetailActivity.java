@@ -31,7 +31,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
 public class OutParaDetailActivity extends AppCompatActivity {
     @Inject @Named(AliasName.OUT_PARA_BRIDGE)
@@ -45,7 +44,6 @@ public class OutParaDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_out_para_detail);
         ButterKnife.bind(this);

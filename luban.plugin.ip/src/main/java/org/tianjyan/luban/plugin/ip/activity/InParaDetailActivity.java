@@ -21,8 +21,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
-
 public class InParaDetailActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     @Inject @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge;
     private InPara inPara;
@@ -31,7 +29,6 @@ public class InParaDetailActivity extends AppCompatActivity implements RadioGrou
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_para_detail);
         ButterKnife.bind(this);

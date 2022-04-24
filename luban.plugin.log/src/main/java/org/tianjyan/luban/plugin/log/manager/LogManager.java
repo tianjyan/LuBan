@@ -1,5 +1,7 @@
 package org.tianjyan.luban.plugin.log.manager;
 
+import android.content.Context;
+
 import org.tianjyan.luban.aidl.Config;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.infrastructure.abs.SettingKey;
@@ -24,7 +26,8 @@ public class LogManager {
     private boolean flag;
     private LinkedBlockingDeque<LogEntry> queue = new LinkedBlockingDeque<>(1000);
 
-    public LogManager(ILBApp app, UILogBridge uiLogBridge) {
+    public LogManager(Context context, UILogBridge uiLogBridge) {
+        ILBApp app = (ILBApp) context.getApplicationContext();
         boolean allowAutoSave = (app.getSetting(SettingKey.AUTO_SAVE_LOG, "true")) == "true"
                 ? true : false;
         thread = new Thread(() -> {

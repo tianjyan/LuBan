@@ -1,8 +1,9 @@
 package org.tianjyan.luban.infrastructure.client;
 
+import android.content.Context;
+
 import org.tianjyan.luban.infrastructure.abs.IClient;
 import org.tianjyan.luban.infrastructure.abs.IClientManager;
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
 import org.tianjyan.luban.plugin.common.AliasName;
 
 import javax.inject.Named;
@@ -10,8 +11,12 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
+import dagger.hilt.components.SingletonComponent;
 
 @Module
+@InstallIn(SingletonComponent.class)
 public class ClientModule {
     @Provides
     @Named(AliasName.CLIENT_MANAGER)
@@ -23,7 +28,7 @@ public class ClientModule {
     @Provides
     @Named(AliasName.DEFAULT_CLIENT)
     @Singleton
-    public static IClient provideDefaultClient(ILBApp app) {
-        return new DefaultClient(app);
+    public static IClient provideDefaultClient(@ApplicationContext Context context) {
+        return new DefaultClient(context);
     }
 }

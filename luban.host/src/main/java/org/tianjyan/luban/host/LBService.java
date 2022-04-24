@@ -10,12 +10,12 @@ import org.tianjyan.luban.plugin.common.Utils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class LBService extends Service {
     @Inject IBinder binder;
     public void onCreate() {
-        AndroidInjection.inject(this);
         super.onCreate();
     }
 

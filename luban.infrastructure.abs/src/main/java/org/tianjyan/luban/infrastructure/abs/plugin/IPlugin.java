@@ -1,8 +1,6 @@
 package org.tianjyan.luban.infrastructure.abs.plugin;
 
-import android.app.Fragment;
-
-import org.tianjyan.luban.infrastructure.abs.ILBApp;
+import androidx.fragment.app.Fragment;
 
 public interface IPlugin {
     String getPluginName();

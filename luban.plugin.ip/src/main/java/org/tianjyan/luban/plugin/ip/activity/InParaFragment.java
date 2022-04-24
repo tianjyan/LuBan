@@ -20,7 +20,9 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class InParaFragment extends AbsFragment {
     @Inject @Named(AliasName.IN_PARA_BRIDGE) UIInParaBridge inParaBridge;
     @BindView(R2.id.para_rv)

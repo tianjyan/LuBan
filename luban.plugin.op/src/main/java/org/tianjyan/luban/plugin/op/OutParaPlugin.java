@@ -1,7 +1,8 @@
 package org.tianjyan.luban.plugin.op;
 
 import android.app.Application;
-import android.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 import org.tianjyan.luban.aidl.OutPara;
 import org.tianjyan.luban.infrastructure.abs.ILBApp;

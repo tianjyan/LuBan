@@ -2,7 +2,6 @@ package org.tianjyan.luban.host;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,20 +27,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import dagger.Lazy;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import dagger.android.HasServiceInjector;
+import dagger.hilt.android.HiltAndroidApp;
 
-public class LBApp extends Application implements ILBApp, HasActivityInjector, HasServiceInjector, SharedPreferences.OnSharedPreferenceChangeListener {
+@HiltAndroidApp
+public class LBApp extends Application implements ILBApp, SharedPreferences.OnSharedPreferenceChangeListener {
     private static boolean isAppRunning = false;
     private static Context mContext;
     private static int sessionDepth = 0;
     private SharedPreferences mSharedPreferences;
     private Map<SettingKey, List<OnSettingChangeListener>> onSettingChangeListenerMap = new HashMap<>();
 
-    @Inject DispatchingAndroidInjector<Activity> activityInjector;
-    @Inject DispatchingAndroidInjector<Service> serviceInjector;
     @Inject @Named(AliasName.LOG) ILog Logger;
     @Inject @Named(AliasName.FLOATING_PLUGIN) Lazy<IFloatingPlugin> floatingPluginLazy;
 
@@ -60,7 +55,6 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerLBComponent.builder().create(this).inject(this);
         Stetho.initializeWithDefaults(this);
         mContext = getApplicationContext();
         loadSettings();
@@ -114,17 +108,6 @@ public class LBApp extends Application implements ILBApp, HasActivityInjector, H
 
             }
         });
-    }
-
-    @Override
-    public AndroidInjector<Activity> activityInjector() {
-        return activityInjector;
-    }
-
-
-    @Override
-    public AndroidInjector<Service> serviceInjector() {
-        return serviceInjector;
     }
 
     @Override
