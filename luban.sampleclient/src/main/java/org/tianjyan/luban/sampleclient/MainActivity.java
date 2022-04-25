@@ -1,9 +1,10 @@
 package org.tianjyan.luban.sampleclient;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.tianjyan.luban.sdk.AbsLBParaLoader;
 import org.tianjyan.luban.sdk.InParaManager;

@@ -1,15 +1,16 @@
 package org.tianjyan.luban.host.plugin.logcat;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 
 import org.tianjyan.luban.host.R;
 import org.tianjyan.luban.host.plugin.common.Utils;
@@ -166,11 +167,21 @@ public class FCService extends Service {
         intent.putExtra("content", exceptionContent);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        Notification.Builder builder;
+
+        NotificationManager manager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("1", "2", NotificationManager.IMPORTANCE_LOW);
+            manager.createNotificationChannel(channel);
+            builder = new Notification.Builder(this, "1");
+        } else {
+            builder = new Notification.Builder(this);
+        }
+
         builder.setContentTitle(packName)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_error)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(exceptionContent))
+                .setStyle(new Notification.BigTextStyle().bigText(exceptionContent))
                 .setFullScreenIntent(pendingIntent, true);
         Notification notification = builder.build();
 

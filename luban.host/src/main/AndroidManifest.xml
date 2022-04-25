@@ -33,7 +33,6 @@
         <service android:name=".plugin.logcat.FCService"/>
         <service
             android:name=".LBService"
-            android:foregroundServiceType="dataSync"
             android:exported="true">
             <intent-filter>
                 <action
