@@ -11,20 +11,23 @@ import org.tianjyan.luban.host.R;
 
 import org.tianjyan.luban.host.infrastructure.abs.ui.AbsActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CrashDetailActivity extends AbsActivity{
+    @BindView(R.id.crash_detail)
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_detail);
+        ButterKnife.bind(this);
         onNewIntent(getIntent());
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        textView = findViewById(R.id.crash_detail);
     }
 
     @Override

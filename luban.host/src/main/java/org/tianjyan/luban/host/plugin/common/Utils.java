@@ -19,8 +19,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class Utils {
-    private static final Format DateTimeFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
-    private static final Format DateTimeFormat2 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
+    private static final Format DateTimeFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
+    private static final Format DateTimeFormat2 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.US);
     public static final String FILE_SEP = System.getProperty("file.separator");
     public static final String LINE_SEP = System.getProperty("line.separator");
     private static ILBApp context;
@@ -65,10 +65,7 @@ public final class Utils {
     }
 
     public static boolean isNullOrEmpty(final String value) {
-        if (value == null || value.isEmpty()) {
-            return true;
-        }
-        return false;
+        return value == null || value.isEmpty();
     }
 
     public static boolean equals(CharSequence a, CharSequence b) {
@@ -117,7 +114,7 @@ public final class Utils {
     }
 
     public static void vibrate() {
-        Vibrator v=(Vibrator) context.getContext().getSystemService(context.getContext().VIBRATOR_SERVICE);
+        Vibrator v=(Vibrator) context.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(100);
     }
 }

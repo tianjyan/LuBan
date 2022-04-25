@@ -98,6 +98,7 @@ public class FloatingView {
         if (isLogoShowing) {
             windowManager.removeView(getLogoContentView());
             handler.removeMessages(HIDE);
+            logoLinearLayout = null;
             isLogoShowing = false;
         }
     }
@@ -114,6 +115,7 @@ public class FloatingView {
         if (!permissionAllowed()) return;
         if (isDetailShowing) {
             windowManager.removeView(getDetailContentView());
+            detailLinearLayout = null;
             isDetailShowing = false;
         }
     }
