@@ -38,7 +38,7 @@ LB.setOutPara("Test", String.valueOf(System.currentTimeMillis()));
 
 此时在主程序中就能看到这个值：
 
-<img src="http://7xqjah.com1.z0.glb.clouddn.com/2017-08-22-Android-Component-02.png" width="240">
+<img src="https://github.com/tianjyan/LuBan/assets/4630470/5f7c6448-d946-493c-aa1f-c7985de9fa11" width="240">
 
 # 其他功能
 * 入参设置
